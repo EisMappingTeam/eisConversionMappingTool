@@ -24,6 +24,7 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
             System.out.println("No parameters found");
 
             FileHelper.getFileNamesAll("C:\\111").forEach(System.out::println) ;
+            FileHelper.getFileAllLines("C:\\111\\222\\fl.txt").forEach(System.out::println) ;
             return;
         }
         exit(0);
