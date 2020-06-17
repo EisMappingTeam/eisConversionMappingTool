@@ -1,17 +1,43 @@
 package com.eis.conv.mapping.srcHandler.sourceParser.java;
 
+import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.utils.CodeGenerationUtils;
-import com.github.javaparser.utils.SourceRoot;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.expr.NormalAnnotationExpr;
+import com.github.javaparser.ast.visitor.ModifierVisitor;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+//import com.github.javaparser.ast.visitor.
 
 import java.io.File;
-import java.nio.file.Paths;
+import java.io.FileNotFoundException;
+import java.util.Optional;
 
 public class JavaFileParser {
-    public CompilationUnit parse(File file) {
-        SourceRoot sourceRoot = new SourceRoot(Paths.get(file.getParent()));
-        CompilationUnit cu = sourceRoot.parse("", file.getName());
+    public CompilationUnit parse(File file) throws FileNotFoundException {
+        //SourceRoot sourceRoot = new SourceRoot(Paths.get(file.getParent()));
+        //CompilationUnit cu = JavaParser.parse() sourceRoot.parse("", file.getName());
+        JavaParser jp = new JavaParser();
+        CompilationUnit cu  =jp.parse( file).getResult().get();
+        cu.accept(  new MethodVisitor(),  new String());
+
+
         return cu;
     }
 
+    private static class AnnotationPropertiesVisitor extends VoidVisitorAdapter<String> {
+        @Override
+        public void visit(NormalAnnotationExpr n, String arg) {
+            System.out.println("Method: " + arg + ", Annotation: " + n.getName());
+            super.visit(n.getPairs(), arg);
+        }
+    }
+
+    private static class MethodVisitor extends VoidVisitorAdapter<String> {
+        @Override
+        public void visit(MethodDeclaration n, String arg) {
+            System.out.println("MV: Method: "  + n.getName());
+            n.accept(new AnnotationPropertiesVisitor(), n.getName().toString());
+            super.visit(n, arg);
+        }
+    }
 }
