@@ -8,23 +8,19 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.NormalAnnotationExpr;
-import com.github.javaparser.ast.visitor.ModifierVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-//import com.github.javaparser.ast.visitor.
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Optional;
+
 
 public class JavaFileParser {
-    public CompilationUnit parse(File file) throws FileNotFoundException {
-        //SourceRoot sourceRoot = new SourceRoot(Paths.get(file.getParent()));
-        //CompilationUnit cu = JavaParser.parse() sourceRoot.parse("", file.getName());
-        JavaParser jp = new JavaParser();
-        CompilationUnit cu  =jp.parse( file).getResult().get();
-        cu.accept(  new ClassVisitor(),  new String());
-        cu.accept(  new MethodVisitor(),  new String());
 
+    public CompilationUnit parse(File file) throws FileNotFoundException {
+        JavaParser jp = new JavaParser();
+        CompilationUnit cu = jp.parse(file).getResult().get();
+        cu.accept(new ClassVisitor(), "");
+        cu.accept(new MethodVisitor(), "");
 
         return cu;
     }
@@ -40,14 +36,15 @@ public class JavaFileParser {
     private static class MethodVisitor extends VoidVisitorAdapter<String> {
         @Override
         public void visit(MethodDeclaration n, String arg) {
-            System.out.println("MV: Method: "  + n.getName());
+            System.out.println("MV: Method: " + n.getName());
             n.accept(new AnnotationPropertiesVisitor(), n.getName().toString());
 
             super.visit(n, arg);
         }
     }
 
-
+    //Sample with parameters:
+    //https://stackoverflow.com/questions/5410193/get-class-annotations-from-java-source-file
     private static class ClassVisitor extends VoidVisitorAdapter<String> {
         @Override
         public void visit(ClassOrInterfaceDeclaration n, String arg) {
@@ -64,6 +61,5 @@ public class JavaFileParser {
             super.visit(n, arg);
         }
     }
-
 
 }
