@@ -1,7 +1,6 @@
 package com.eis.conv.mapping.srcHandler;
 
-import com.eis.conv.mapping.core.files.FileHelper;
-import com.eis.conv.mapping.srcHandler.sourceParser.java.JavaFileParser;
+import com.eis.conv.mapping.srcHandler.sourceParsers.jParser.JavaFileParser;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
