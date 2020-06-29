@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.sourceObjects.jObjects;
+package com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects;
 
 public class JAnnotation {
     //TODO: append with detailed annotation parameters

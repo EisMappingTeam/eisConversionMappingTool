@@ -1,7 +1,6 @@
-package com.eis.conv.mapping.srcHandler.sourceParsers.jParser;
+package com.eis.conv.mapping.srcHandler.source.sourceParsers.jParser;
 
-import com.eis.conv.mapping.srcHandler.sourceObjects.jObjects.FileAnnotations;
-import com.eis.conv.mapping.srcHandler.sourceObjects.jObjects.JAnnotation;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.FileAnnotations;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -18,6 +17,7 @@ import java.io.FileNotFoundException;
 
 public class JavaFileParser {
 
+    //https://github.com/javaparser/javaparser/issues/1336
     public CompilationUnit parse(File file) throws FileNotFoundException {
         FileAnnotations fileAnnotations = new FileAnnotations();
 
@@ -31,7 +31,8 @@ public class JavaFileParser {
 
     private static class AnnotationPropertiesVisitor extends VoidVisitorAdapter<String> {
         FileAnnotations fileAnnotations;
-        private AnnotationPropertiesVisitor(FileAnnotations _fileAnnotations ) {
+
+        private AnnotationPropertiesVisitor(FileAnnotations _fileAnnotations) {
             fileAnnotations = _fileAnnotations;
         }
 
@@ -45,7 +46,8 @@ public class JavaFileParser {
 
     private static class MethodVisitor extends VoidVisitorAdapter<String> {
         FileAnnotations fileAnnotations;
-        private MethodVisitor(FileAnnotations _fileAnnotations ) {
+
+        private MethodVisitor(FileAnnotations _fileAnnotations) {
             fileAnnotations = _fileAnnotations;
         }
 
@@ -62,7 +64,8 @@ public class JavaFileParser {
     //https://stackoverflow.com/questions/5410193/get-class-annotations-from-java-source-file
     private static class ClassVisitor extends VoidVisitorAdapter<String> {
         FileAnnotations fileAnnotations;
-        private ClassVisitor(FileAnnotations _fileAnnotations ) {
+
+        private ClassVisitor(FileAnnotations _fileAnnotations) {
             fileAnnotations = _fileAnnotations;
         }
 

@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.sourceObjects.jObjects;
+package com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects;
 
 import java.util.ArrayList;
 import java.util.List;
