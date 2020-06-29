@@ -2,14 +2,21 @@ package com.eis.conv.mapping.srcHandler.source.repo.repoHandlers;
 
 import com.eis.conv.mapping.srcHandler.source.repo.RepoProject;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoRoot;
+import com.eis.conv.mapping.srcHandler.source.repo.RepoVersion;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public final class RepoHandler {
+
     public static RepoRoot getRepoRoot(String rootPath) throws IOException {
         RepoRoot repoRoot = new RepoRoot(rootPath);
 
@@ -28,12 +35,20 @@ public final class RepoHandler {
 
 
     public static RepoProject getRepoProject(String rootPath, String project) throws IOException {
-        RepoProject repoProject = new RepoProject(project);
+        RepoProject repoProject = new RepoProject(project, addToPath(rootPath, project));
 
         List<String> folders = getDirs(addToPath(rootPath, project));
-        folders.forEach(item -> repoProject.getVersions().add(item));
+        folders.forEach(item -> repoProject.getVersions().add(new RepoVersion(item, addToPath(repoProject.getPath(), item))));
 
         return repoProject;
+    }
+
+
+    public static List<String> getAllFileNames(String rootPath) throws IOException {
+        Stream<Path> walk = Files.walk(Paths.get(rootPath));
+        List<String> result = walk.filter(Files::isRegularFile)
+                .map(x -> x.toString()).collect(Collectors.toList());
+        return result;
     }
 
 
@@ -52,5 +67,6 @@ public final class RepoHandler {
         }
         return result;
     }
+
 
 }
