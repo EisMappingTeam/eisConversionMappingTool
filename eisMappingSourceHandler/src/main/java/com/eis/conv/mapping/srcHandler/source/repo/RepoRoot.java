@@ -44,14 +44,4 @@ public class RepoRoot {
 
     }
 
-//    public void loadVersionFileList(String project, String version) {
-//        if (this.isPresentProject(project)) {
-//            RepoProject rp = this.getProject(project);
-//            if (rp.isPresentVersion(version)) {
-//                RepoVersion ver = rp.getVersion(version);
-//                ver.setFileNames(RepoHandler.getAllFileNames());
-//            }
-//        }
-//
-//    }
 }

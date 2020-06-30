@@ -2,6 +2,7 @@ package com.eis.conv.mapping.srcHandler;
 
 import com.eis.conv.mapping.srcHandler.source.repo.RepoProject;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoRoot;
+import com.eis.conv.mapping.srcHandler.source.repo.RepoVersion;
 import com.eis.conv.mapping.srcHandler.source.repo.repoHandlers.RepoHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceParsers.jParser.JavaFileParser;
 import org.springframework.boot.Banner;
@@ -39,6 +40,9 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
 
         //
         RepoRoot rr = RepoHandler.getRepoRoot("C:\\111");
+        RepoProject rp = rr.getProject("222");
+        RepoVersion rv = rp.getVersion("2_CCC");
+        rv.loadFilesList();
         exit(0);
     }
 }

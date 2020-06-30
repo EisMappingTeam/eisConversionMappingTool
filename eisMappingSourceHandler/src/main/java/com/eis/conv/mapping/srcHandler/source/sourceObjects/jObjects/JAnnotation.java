@@ -2,11 +2,20 @@ package com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects;
 
 public class JAnnotation {
     //TODO: append with detailed annotation parameters
+    private String property;
     private String annotation;
     private String rawValue;
     private boolean classLevel;
     private boolean methodLevel;
     private String parameters;
+
+    public String getProperty() {
+        return property;
+    }
+
+    public void setProperty(String property) {
+        this.property = property;
+    }
 
     public String getAnnotation() {
         return annotation;

@@ -1,5 +1,8 @@
 package com.eis.conv.mapping.srcHandler.source.repo;
 
+import com.eis.conv.mapping.srcHandler.source.repo.repoHandlers.RepoHandler;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,5 +44,9 @@ public class RepoVersion {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public void loadFilesList() throws IOException {
+        fileNames = RepoHandler.getAllFileNames(path);
     }
 }
