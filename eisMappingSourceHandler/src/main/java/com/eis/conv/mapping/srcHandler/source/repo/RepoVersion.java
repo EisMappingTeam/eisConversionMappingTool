@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RepoVersion {
-    private String versionName;
-    private String path;
+    private String versionName = "";
+    private String path = "";
     List<String> fileNames = new ArrayList<>();
 
 

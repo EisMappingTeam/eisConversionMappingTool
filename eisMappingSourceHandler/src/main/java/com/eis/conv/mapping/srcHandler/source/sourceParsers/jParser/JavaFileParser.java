@@ -21,11 +21,13 @@ public class JavaFileParser {
 
         JavaParser jp = new JavaParser();
         CompilationUnit cu = jp.parse(file).getResult().get();
-        cu.accept(new ClassVisitor(fileAnnotations), "");
-        cu.accept(new MethodVisitor(fileAnnotations), "");
+        cu.accept(new ClassHeaderVisitor(fileAnnotations), ""); //Load class annotations
+        cu.accept(new ClassVisitor(fileAnnotations), "");       //Load class variables annotations
+        cu.accept(new MethodVisitor(fileAnnotations), "");      //Load method annotations
 
         return fileAnnotations;
     }
+
 
     private static class AnnotationPropertiesVisitor extends VoidVisitorAdapter<String> {
         FileAnnotations fileAnnotations;
@@ -41,6 +43,7 @@ public class JavaFileParser {
             JAnnotation jAnnotation = new JAnnotation();
             jAnnotation.setClassLevel(false);
             jAnnotation.setAnnotation(n.getName().toString());
+            jAnnotation.setMethod(arg);
             jAnnotation.setRawValue(n.toString());
 
             fileAnnotations.getAnnotations().add(jAnnotation);
@@ -76,25 +79,14 @@ public class JavaFileParser {
 
         @Override
         public void visit(ClassOrInterfaceDeclaration n, String arg) {
-            //Class annotations
-            for (AnnotationExpr ae : n.getAnnotations()) {
-                System.out.println("Annotation CLASS DECL: " + ae.getName());
-                JAnnotation jAnnotation = new JAnnotation();
-                jAnnotation.setClassLevel(true);
-                jAnnotation.setAnnotation(ae.getName().toString());
-                jAnnotation.setRawValue(ae.toString());
-
-                fileAnnotations.getAnnotations().add(jAnnotation);
-            }
-
-            //Variable annotations
+            //Class variable annotations
             for (FieldDeclaration ff : n.getFields()) {
                 for (VariableDeclarator vd : ff.getVariables()) {
                     for (AnnotationExpr ae : ff.getAnnotations()) {
                         //System.out.println("VARIABLE DECL: " + vd.getName() + "  Annotation " + ae.toString());
                         JAnnotation jAnnotation = new JAnnotation();
                         jAnnotation.setClassLevel(false);
-                        jAnnotation.setProperty(vd.getName().asString());
+                        jAnnotation.setVariable(vd.getName().asString());
                         jAnnotation.setAnnotation(ae.getName().asString());
                         jAnnotation.setRawValue(ae.toString());
 
@@ -105,5 +97,30 @@ public class JavaFileParser {
             super.visit(n, arg);
         }
     }
+
+
+    private static class ClassHeaderVisitor extends VoidVisitorAdapter<String> {
+        FileAnnotations fileAnnotations;
+
+        private ClassHeaderVisitor(FileAnnotations _fileAnnotations) {
+            fileAnnotations = _fileAnnotations;
+        }
+
+        @Override
+        public void visit(ClassOrInterfaceDeclaration n, String arg) {
+            //Class header annotations
+            for (AnnotationExpr ae : n.getAnnotations()) {
+                //System.out.println("Annotation CLASS: " + ae.getName());
+                JAnnotation jAnnotation = new JAnnotation();
+                jAnnotation.setClassLevel(true);
+                jAnnotation.setAnnotation(ae.getName().toString());
+                jAnnotation.setRawValue(ae.toString());
+
+                fileAnnotations.getAnnotations().add(jAnnotation);
+            }
+            super.visit(n, arg);
+        }
+    }
+
 
 }

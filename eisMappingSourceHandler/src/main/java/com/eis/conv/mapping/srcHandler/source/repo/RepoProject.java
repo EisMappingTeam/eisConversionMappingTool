@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RepoProject {
-    private String projectName;
-    private String path;
+    private String projectName = "";
+    private String path = "";
     private List<RepoVersion> versions = new ArrayList<>();
 
     public RepoProject() {

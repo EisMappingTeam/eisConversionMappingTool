@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileAnnotations {
-    private String fileName;
+    private String fileName = "";
     private List<JAnnotation> annotations = new ArrayList<JAnnotation>();
 
     public String getFileName() {

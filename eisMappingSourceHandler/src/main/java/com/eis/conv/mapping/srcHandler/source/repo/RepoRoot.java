@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public class RepoRoot {
-    private String rootDir;
+    private String rootDir = "";
     private List<RepoProject> projects = new ArrayList<RepoProject>();
 
     public RepoRoot() {
