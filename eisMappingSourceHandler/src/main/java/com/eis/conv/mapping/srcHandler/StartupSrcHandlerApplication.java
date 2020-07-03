@@ -1,5 +1,6 @@
 package com.eis.conv.mapping.srcHandler;
 
+import com.eis.conv.mapping.core.files.FileHelper;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoProject;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoRoot;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoVersion;
@@ -32,10 +33,13 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
             //FileHelper.getFileNamesAll("C:\\111").forEach(System.out::println) ;
             //FileHelper.getFileAllLines("C:\\111\\222\\fl.txt").forEach(System.out::println) ;
 
-            File f = new File("C:\\111\\222\\fl.txt");
+            String fileName  = "C:\\111\\222\\fl.txt";
+
+            //File f = new File(fileName);
+            String fileContent = FileHelper.getFileAsSting(fileName);
             JavaFileParser jfp = new JavaFileParser();
-            jfp.parse(f);
-            //return;
+            jfp.parse(fileContent);
+            //jfp.parse(f);
         }
 
         //

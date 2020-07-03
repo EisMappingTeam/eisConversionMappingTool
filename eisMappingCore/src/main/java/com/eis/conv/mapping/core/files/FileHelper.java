@@ -27,5 +27,10 @@ public final class FileHelper {
         }
         return result;
     }
+
+    public  static String  getFileAsSting(String fileName) throws IOException {
+        Path pth = Path.of(fileName);
+        return Files.readString(pth);
+    }
 }
 

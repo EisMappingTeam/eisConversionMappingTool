@@ -15,12 +15,27 @@ import java.io.FileNotFoundException;
 
 public class JavaFileParser {
 
+
+//    public FileAnnotations parse(File file) throws FileNotFoundException {
+//        FileAnnotations fileAnnotations = new FileAnnotations();
+//
+//        JavaParser jp = new JavaParser();
+//
+//        CompilationUnit cu = jp.parse(file).getResult().get();
+//        cu.accept(new ClassHeaderVisitor(fileAnnotations), ""); //Load class annotations
+//        cu.accept(new ClassVisitor(fileAnnotations), "");       //Load class variables annotations
+//        cu.accept(new MethodVisitor(fileAnnotations), "");      //Load method annotations
+//
+//        return fileAnnotations;
+//    }
+
     //https://github.com/javaparser/javaparser/issues/1336
-    public FileAnnotations parse(File file) throws FileNotFoundException {
+    public FileAnnotations parse(String fileContent) throws FileNotFoundException {
         FileAnnotations fileAnnotations = new FileAnnotations();
 
         JavaParser jp = new JavaParser();
-        CompilationUnit cu = jp.parse(file).getResult().get();
+
+        CompilationUnit cu = jp.parse(fileContent).getResult().get();
         cu.accept(new ClassHeaderVisitor(fileAnnotations), ""); //Load class annotations
         cu.accept(new ClassVisitor(fileAnnotations), "");       //Load class variables annotations
         cu.accept(new MethodVisitor(fileAnnotations), "");      //Load method annotations
