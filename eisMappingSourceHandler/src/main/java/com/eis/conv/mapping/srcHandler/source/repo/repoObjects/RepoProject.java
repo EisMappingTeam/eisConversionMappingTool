@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.repo;
+package com.eis.conv.mapping.srcHandler.source.repo.repoObjects;
 
 import java.util.ArrayList;
 import java.util.List;

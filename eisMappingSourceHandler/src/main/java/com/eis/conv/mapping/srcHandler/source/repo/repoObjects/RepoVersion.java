@@ -1,6 +1,6 @@
-package com.eis.conv.mapping.srcHandler.source.repo;
+package com.eis.conv.mapping.srcHandler.source.repo.repoObjects;
 
-import com.eis.conv.mapping.srcHandler.source.repo.repoHandlers.RepoHandler;
+import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;

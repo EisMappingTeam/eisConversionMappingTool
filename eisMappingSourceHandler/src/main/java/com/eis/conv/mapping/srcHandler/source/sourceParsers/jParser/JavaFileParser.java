@@ -1,6 +1,6 @@
 package com.eis.conv.mapping.srcHandler.source.sourceParsers.jParser;
 
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.FileAnnotations;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JFileAnnotations;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JAnnotation;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -9,15 +9,14 @@ import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.NormalAnnotationExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 
 
 public class JavaFileParser {
 
 
-//    public FileAnnotations parse(File file) throws FileNotFoundException {
-//        FileAnnotations fileAnnotations = new FileAnnotations();
+//    public JFileAnnotations parse(File file) throws FileNotFoundException {
+//        JFileAnnotations fileAnnotations = new JFileAnnotations();
 //
 //        JavaParser jp = new JavaParser();
 //
@@ -30,8 +29,8 @@ public class JavaFileParser {
 //    }
 
     //https://github.com/javaparser/javaparser/issues/1336
-    public FileAnnotations parse(String fileContent) throws FileNotFoundException {
-        FileAnnotations fileAnnotations = new FileAnnotations();
+    public JFileAnnotations parse(String fileContent) throws FileNotFoundException {
+        JFileAnnotations fileAnnotations = new JFileAnnotations();
 
         JavaParser jp = new JavaParser();
 
@@ -45,9 +44,9 @@ public class JavaFileParser {
 
 
     private static class AnnotationPropertiesVisitor extends VoidVisitorAdapter<String> {
-        FileAnnotations fileAnnotations;
+        JFileAnnotations fileAnnotations;
 
-        private AnnotationPropertiesVisitor(FileAnnotations _fileAnnotations) {
+        private AnnotationPropertiesVisitor(JFileAnnotations _fileAnnotations) {
             fileAnnotations = _fileAnnotations;
         }
 
@@ -68,9 +67,9 @@ public class JavaFileParser {
 
 
     private static class MethodVisitor extends VoidVisitorAdapter<String> {
-        FileAnnotations fileAnnotations;
+        JFileAnnotations fileAnnotations;
 
-        private MethodVisitor(FileAnnotations _fileAnnotations) {
+        private MethodVisitor(JFileAnnotations _fileAnnotations) {
             fileAnnotations = _fileAnnotations;
         }
 
@@ -86,9 +85,9 @@ public class JavaFileParser {
     //Sample with parameters:
     //https://stackoverflow.com/questions/5410193/get-class-annotations-from-java-source-file
     private static class ClassVisitor extends VoidVisitorAdapter<String> {
-        FileAnnotations fileAnnotations;
+        JFileAnnotations fileAnnotations;
 
-        private ClassVisitor(FileAnnotations _fileAnnotations) {
+        private ClassVisitor(JFileAnnotations _fileAnnotations) {
             fileAnnotations = _fileAnnotations;
         }
 
@@ -115,9 +114,9 @@ public class JavaFileParser {
 
 
     private static class ClassHeaderVisitor extends VoidVisitorAdapter<String> {
-        FileAnnotations fileAnnotations;
+        JFileAnnotations fileAnnotations;
 
-        private ClassHeaderVisitor(FileAnnotations _fileAnnotations) {
+        private ClassHeaderVisitor(JFileAnnotations _fileAnnotations) {
             fileAnnotations = _fileAnnotations;
         }
 

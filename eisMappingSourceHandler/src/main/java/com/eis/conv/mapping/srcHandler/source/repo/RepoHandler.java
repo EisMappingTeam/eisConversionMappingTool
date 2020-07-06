@@ -1,8 +1,8 @@
-package com.eis.conv.mapping.srcHandler.source.repo.repoHandlers;
+package com.eis.conv.mapping.srcHandler.source.repo;
 
-import com.eis.conv.mapping.srcHandler.source.repo.RepoProject;
-import com.eis.conv.mapping.srcHandler.source.repo.RepoRoot;
-import com.eis.conv.mapping.srcHandler.source.repo.RepoVersion;
+import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoProject;
+import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoRoot;
+import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoVersion;
 
 import java.io.File;
 import java.io.IOException;

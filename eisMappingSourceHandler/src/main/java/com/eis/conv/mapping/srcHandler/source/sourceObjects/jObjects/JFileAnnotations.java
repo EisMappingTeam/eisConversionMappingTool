@@ -3,9 +3,16 @@ package com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileAnnotations {
+public class JFileAnnotations {
     private String fileName = "";
-    private List<JAnnotation> annotations = new ArrayList<JAnnotation>();
+    private List<JAnnotation> annotations = new ArrayList<>();
+
+    public JFileAnnotations() {
+    }
+
+    public JFileAnnotations(String fileName) {
+        this.fileName = fileName;
+    }
 
     public String getFileName() {
         return fileName;
