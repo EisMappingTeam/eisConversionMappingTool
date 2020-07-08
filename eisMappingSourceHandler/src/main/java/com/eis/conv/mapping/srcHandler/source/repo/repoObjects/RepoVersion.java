@@ -1,5 +1,6 @@
 package com.eis.conv.mapping.srcHandler.source.repo.repoObjects;
 
+import com.eis.conv.mapping.core.files.FileHelper;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;
 
 import java.io.IOException;
@@ -47,6 +48,7 @@ public class RepoVersion {
     }
 
     public void loadFilesList() throws IOException {
-        fileNames = RepoHandler.getAllFileNames(path);
+        setFileNames(FileHelper.getFileNamesAll(this.path));
     }
+
 }

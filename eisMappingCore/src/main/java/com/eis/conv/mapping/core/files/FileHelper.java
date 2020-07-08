@@ -13,6 +13,18 @@ import java.util.stream.Stream;
 
 public final class FileHelper {
 
+    public static List<String> getDirs(String rootPath) {
+        List<String> result = new ArrayList<>();
+        File f = new File(rootPath);
+        for (String itm : f.list()) {
+            if (new File(extendPath(rootPath, itm)).isDirectory()) {
+                result.add(itm);
+            }
+
+        }
+        return result;
+    }
+
     public static List<String> getFileNamesAll(String path) throws IOException {
         Stream<Path> walk = Files.walk(Paths.get(path));
         return walk.filter(Files::isRegularFile)
@@ -31,6 +43,10 @@ public final class FileHelper {
     public  static String  getFileAsSting(String fileName) throws IOException {
         Path pth = Path.of(fileName);
         return Files.readString(pth);
+    }
+
+    public static String extendPath(String rootPath, String appendValue) {
+        return rootPath + "\\" + appendValue;
     }
 }
 

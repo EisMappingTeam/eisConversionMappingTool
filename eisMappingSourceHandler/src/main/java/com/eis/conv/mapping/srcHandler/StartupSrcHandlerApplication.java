@@ -1,5 +1,6 @@
 package com.eis.conv.mapping.srcHandler;
 
+import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoProduct;
 import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoProject;
 import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoRoot;
 import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoVersion;
@@ -29,15 +30,17 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         if (args.length < 1) {
             System.out.println("No parameters found");
 
-            String fileName  = "C:\\111\\222\\fl.txt";
+            String fileName = "C:\\111\\222\\fl.txt";
             JFileAnnotations jFileAnnotations = JFileHandler.loadFromFile(fileName);
         }
 
         //
-        RepoRoot rr = RepoHandler.getRepoRoot("C:\\111");
+        RepoRoot rr = RepoHandler.loadRepoRoot("C:\\111");
         RepoProject rp = rr.getProject("222");
-        RepoVersion rv = rp.getVersion("2_CCC");
+        RepoProduct rProd = rp.getProduct("2_CCC");
+        RepoVersion rv = rProd.getVersion("S02");
         rv.loadFilesList();
+
         exit(0);
     }
 }

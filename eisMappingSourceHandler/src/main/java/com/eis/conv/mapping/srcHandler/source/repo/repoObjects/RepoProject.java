@@ -6,7 +6,7 @@ import java.util.List;
 public class RepoProject {
     private String projectName = "";
     private String path = "";
-    private List<RepoVersion> versions = new ArrayList<>();
+    private List<RepoProduct> products = new ArrayList<>();
 
     public RepoProject() {
     }
@@ -25,12 +25,12 @@ public class RepoProject {
         this.projectName = projectName;
     }
 
-    public List<RepoVersion> getVersions() {
-        return versions;
+    public List<RepoProduct> getProducts() {
+        return products;
     }
 
-    public void setVersions(List<RepoVersion> versions) {
-        this.versions = versions;
+    public void setProducts(List<RepoProduct> products) {
+        this.products = products;
     }
 
     public String getPath() {
@@ -41,12 +41,12 @@ public class RepoProject {
         this.path = path;
     }
 
-    public RepoVersion getVersion(String versionName) {
-        RepoVersion result = versions.stream().filter(ver -> ver.getVersionName().equalsIgnoreCase(versionName)).findFirst().orElse(null);
+    public RepoProduct getProduct(String productName) {
+        RepoProduct result = products.stream().filter(prod -> prod.getProductName().equalsIgnoreCase(productName)).findFirst().orElse(null);
         return result;
     }
 
-    public boolean isPresentVersion(String versionName) {
-        return versions.stream().filter(ver -> ver.getVersionName().equalsIgnoreCase(versionName)).findFirst().isPresent();
+    public boolean isPresentProduct(String productName) {
+        return products.stream().filter(product -> product.getProductName().equalsIgnoreCase(productName)).findFirst().isPresent();
     }
 }
