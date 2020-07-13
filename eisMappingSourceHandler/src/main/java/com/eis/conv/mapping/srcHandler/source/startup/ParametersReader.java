@@ -1,6 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.startup;
 
 import com.eis.conv.mapping.core.files.FileHelper;
+import com.eis.conv.mapping.srcHandler.source.startup.parameters.StartupParameters;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.IOException;

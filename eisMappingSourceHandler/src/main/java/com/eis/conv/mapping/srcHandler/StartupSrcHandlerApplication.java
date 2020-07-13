@@ -8,7 +8,7 @@ import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.JFileHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JFileAnnotations;
 import com.eis.conv.mapping.srcHandler.source.startup.ParametersReader;
-import com.eis.conv.mapping.srcHandler.source.startup.StartupParameters;
+import com.eis.conv.mapping.srcHandler.source.startup.parameters.StartupParameters;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
