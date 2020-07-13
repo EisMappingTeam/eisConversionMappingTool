@@ -1,17 +1,17 @@
-package com.eis.conv.mapping.srcHandler.source.startup.parameters;
+package com.eis.conv.mapping.srcHandler.source.startup.parameters.user;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-public class StartupAction {
+public class UserStartupAction {
     @JacksonXmlProperty(localName = "actionName")
     private String actionName;
 
     @JacksonXmlElementWrapper(localName = "downloadRepo", useWrapping = false)
-    private  DownloadRepo downloadRepo;
+    private UserDownloadRepo downloadRepo;
 
     @JacksonXmlElementWrapper(localName = "loadSource", useWrapping = false)
-    private  LoadSource loadSource;
+    private UserLoadSource loadSource;
 
 
     public String getActionName() {
@@ -22,19 +22,19 @@ public class StartupAction {
         this.actionName = actionName;
     }
 
-    public DownloadRepo getDownloadRepo() {
+    public UserDownloadRepo getDownloadRepo() {
         return downloadRepo;
     }
 
-    public void setDownloadRepo(DownloadRepo downloadRepo) {
+    public void setDownloadRepo(UserDownloadRepo downloadRepo) {
         this.downloadRepo = downloadRepo;
     }
 
-    public LoadSource getLoadSource() {
+    public UserLoadSource getLoadSource() {
         return loadSource;
     }
 
-    public void setLoadSource(LoadSource loadSource) {
+    public void setLoadSource(UserLoadSource loadSource) {
         this.loadSource = loadSource;
     }
 }

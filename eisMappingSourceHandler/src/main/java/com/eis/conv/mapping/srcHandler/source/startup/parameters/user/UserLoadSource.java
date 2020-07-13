@@ -1,8 +1,8 @@
-package com.eis.conv.mapping.srcHandler.source.startup.parameters;
+package com.eis.conv.mapping.srcHandler.source.startup.parameters.user;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-public class LoadSource {
+public class UserLoadSource {
     @JacksonXmlProperty(localName = "project")
     private String project;
 

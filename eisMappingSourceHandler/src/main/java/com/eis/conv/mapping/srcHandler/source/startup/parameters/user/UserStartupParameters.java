@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.startup.parameters;
+package com.eis.conv.mapping.srcHandler.source.startup.parameters.user;
 
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
@@ -6,8 +6,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 @JacksonXmlRootElement(localName = "MappingTool")
-public class StartupParameters {
-    public StartupParameters() {
+public class UserStartupParameters {
+    public UserStartupParameters() {
     }
 
     @JacksonXmlProperty(localName = "user")
@@ -18,7 +18,7 @@ public class StartupParameters {
     private String applicationSettingsFile;
 
     @JacksonXmlElementWrapper(localName = "actions", useWrapping = false)
-    private StartupActions actions;
+    private UserStartupActions actions;
 
     public String getUser() {
         return user;
@@ -44,11 +44,11 @@ public class StartupParameters {
         this.applicationSettingsFile = applicationSettingsFile;
     }
 
-    public StartupActions getActions() {
+    public UserStartupActions getActions() {
         return actions;
     }
 
-    public void setActions(StartupActions actions) {
+    public void setActions(UserStartupActions actions) {
         this.actions = actions;
     }
 }

@@ -8,7 +8,7 @@ import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.JFileHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JFileAnnotations;
 import com.eis.conv.mapping.srcHandler.source.startup.ParametersReader;
-import com.eis.conv.mapping.srcHandler.source.startup.parameters.StartupParameters;
+import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.UserStartupParameters;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,7 +29,7 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        StartupParameters parameters;
+        UserStartupParameters parameters;
         if (args.length < 1) {
             System.out.println("No parameters found");
         } else {
