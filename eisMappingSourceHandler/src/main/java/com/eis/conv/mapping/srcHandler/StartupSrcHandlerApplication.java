@@ -7,6 +7,8 @@ import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoVersion;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.JFileHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JFileAnnotations;
+import com.eis.conv.mapping.srcHandler.source.startup.ParametersReader;
+import com.eis.conv.mapping.srcHandler.source.startup.StartupParameters;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,14 +29,20 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        StartupParameters parameters;
         if (args.length < 1) {
             System.out.println("No parameters found");
-
-            String fileName = "C:\\111\\222\\fl.txt";
-            JFileAnnotations jFileAnnotations = JFileHandler.loadFromFile(fileName);
+        } else {
+            parameters = ParametersReader.read(args[0]);
+            System.out.println(parameters);
         }
 
         //
+
+        String fileName = "C:\\111\\222\\fl.txt";
+        JFileAnnotations jFileAnnotations = JFileHandler.loadFromFile(fileName);
+
+
         RepoRoot rr = RepoHandler.loadRepoRoot("C:\\111");
         RepoProject rp = rr.getProject("222");
         RepoProduct rProd = rp.getProduct("2_CCC");
