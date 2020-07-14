@@ -2,10 +2,9 @@
     <repoRootDir>repoRoot</repoRootDir>
 
     <repoCommand>
-        <commandName>download</commandName>
-        <project>Proj</project>
+        <commandName>REPO_DOWNLOAD</commandName>
+        <project>Prj</project>
         <product>PROD</product>
-        <version>Ver01</version>
 
         <userPattern>@user@</userPattern>
         <passwordPattern>@passw@</passwordPattern>

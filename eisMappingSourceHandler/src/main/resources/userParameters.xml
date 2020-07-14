@@ -1,0 +1,26 @@
+<MappingTool>
+    <user>AAA</user>
+    <password>VVV</password>
+    <applicationSettingsFile></applicationSettingsFile>
+
+    <actions>
+        <action>
+            <actionName>LOAD_REPO</actionName>
+            <downloadRepo>
+                <project>Prj</project>
+                <product>PROD</product>
+                <version>loadV</version>
+            </downloadRepo>
+        </action>
+
+        <action>
+            <actionName>LOAD_SOURCE</actionName>
+            <loadSource>
+                <project>Prj</project>
+                <product>PROD</product>
+                <version>XXXXX</version>
+            </loadSource>
+        </action>
+    </actions>
+
+</MappingTool>

@@ -8,6 +8,8 @@ import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.JFileHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JFileAnnotations;
 import com.eis.conv.mapping.srcHandler.source.startup.ParametersReader;
+import com.eis.conv.mapping.srcHandler.source.startup.UserActionRunner;
+import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParameterFilesHelper;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.UserStartupParameters;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
@@ -29,20 +31,28 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        UserStartupParameters parameters;
+        ParameterFilesHelper parameterFilesHelper = new ParameterFilesHelper();
+        String userParamFileName;
+
         if (args.length < 1) {
             System.out.println("No parameters found");
+            userParamFileName = parameterFilesHelper.getUserSettingsFileName("");
+            System.out.println("User settings load from resources: " + userParamFileName);
+
         } else {
-            parameters = ParametersReader.read(args[0]);
-            System.out.println(parameters);
+            userParamFileName = parameterFilesHelper.getUserSettingsFileName(args[0]);
         }
 
-        //
+        UserStartupParameters parameters;
+        parameters = ParametersReader.readUserParameters(userParamFileName);
 
+        UserActionRunner.runActions(parameters);
+
+        //Load java
         String fileName = "C:\\111\\222\\fl.txt";
         JFileAnnotations jFileAnnotations = JFileHandler.loadFromFile(fileName);
 
-
+        //Load REPO: Project-Product-Versions
         RepoRoot rr = RepoHandler.loadRepoRoot("C:\\111");
         RepoProject rp = rr.getProject("222");
         RepoProduct rProd = rp.getProduct("2_CCC");

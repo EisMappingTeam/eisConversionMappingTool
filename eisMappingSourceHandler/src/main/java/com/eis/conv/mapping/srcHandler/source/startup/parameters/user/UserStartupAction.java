@@ -37,4 +37,13 @@ public class UserStartupAction {
     public void setLoadSource(UserLoadSource loadSource) {
         this.loadSource = loadSource;
     }
+
+    @Override
+    public String toString() {
+        return "UserStartupAction{" +
+                "actionName='" + actionName + '\'' +
+                ", downloadRepo=" + downloadRepo +
+                ", loadSource=" + loadSource +
+                '}';
+    }
 }

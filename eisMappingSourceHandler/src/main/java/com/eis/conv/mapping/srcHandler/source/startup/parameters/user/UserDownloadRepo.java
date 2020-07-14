@@ -13,5 +13,27 @@ public class UserDownloadRepo {
     @JacksonXmlProperty(localName = "version")
     private String version;
 
+    public String getProject() {
+        return project;
+    }
 
+    public void setProject(String project) {
+        this.project = project;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
 }
