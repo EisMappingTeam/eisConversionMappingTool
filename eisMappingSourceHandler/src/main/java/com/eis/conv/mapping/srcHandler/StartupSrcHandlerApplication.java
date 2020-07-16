@@ -46,8 +46,8 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
             userParamFileName = parameterFilesHelper.getUserSettingsFileName(args[0]);
         }
 
-        UserStartupParameters parameters;
-        parameters = ParametersReader.readUserParameters(userParamFileName);
+        UserStartupParameters parameters= ParametersReader.readUserParameters(userParamFileName);
+
 
         UserActionRunner.runActions(parameters);
 

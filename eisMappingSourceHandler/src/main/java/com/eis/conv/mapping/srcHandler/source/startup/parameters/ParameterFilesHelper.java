@@ -4,8 +4,8 @@ import java.io.File;
 
 public class ParameterFilesHelper {
 
-    private static final String USER_PARAMETER_FILE = "userParameters.xml";
-    private static final String APP_PARAMETER_FILE = "appParameters.xml";
+    private static final String USER_PARAMETER_FILE = "parameters/userParameters.xml";
+    private static final String APP_PARAMETER_FILE = "parameters/appParameters.xml";
 
     public String getUserSettingsFileName(String userSettingsFileName) {
         if (userSettingsFileName.length() <1) {
