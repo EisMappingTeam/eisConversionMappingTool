@@ -1,5 +1,7 @@
 package com.eis.conv.mapping.srcHandler;
 
+import com.eis.conv.mapping.core.files.FileHelper;
+import com.eis.conv.mapping.core.xml.XmlDOMParser;
 import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoProduct;
 import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoProject;
 import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoRoot;
@@ -11,6 +13,7 @@ import com.eis.conv.mapping.srcHandler.source.startup.ParametersReader;
 import com.eis.conv.mapping.srcHandler.source.startup.UserActionRunner;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParameterFilesHelper;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.UserStartupParameters;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -59,6 +62,11 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         RepoVersion rv = rProd.getVersion("S02");
         rv.loadFilesList();
 
+
+        //XML
+        String xml = FileHelper.getFileAsSting("C:\\111\\ipb-import-validation-beans.xml");
+        XmlDOMParser mp = new XmlDOMParser();
+        mp.parseXml(xml);
         exit(0);
     }
 }
