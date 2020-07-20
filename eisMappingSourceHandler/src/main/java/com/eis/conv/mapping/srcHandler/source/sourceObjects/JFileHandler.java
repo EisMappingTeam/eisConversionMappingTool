@@ -12,17 +12,21 @@ import java.util.List;
 public final class JFileHandler {
 
     public static JFileAnnotations loadFromFile(String fileName) throws IOException {
+        JFileAnnotations result;
         if (fileName.length() < 1) {
             return new JFileAnnotations();
         }
         String fileContent = FileHelper.getFileAsSting(fileName);
-        return loadFromString(fileName, fileContent);
+
+        result = loadFromString(fileName, fileContent);
+        result.setFileName(fileName);
+        result.setFileExtension(FileHelper.getFileExtension(fileName));
+        return result;
     }
 
     public static JFileAnnotations loadFromString(String fileName, String fileContent) throws FileNotFoundException {
         JavaFileParser jfp = new JavaFileParser();
         JFileAnnotations jFileAnnotation = jfp.parse(fileContent);
-        jFileAnnotation.setFileName(fileName);
         return jFileAnnotation;
     }
 

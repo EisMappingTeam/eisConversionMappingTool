@@ -26,6 +26,9 @@ public class JavaFileParser {
         cu.accept(new ClassVisitor(fileAnnotations), "");       //Load class variables annotations
         cu.accept(new MethodVisitor(fileAnnotations), "");      //Load method annotations
 
+        if (cu.getPackageDeclaration().isPresent()) {
+            fileAnnotations.setPackageValue(cu.getPackageDeclaration().get().getName().asString());
+        }
         return fileAnnotations;
     }
 

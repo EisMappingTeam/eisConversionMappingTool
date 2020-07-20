@@ -20,9 +20,12 @@ public final class FileHelper {
             if (new File(extendPath(rootPath, itm)).isDirectory()) {
                 result.add(itm);
             }
-
         }
         return result;
+    }
+
+    public static String getFileExtension(String filename) {   //Guava
+        return com.google.common.io.Files.getFileExtension(filename);
     }
 
     public static List<String> getFileNamesAll(String path) throws IOException {
@@ -40,7 +43,7 @@ public final class FileHelper {
         return result;
     }
 
-    public  static String  getFileAsSting(String fileName) throws IOException {
+    public static String getFileAsSting(String fileName) throws IOException {
         Path pth = Path.of(fileName);
         return Files.readString(pth);
     }

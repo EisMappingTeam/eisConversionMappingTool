@@ -54,6 +54,8 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         //Load java
         String fileName = "C:\\111\\222\\fl.txt";
         JFileAnnotations jFileAnnotations = JFileHandler.loadFromFile(fileName);
+        jFileAnnotations.setProject("prj");
+        jFileAnnotations.setProduct("Prod");
 
         //Load REPO: Project-Product-Versions
         RepoRoot rr = RepoHandler.loadRepoRoot("C:\\111");
