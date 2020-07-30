@@ -66,7 +66,7 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
 
 
         //XML
-        String xml = FileHelper.getFileAsSting("C:\\111\\ipb-import-validation-beans.xml");
+        String xml = FileHelper.getFileAsSting("C:\\111\\222\\rules.xml");
         XmlDOMParser mp = new XmlDOMParser();
         mp.parseXml(xml);
         exit(0);

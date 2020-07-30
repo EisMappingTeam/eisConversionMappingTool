@@ -1,0 +1,341 @@
+<?xml version='1.0' encoding='utf-8'?>
+<constraint-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://jboss.org/xml/ns/javax/validation/mapping validation-mapping-1.0.xsd"
+                     xmlns="http://jboss.org/xml/ns/javax/validation/mapping">
+
+    <bean class="com.exigen.ipb.crm.domain.AddressEntity" ignore-annotations="false">
+        <field name="addressTypeCd" ignore-annotations="true">
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{crm00079}</message>
+                <groups>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+            </constraint>
+        </field>
+    </bean>
+    <!-- Address constraints start -->
+    <bean class="com.exigen.ipb.base.datatypes.Address">
+        <field name="countryCd">
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{crm00077}</message>
+                <groups>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+            </constraint>
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{crm00113}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+                <element name="max">3</element>
+            </constraint>
+        </field>
+        <field name="addressLine1">
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{addressline1.limit.message}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+                <element name="max">100</element>
+            </constraint>
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{crm00074}</message>
+                <groups>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+            </constraint>
+        </field>
+        <field name="addressLine2">
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{addressline2.limit.message}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+                <element name="max">100</element>
+            </constraint>
+        </field>
+        <field name="addressLine3">
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{addressLine3.limit.message}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+                <element name="max">65</element>
+            </constraint>
+        </field>
+        <field name="postalCode">
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{crm00072}</message>
+                <groups>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.SpainAddressGroup</value>
+                </groups>
+            </constraint>
+            <constraint annotation="javax.validation.constraints.Pattern">
+                <message>{zipcode.invalid}</message>
+                <groups>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.SpainAddressGroup</value>
+                </groups>
+                <!--12345 or 12345-1234 or 12345678-->
+                <element name="regexp">(?:0[1-9]|[1-4]\d|5[0-2])\d{3}</element>
+            </constraint>
+
+
+        </field>
+        <field name="city">
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{city.limit.message}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+                <element name="max">50</element>
+            </constraint>
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{crm00073}</message>
+                <groups>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+            </constraint>
+        </field>
+        <field name="stateProvCd">
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{crm00032}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+                <element name="max">255</element>
+            </constraint>
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{state.required}</message>
+                <groups>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.SpainAddressGroup</value>
+                </groups>
+            </constraint>
+        </field>
+        <field name="county">
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{crm00055}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBContactsGroup</value>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.LMBEmploymentContactsGroup</value>
+                </groups>
+                <element name="max">40</element>
+            </constraint>
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{county.required}</message>
+                <groups>
+                    <value>com.lmig.ci.lmb.eis.crm.validation.group.IrelandAddressGroup</value>
+                </groups>
+            </constraint>
+        </field>
+
+        <field name="standartized">
+            <valid/>
+        </field>
+        <field name="addressDisplayValue">
+            <valid/>
+        </field>
+        <field name="streetName">
+            <valid/>
+        </field>
+        <field name="streetNumber">
+            <valid/>
+        </field>
+        <field name="streetType">
+            <valid/>
+        </field>
+        <field name="unitNumber">
+            <valid/>
+        </field>
+        <field name="usageType">
+            <valid/>
+        </field>
+    </bean>
+    <!-- Address constraints end -->
+    <!-- NameInfo constraints start -->
+    <bean class="com.exigen.ipb.base.datatypes.NameInfo">
+        <field name="firstName">
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{crm00069}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.CustomerGroup</value>
+                    <value>com.exigen.ipb.crm.domain.validation.group.LeadGroup</value>
+                </groups>
+            </constraint>
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{crm00083}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.RelationshipGroup</value>
+                </groups>
+            </constraint>
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{crm00006}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.CustomerGroup</value>
+                    <value>com.exigen.ipb.crm.domain.validation.group.LeadGroup</value>
+                    <value>com.exigen.ipb.crm.domain.validation.group.RelationshipGroup</value>
+                </groups>
+                <element name="max">50</element>
+            </constraint>
+        </field>
+        <field name="middleName">
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{crm00006}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.CustomerGroup</value>
+                    <value>com.exigen.ipb.crm.domain.validation.group.LeadGroup</value>
+                    <value>com.exigen.ipb.crm.domain.validation.group.RelationshipGroup</value>
+                </groups>
+                <element name="max">50</element>
+            </constraint>
+        </field>
+        <field name="lastName">
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{crm00068}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.CustomerGroup</value>
+                    <value>com.exigen.ipb.crm.domain.validation.group.LeadGroup</value>
+                </groups>
+            </constraint>
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{crm00082}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.RelationshipGroup</value>
+                </groups>
+            </constraint>
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{crm00006}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.CustomerGroup</value>
+                    <value>com.exigen.ipb.crm.domain.validation.group.LeadGroup</value>
+                    <value>com.exigen.ipb.crm.domain.validation.group.RelationshipGroup</value>
+                </groups>
+                <element name="max">50</element>
+            </constraint>
+        </field>
+        <field name="salutation">
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{salutation.required}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.CustomerGroup</value>
+                    <value>com.exigen.ipb.crm.domain.validation.group.LeadGroup</value>
+                </groups>
+            </constraint>
+        </field>
+        <field name="suffix">
+            <valid />
+        </field>
+        <field name="nameTypeCd">
+            <valid />
+        </field>
+        <field name="otherName">
+            <valid />
+        </field>
+        <field name="phoneticFirstName">
+            <valid />
+        </field>
+        <field name="phoneticLastName">
+            <valid />
+        </field>
+        <field name="titleCd">
+            <valid />
+        </field>
+        <field name="legalEntityCd">
+            <valid />
+        </field>
+        <field name="additionalNameInd">
+            <valid/>
+        </field>
+
+        <field name="isDirty">
+            <valid/>
+        </field>
+    </bean>
+    <!-- Phone constraints start -->
+    <bean class="com.exigen.ipb.base.datatypes.Phone">
+        <field name="phoneNumber">
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{crm00032}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                </groups>
+                <element name="max">255</element>
+            </constraint>
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{phone.required}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                </groups>
+            </constraint>
+            <constraint annotation="javax.validation.constraints.Pattern">
+                <message>{phone.invalid}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                </groups>
+                <element name="regexp">^[0-9]{5,15}$</element>
+            </constraint>
+            <!--Customer Account Contacts constraints -->
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{crm00013}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.AccountContactsGroup</value>
+                </groups>
+                <element name="max">20</element>
+            </constraint>
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{phone.required}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.AccountContactsGroup</value>
+                </groups>
+            </constraint>
+            <constraint annotation="javax.validation.constraints.Pattern">
+                <message>{phone.invalid}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.AccountContactsGroup</value>
+                </groups>
+                <element name="regexp">^[0-9]{5,15}$</element>
+            </constraint>
+        </field>
+    </bean>
+    <!-- Phone constraints end -->
+    <bean class="com.exigen.ipb.crm.domain.EmailInfo">
+        <field name="emailId">
+            <constraint annotation="javax.validation.constraints.Size">
+                <message>{crm00032}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                </groups>
+                <element name="max">255</element>
+            </constraint>
+            <constraint annotation="com.exigen.ipb.crm.domain.validation.NotBlank">
+                <message>{emailAddress.required}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                </groups>
+            </constraint>
+            <constraint annotation="javax.validation.constraints.Pattern">
+                <message>{crm00046}</message>
+                <groups>
+                    <value>com.exigen.ipb.crm.domain.validation.group.ContactsGroup</value>
+                </groups>
+                <element name="regexp">^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-zA-Z]{2,6}(?:\.[a-zA-Z]{2})?)$</element>
+            </constraint>
+        </field>
+    </bean>
+</constraint-mappings>

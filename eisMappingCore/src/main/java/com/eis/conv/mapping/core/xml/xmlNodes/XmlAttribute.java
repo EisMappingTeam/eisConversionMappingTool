@@ -1,0 +1,22 @@
+package com.eis.conv.mapping.core.xml.xmlNodes;
+
+public class XmlAttribute {
+    private String name;
+    private String value;
+
+    public XmlAttribute() {
+    }
+
+    public XmlAttribute(String name, String value) {
+        this.name = name;
+        this.value = value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
