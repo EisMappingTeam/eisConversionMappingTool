@@ -48,4 +48,18 @@ public class XmlNode {
     public void setChildren(List<XmlNode> children) {
         this.children = children;
     }
+
+    public XmlNode getChildByName(String nodeName) {
+        XmlNode result = children.stream().filter(item -> item.getName().equalsIgnoreCase(nodeName))
+                .findFirst()
+                .orElse(new XmlNode());
+        return result;
+    }
+
+    public XmlAttribute getAttributeByName(String attributeName) {
+        XmlAttribute result = attributes.stream().filter(item -> item.getName().equalsIgnoreCase(attributeName))
+                .findFirst()
+                .orElse(new XmlAttribute());
+        return result;
+    }
 }
