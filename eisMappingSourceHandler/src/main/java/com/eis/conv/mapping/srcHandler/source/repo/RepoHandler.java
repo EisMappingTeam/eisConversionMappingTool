@@ -1,10 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.repo;
 
 import com.eis.conv.mapping.core.files.FileHelper;
-import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoProduct;
-import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoProject;
-import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoRoot;
-import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoVersion;
+import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,9 +28,9 @@ public final class RepoHandler {
     }
 
 
-    public static RepoProject loadRepoProject(String rootPath, String project) throws IOException {
-        String dir = FileHelper.extendPath(rootPath, project);
-        RepoProject repoProject = new RepoProject(project, dir);
+    public static RepoProject loadRepoProject(String rootPath, String projectDirName) throws IOException {
+        String dir = FileHelper.extendPath(rootPath, projectDirName);
+        RepoProject repoProject = new RepoProject(projectDirName, dir);
 
         List<String> folders = FileHelper.getDirs(dir);
         for (String item : folders) {
@@ -43,9 +40,9 @@ public final class RepoHandler {
         return repoProject;
     }
 
-    public static RepoProduct loadRepoProduct(String rootPath, String product) throws IOException {
-        String dir = FileHelper.extendPath(rootPath, product);
-        RepoProduct repoProduct = new RepoProduct(product, dir);
+    public static RepoProduct loadRepoProduct(String rootPath, String productDirName) throws IOException {
+        String dir = FileHelper.extendPath(rootPath, productDirName);
+        RepoProduct repoProduct = new RepoProduct(productDirName, dir);
 
         List<String> folders = FileHelper.getDirs(dir);
         for (String item : folders) {
@@ -55,13 +52,28 @@ public final class RepoHandler {
         return repoProduct;
     }
 
+    public static RepoVersion loadRepoVersion(String rootPath, String versionDirName) throws IOException {
+        String dir = FileHelper.extendPath(rootPath, versionDirName);
+        RepoVersion repoVersion = new RepoVersion(versionDirName, dir);
 
-    public static RepoVersion loadRepoVersion(String productPath, String version) throws IOException {
-        String dir = FileHelper.extendPath(productPath, version);
-        RepoVersion repoVersion = new RepoVersion(version, dir);
-
+        List<String> folders = FileHelper.getDirs(dir);
+        for (String item : folders) {
+            RepoProductItem repoProductItem = loadRepoProductItem(dir, item);
+            repoVersion.getProductItems().add(repoProductItem);
+        }
         return repoVersion;
     }
 
+
+    public static RepoProductItem loadRepoProductItem(String productPath, String productItemDirName) throws IOException {
+        String dir = FileHelper.extendPath(productPath, productItemDirName);
+        RepoProductItem repoProductItem = new RepoProductItem(productItemDirName, dir);
+        return repoProductItem;
+    }
+
+    public static void loadRepoProductItemFiles(RepoProductItem repoProductItem) throws IOException {
+        repoProductItem.setFileNames(FileHelper.getFileNamesAll(repoProductItem.getPath()));
+        return;
+    }
 
 }

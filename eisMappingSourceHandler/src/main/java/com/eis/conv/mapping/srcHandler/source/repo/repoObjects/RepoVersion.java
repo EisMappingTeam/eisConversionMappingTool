@@ -1,16 +1,16 @@
 package com.eis.conv.mapping.srcHandler.source.repo.repoObjects;
 
-import com.eis.conv.mapping.core.files.FileHelper;
-import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class RepoVersion {
     private String versionName = "";
     private String path = "";
-    List<String> fileNames = new ArrayList<>();
+
+    private List<RepoProductItem> productItems = new ArrayList<>();
+
+//    List<String> fileNames = new ArrayList<>();
 
 
     public RepoVersion() {
@@ -31,14 +31,6 @@ public class RepoVersion {
         this.versionName = versionName;
     }
 
-    public List<String> getFileNames() {
-        return fileNames;
-    }
-
-    public void setFileNames(List<String> fileNames) {
-        this.fileNames = fileNames;
-    }
-
     public String getPath() {
         return path;
     }
@@ -47,8 +39,26 @@ public class RepoVersion {
         this.path = path;
     }
 
-    public void loadFilesList() throws IOException {
-        setFileNames(FileHelper.getFileNamesAll(this.path));
+    public List<RepoProductItem> getProductItems() {
+        return productItems;
     }
+
+    public void setProductItems(List<RepoProductItem> productItems) {
+        this.productItems = productItems;
+    }
+
+    public RepoProductItem getProductItem(String productItemName) {
+        RepoProductItem result = productItems.stream().filter(prodItm -> prodItm.getProductItemName().equalsIgnoreCase(productItemName)).findFirst().orElse(null);
+        return result;
+    }
+
+    public boolean isPresentProductItem(String productItemName) {
+        return productItems.stream().filter(productItm -> productItm.getProductItemName().equalsIgnoreCase(productItemName)).findFirst().isPresent();
+    }
+
+
+//    public void loadFilesList() throws IOException {
+//        setFileNames(FileHelper.getFileNamesAll(this.path));
+//    }
 
 }

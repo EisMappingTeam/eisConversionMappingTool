@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.sourceObjects;
 
 import com.eis.conv.mapping.core.files.FileHelper;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JFileAnnotations;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.sourceParsers.jParser.JavaFileParser;
 
 import java.io.FileNotFoundException;
@@ -11,10 +11,10 @@ import java.util.List;
 
 public final class JFileHandler {
 
-    public static JFileAnnotations loadFromFile(String fileName) throws IOException {
-        JFileAnnotations result;
+    public static SourceJavaFile loadFromFile(String fileName) throws IOException {
+        SourceJavaFile result;
         if (fileName.length() < 1) {
-            return new JFileAnnotations();
+            return new SourceJavaFile();
         }
         String fileContent = FileHelper.getFileAsSting(fileName);
 
@@ -24,16 +24,16 @@ public final class JFileHandler {
         return result;
     }
 
-    public static JFileAnnotations loadFromString(String fileName, String fileContent) throws FileNotFoundException {
+    public static SourceJavaFile loadFromString(String fileName, String fileContent) throws FileNotFoundException {
         JavaFileParser jfp = new JavaFileParser();
-        JFileAnnotations jFileAnnotation = jfp.parse(fileContent);
+        SourceJavaFile jFileAnnotation = jfp.parse(fileContent);
         return jFileAnnotation;
     }
 
-    public static List<JFileAnnotations> loadFromFileList(List<String> fileNames) throws IOException {
-        List<JFileAnnotations> result = new ArrayList<>();
+    public static List<SourceJavaFile> loadFromFileList(List<String> fileNames) throws IOException {
+        List<SourceJavaFile> result = new ArrayList<>();
         for (String item : fileNames) {
-            JFileAnnotations jFA = loadFromFile(item);
+            SourceJavaFile jFA = loadFromFile(item);
             result.add(jFA);
         }
         return result;

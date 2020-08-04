@@ -2,18 +2,14 @@ package com.eis.conv.mapping.srcHandler;
 
 import com.eis.conv.mapping.core.files.FileHelper;
 import com.eis.conv.mapping.core.xml.XmlDOMParser;
-import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoProduct;
-import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoProject;
-import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoRoot;
-import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoVersion;
+import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.*;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.JFileHandler;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JFileAnnotations;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.startup.ParametersReader;
 import com.eis.conv.mapping.srcHandler.source.startup.UserActionRunner;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParameterFilesHelper;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.UserStartupParameters;
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -52,23 +48,25 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         UserActionRunner.runActions(parameters);
 
         //Load java
-        String fileName = "C:\\111\\222\\fl.txt";
-        JFileAnnotations jFileAnnotations = JFileHandler.loadFromFile(fileName);
+        String fileName = "C:\\111\\hotai\\fl.txt";
+        SourceJavaFile jFileAnnotations = JFileHandler.loadFromFile(fileName);
         jFileAnnotations.setProject("prj");
         jFileAnnotations.setProduct("Prod");
 
         //Load REPO: Project-Product-Versions
         RepoRoot rr = RepoHandler.loadRepoRoot("C:\\111");
-        RepoProject rp = rr.getProject("222");
-        RepoProduct rProd = rp.getProduct("2_CCC");
+        RepoProject rp = rr.getProject("hotai");
+        RepoProduct rProd = rp.getProduct("AC");
         RepoVersion rv = rProd.getVersion("S02");
-        rv.loadFilesList();
+        RepoProductItem rpi =rv.getProductItem("BASE");
+        RepoHandler.loadRepoProductItemFiles(rpi);
 
 
         //XML
-        String xml = FileHelper.getFileAsSting("C:\\111\\222\\rules.xml");
+        String xml = FileHelper.getFileAsSting("C:\\111\\hotai\\rules.xml");
         XmlDOMParser mp = new XmlDOMParser();
         mp.parseXml(xml);
         exit(0);
+
     }
 }

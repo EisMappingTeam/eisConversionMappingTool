@@ -49,7 +49,11 @@ public final class FileHelper {
     }
 
     public static String extendPath(String rootPath, String appendValue) {
-        return rootPath + "\\" + appendValue;
+        if (appendValue.length() < 1) {
+            return rootPath;
+        } else {
+            return rootPath + "\\" + appendValue;
+        }
     }
 }
 

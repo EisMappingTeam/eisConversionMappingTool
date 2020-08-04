@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.sourceObjects;
 
 
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JFileAnnotations;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.SourceJavaFile;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -48,13 +48,13 @@ public class JFileHandlerTest {
 
     @Test
     public void loadFromFileTest() throws IOException {
-        JFileAnnotations jFileAnnotations = JFileHandler.loadFromFile("");
+        SourceJavaFile jFileAnnotations = JFileHandler.loadFromFile("");
         assertThat(jFileAnnotations.getFileName()).isEqualTo("");
     }
 
     @Test
     public void loadFromStringTest() throws FileNotFoundException {
-        JFileAnnotations jFileAnnotations = JFileHandler.loadFromString(fileName, javaFileContent);
+        SourceJavaFile jFileAnnotations = JFileHandler.loadFromString(fileName, javaFileContent);
 
         assertThat(jFileAnnotations.getFileName()).isEqualTo(fileName);
         assertThat(jFileAnnotations.getAnnotations().size()).isEqualTo(7);
@@ -63,7 +63,7 @@ public class JFileHandlerTest {
 
     @Test
     public void loadFromFileListTest() throws IOException {
-        List<JFileAnnotations> result = JFileHandler.loadFromFileList(new ArrayList<String>());
+        List<SourceJavaFile> result = JFileHandler.loadFromFileList(new ArrayList<String>());
         assertThat(result.size()).isEqualTo(0);
     }
 }
