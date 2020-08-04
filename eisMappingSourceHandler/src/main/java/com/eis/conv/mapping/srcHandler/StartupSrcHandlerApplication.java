@@ -9,12 +9,15 @@ import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.SourceJavaFile
 import com.eis.conv.mapping.srcHandler.source.startup.ParametersReader;
 import com.eis.conv.mapping.srcHandler.source.startup.UserActionRunner;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParameterFilesHelper;
+import com.eis.conv.mapping.srcHandler.source.startup.parameters.application.AppStartupParameters;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.UserStartupParameters;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
+import java.io.IOException;
 
 import static java.lang.System.exit;
 
@@ -30,23 +33,13 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        ParameterFilesHelper parameterFilesHelper = new ParameterFilesHelper();
-        String userParamFileName;
+        //Parameters
+        UserStartupParameters userParameters = getUserParameters(args);
+        AppStartupParameters appParameters = getAppParameters(userParameters.getApplicationSettingsFile());
+        //Run
+        UserActionRunner.runActions(userParameters, appParameters);
 
-        if (args.length < 1) {
-            System.out.println("No parameters found");
-            userParamFileName = parameterFilesHelper.getUserSettingsFileName("");
-            System.out.println("User settings load from resources: " + userParamFileName);
-
-        } else {
-            userParamFileName = parameterFilesHelper.getUserSettingsFileName(args[0]);
-        }
-
-        UserStartupParameters parameters= ParametersReader.readUserParameters(userParamFileName);
-
-
-        UserActionRunner.runActions(parameters);
-
+        //*************Samples****************
         //Load java
         String fileName = "C:\\111\\hotai\\fl.txt";
         SourceJavaFile jFileAnnotations = JFileHandler.loadFromFile(fileName);
@@ -58,7 +51,7 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         RepoProject rp = rr.getProject("hotai");
         RepoProduct rProd = rp.getProduct("AC");
         RepoVersion rv = rProd.getVersion("S02");
-        RepoProductItem rpi =rv.getProductItem("BASE");
+        RepoProductItem rpi = rv.getProductItem("BASE");
         RepoHandler.loadRepoProductItemFiles(rpi);
 
 
@@ -68,5 +61,32 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         mp.parseXml(xml);
         exit(0);
 
+    }
+
+
+    private UserStartupParameters getUserParameters(String... args) throws IOException {
+        ParameterFilesHelper parameterFilesHelper = new ParameterFilesHelper();
+        String userParamFileName;
+        if (args.length < 1) {
+            userParamFileName = parameterFilesHelper.getUserSettingsFileName("");
+//            System.out.println("User settings load from resources: " + userParamFileName);
+        } else {
+            userParamFileName = parameterFilesHelper.getUserSettingsFileName(args[0]);
+//            System.out.println("User settings load from " + userParamFileName);
+        }
+        return ParametersReader.readUserParameters(userParamFileName);
+    }
+
+    private AppStartupParameters getAppParameters(String filePath) throws IOException {
+        ParameterFilesHelper parameterFilesHelper = new ParameterFilesHelper();
+        String appSettingsFileName;
+        if (filePath.length() < 1) {
+            appSettingsFileName = parameterFilesHelper.getAppSettingsFileName("");
+//            System.out.println("Application settings load from resources: " + appSettingsFileName);
+        } else {
+            appSettingsFileName = parameterFilesHelper.getAppSettingsFileName(filePath);
+//            System.out.println("User settings load from " + appSettingsFileName);
+        }
+        return ParametersReader.readAppParameters(appSettingsFileName);
     }
 }

@@ -1,8 +1,8 @@
 package com.eis.conv.mapping.srcHandler.source.startup.parameters.user;
 
 public enum UserAllActions {
-    LOAD_REPO("LOAD_REPO"),
-    LOAD_SOURCE("LOAD_SOURCE");
+    DOWNLOAD_REPO("DOWNLOAD_REPO"), //download from Mercurial
+    LOAD_SOURCE("LOAD_SOURCE");     //load folders structure and load java-xml-properties
 
     private final String action;
 

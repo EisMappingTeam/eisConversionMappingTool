@@ -7,6 +7,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 @JacksonXmlRootElement(localName = "MappingToolApplication")
 public class AppStartupParameters {
 
+    private String fileName;
+
     @JacksonXmlProperty(localName = "repoRootDir")
     private String repoRootDir;
 
@@ -29,6 +31,13 @@ public class AppStartupParameters {
         this.repoCommand = repoCommand;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public AppRepoCommand getAppRepoCommand(AppAllCommands cmd, String project, String product) {
         for (AppRepoCommand item : this.repoCommand) {

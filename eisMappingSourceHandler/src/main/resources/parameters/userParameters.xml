@@ -5,7 +5,7 @@
 
     <actions>
         <action>
-            <actionName>LOAD_REPO</actionName>
+            <actionName>DOWNLOAD_REPO</actionName>
             <downloadRepo>
                 <project>Prj</project>
                 <product>PROD</product>

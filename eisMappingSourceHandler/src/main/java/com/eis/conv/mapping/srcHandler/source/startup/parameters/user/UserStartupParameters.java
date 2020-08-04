@@ -7,8 +7,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 @JacksonXmlRootElement(localName = "MappingTool")
 public class UserStartupParameters {
-    public UserStartupParameters() {
-    }
+    private String fileName;
 
     @JacksonXmlProperty(localName = "user")
     private String user;
@@ -19,6 +18,18 @@ public class UserStartupParameters {
 
     @JacksonXmlElementWrapper(localName = "actions", useWrapping = false)
     private UserStartupActions actions;
+
+
+    public UserStartupParameters() {
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public String getUser() {
         return user;

@@ -16,6 +16,7 @@ public final class ParametersReader {
         String xmlData = FileHelper.getFileAsSting(filePath);
         UserStartupParameters parameters = XmlHandler.xmlToObject(xmlData, new TypeReference<UserStartupParameters>() {
         });
+        parameters.setFileName(filePath);
         return parameters;
     }
 
@@ -23,6 +24,7 @@ public final class ParametersReader {
         String xmlData = FileHelper.getFileAsSting(filePath);
         AppStartupParameters parameters = XmlHandler.xmlToObject(xmlData, new TypeReference<AppStartupParameters>() {
         });
+        parameters.setFileName(filePath);
         return parameters;
     }
 }

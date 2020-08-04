@@ -32,7 +32,7 @@ public class ParametersReaderTest {
         UserStartupAction action0 = userStartupActions.getAction()[0];
         UserStartupAction action1 = userStartupActions.getAction()[1];
 
-        assertThat(action0.getActionName()).isEqualTo("LOAD_REPO");
+        assertThat(action0.getActionName()).isEqualTo("DOWNLOAD_REPO");
         assertThat(action1.getActionName()).isEqualTo("LOAD_SOURCE");
     }
 
