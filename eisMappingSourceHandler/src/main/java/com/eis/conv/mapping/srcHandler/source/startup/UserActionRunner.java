@@ -1,5 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.startup;
 
+import com.eis.conv.mapping.srcHandler.source.startup.actions.AppCommandRunner;
+import com.eis.conv.mapping.srcHandler.source.startup.actions.RepoLoader;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.application.AppStartupParameters;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.*;
 
@@ -8,17 +10,13 @@ import java.io.IOException;
 public final class UserActionRunner {
 
     public static void runActions(UserStartupParameters userParameters, AppStartupParameters appParameters) throws IOException {
-
-        UserStartupActions actions = userParameters.getActions();
-
-        if (actions == null) {
-            return;
-        }
+        UserStartupActions actions = userParameters.getActions() != null ? userParameters.getActions() : new UserStartupActions();
 
         for (UserStartupAction action : actions.getAction()) {
+            System.out.println("Startup action: " + action.getActionName());
 
+            //Actions selector
             if (action.getActionName().equalsIgnoreCase(UserAllActions.DOWNLOAD_REPO.getAction())) {
-                System.out.println(UserAllActions.DOWNLOAD_REPO.getAction());
 
 
                 UserDownloadRepo userDownloadRepo = action.getDownloadRepo();
@@ -29,12 +27,12 @@ public final class UserActionRunner {
 
             } else if (action.getActionName().equalsIgnoreCase(UserAllActions.LOAD_SOURCE.getAction())) {
                 //Read folders and sources
-                System.out.println(UserAllActions.LOAD_SOURCE.getAction());
+                UserLoadSource userLoadSource = action.getLoadSource() != null ? action.getLoadSource() : new UserLoadSource();
+                RepoLoader.loadRepoSource(userLoadSource.getProject(), userLoadSource.getProduct(), userLoadSource.getVersion(), appParameters.getRepoRootDir());
             }
 
         }
     }
-
 
 
 }

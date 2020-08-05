@@ -1,5 +1,6 @@
 package com.eis.conv.mapping.srcHandler.source.startup;
 
+import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParametersReader;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.application.AppStartupParameters;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.UserStartupAction;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.UserStartupActions;
@@ -28,9 +29,9 @@ public class ParametersReaderTest {
         assertThat(parameters.getActions()).isNotEqualTo(null);
         UserStartupActions userStartupActions = parameters.getActions();
 
-        assertThat(userStartupActions.getAction().length).isEqualTo(2);
-        UserStartupAction action0 = userStartupActions.getAction()[0];
-        UserStartupAction action1 = userStartupActions.getAction()[1];
+        assertThat(userStartupActions.getAction().size()).isEqualTo(2);
+        UserStartupAction action0 = userStartupActions.getAction().get(0);
+        UserStartupAction action1 = userStartupActions.getAction().get(1);
 
         assertThat(action0.getActionName()).isEqualTo("DOWNLOAD_REPO");
         assertThat(action1.getActionName()).isEqualTo("LOAD_SOURCE");

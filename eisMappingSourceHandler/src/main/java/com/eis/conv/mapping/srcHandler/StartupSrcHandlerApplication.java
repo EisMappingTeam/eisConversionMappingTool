@@ -6,9 +6,9 @@ import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.*;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.JFileHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.SourceJavaFile;
-import com.eis.conv.mapping.srcHandler.source.startup.ParametersReader;
+import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParametersReader;
 import com.eis.conv.mapping.srcHandler.source.startup.UserActionRunner;
-import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParameterFilesHelper;
+import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParametersFileNameHelper;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.application.AppStartupParameters;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.UserStartupParameters;
 import org.springframework.boot.Banner;
@@ -47,13 +47,8 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         jFileAnnotations.setProduct("Prod");
 
         //Load REPO: Project-Product-Versions
-        RepoRoot rr = RepoHandler.loadRepoRoot("C:\\111");
-        RepoProject rp = rr.getProject("hotai");
-        RepoProduct rProd = rp.getProduct("AC");
-        RepoVersion rv = rProd.getVersion("S02");
-        RepoProductItem rpi = rv.getProductItem("BASE");
-        RepoHandler.loadRepoProductItemFiles(rpi);
-
+        RepoFolder rrff = RepoHandler.loadRepoFolders("C:\\111","") ;
+        rrff.loadFiles();
 
         //XML
         String xml = FileHelper.getFileAsSting("C:\\111\\hotai\\rules.xml");
@@ -65,7 +60,7 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
 
 
     private UserStartupParameters getUserParameters(String... args) throws IOException {
-        ParameterFilesHelper parameterFilesHelper = new ParameterFilesHelper();
+        ParametersFileNameHelper parameterFilesHelper = new ParametersFileNameHelper();
         String userParamFileName;
         if (args.length < 1) {
             userParamFileName = parameterFilesHelper.getUserSettingsFileName("");
@@ -78,7 +73,7 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
     }
 
     private AppStartupParameters getAppParameters(String filePath) throws IOException {
-        ParameterFilesHelper parameterFilesHelper = new ParameterFilesHelper();
+        ParametersFileNameHelper parameterFilesHelper = new ParametersFileNameHelper();
         String appSettingsFileName;
         if (filePath.length() < 1) {
             appSettingsFileName = parameterFilesHelper.getAppSettingsFileName("");
@@ -89,5 +84,5 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         }
         return ParametersReader.readAppParameters(appSettingsFileName);
     }
-    
+
 }

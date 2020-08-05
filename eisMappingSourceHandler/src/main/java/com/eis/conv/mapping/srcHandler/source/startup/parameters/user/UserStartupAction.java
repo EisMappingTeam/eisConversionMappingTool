@@ -14,6 +14,13 @@ public class UserStartupAction {
     private UserLoadSource loadSource;
 
 
+    public UserStartupAction() {
+    }
+
+    public UserStartupAction(String actionName) {
+        this.actionName = actionName;
+    }
+
     public String getActionName() {
         return actionName;
     }

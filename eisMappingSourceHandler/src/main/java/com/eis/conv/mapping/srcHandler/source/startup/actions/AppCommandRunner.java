@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.startup;
+package com.eis.conv.mapping.srcHandler.source.startup.actions;
 
 
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.application.AppAllCommands;

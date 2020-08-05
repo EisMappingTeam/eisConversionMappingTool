@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.startup;
+package com.eis.conv.mapping.srcHandler.source.startup.parameters;
 
 import com.eis.conv.mapping.core.files.FileHelper;
 import com.eis.conv.mapping.core.xml.XmlHandler;

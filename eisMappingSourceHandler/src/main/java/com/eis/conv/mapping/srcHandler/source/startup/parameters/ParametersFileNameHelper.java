@@ -2,7 +2,7 @@ package com.eis.conv.mapping.srcHandler.source.startup.parameters;
 
 import java.io.File;
 
-public class ParameterFilesHelper {
+public class ParametersFileNameHelper {
 
     private static final String USER_PARAMETER_FILE = "parameters/userParameters.xml";
     private static final String APP_PARAMETER_FILE = "parameters/appParameters.xml";
