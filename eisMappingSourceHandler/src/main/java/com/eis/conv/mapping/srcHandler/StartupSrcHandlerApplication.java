@@ -18,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import static java.lang.System.exit;
 
@@ -47,8 +48,7 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         jFileAnnotations.setProduct("Prod");
 
         //Load REPO: Project-Product-Versions
-        RepoFolder rrff = RepoHandler.loadRepoFolders("C:\\111","") ;
-        rrff.loadFiles();
+        List<RepoFolder> src = RepoHandler.loadRepo( "hotai","AC","S02","C:\\111");
 
         //XML
         String xml = FileHelper.getFileAsSting("C:\\111\\hotai\\rules.xml");
@@ -59,15 +59,16 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
     }
 
 
+
     private UserStartupParameters getUserParameters(String... args) throws IOException {
         ParametersFileNameHelper parameterFilesHelper = new ParametersFileNameHelper();
         String userParamFileName;
         if (args.length < 1) {
             userParamFileName = parameterFilesHelper.getUserSettingsFileName("");
-//            System.out.println("User settings load from resources: " + userParamFileName);
+            //System.out.println("User settings load from resources: " + userParamFileName);
         } else {
             userParamFileName = parameterFilesHelper.getUserSettingsFileName(args[0]);
-//            System.out.println("User settings load from " + userParamFileName);
+            //System.out.println("User settings load from " + userParamFileName);
         }
         return ParametersReader.readUserParameters(userParamFileName);
     }
@@ -77,10 +78,10 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         String appSettingsFileName;
         if (filePath.length() < 1) {
             appSettingsFileName = parameterFilesHelper.getAppSettingsFileName("");
-//            System.out.println("Application settings load from resources: " + appSettingsFileName);
+            //System.out.println("Application settings load from resources: " + appSettingsFileName);
         } else {
             appSettingsFileName = parameterFilesHelper.getAppSettingsFileName(filePath);
-//            System.out.println("User settings load from " + appSettingsFileName);
+            //System.out.println("User settings load from " + appSettingsFileName);
         }
         return ParametersReader.readAppParameters(appSettingsFileName);
     }

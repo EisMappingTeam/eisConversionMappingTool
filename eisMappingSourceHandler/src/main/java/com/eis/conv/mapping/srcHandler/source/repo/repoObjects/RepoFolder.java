@@ -10,7 +10,7 @@ public class RepoFolder {
     private String name = "";
     private String path = "";
     private List<String> subFolders = new ArrayList<String>();
-    private List<String> files = new ArrayList<>();
+    private List<String> filesAll = new ArrayList<>();
 
     public RepoFolder() {
     }
@@ -48,20 +48,20 @@ public class RepoFolder {
         this.subFolders = subFolders;
     }
 
-    public List<String> getFiles() {
-        return files;
+    public List<String> getFilesAll() {
+        return filesAll;
     }
 
-    public void setFiles(List<String> files) {
-        this.files = files;
+    public void setFilesAll(List<String> filesAll) {
+        this.filesAll = filesAll;
     }
 
     public boolean isPresentSubFolder(String subFolderName) {
         return subFolders.stream().filter(dir -> dir.equalsIgnoreCase(subFolderName)).findFirst().isPresent();
     }
 
-    public void loadFiles() throws IOException {
-        files = FileHelper.getFileNamesAll(path);
+    public void loadFilesAll() throws IOException {
+        filesAll = FileHelper.getFileNamesAll(path);
         return;
     }
 

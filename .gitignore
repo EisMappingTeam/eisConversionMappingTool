@@ -9,7 +9,7 @@
 
 # Packages #
 ############
-# it's better to unpack these files and commit the raw source
+# it's better to unpack these filesAll and commit the raw source
 # git has its own built in compression methods
 *.7z
 *.dmg
@@ -25,7 +25,7 @@
 *.log
 *.sqlite
 
-# OS generated files #
+# OS generated filesAll #
 ######################
 .DS_Store
 .DS_Store?

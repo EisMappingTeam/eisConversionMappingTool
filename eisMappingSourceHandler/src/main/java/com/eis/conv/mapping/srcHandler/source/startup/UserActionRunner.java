@@ -1,7 +1,6 @@
 package com.eis.conv.mapping.srcHandler.source.startup;
 
 import com.eis.conv.mapping.srcHandler.source.startup.actions.AppCommandRunner;
-import com.eis.conv.mapping.srcHandler.source.startup.actions.RepoLoader;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.application.AppStartupParameters;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.*;
 
@@ -28,7 +27,7 @@ public final class UserActionRunner {
             } else if (action.getActionName().equalsIgnoreCase(UserAllActions.LOAD_SOURCE.getAction())) {
                 //Read folders and sources
                 UserLoadSource userLoadSource = action.getLoadSource() != null ? action.getLoadSource() : new UserLoadSource();
-                RepoLoader.loadRepoSource(userLoadSource.getProject(), userLoadSource.getProduct(), userLoadSource.getVersion(), appParameters.getRepoRootDir());
+                //RepoLoader.loadRepoSource(userLoadSource.getProject(), userLoadSource.getProduct(), userLoadSource.getVersion(), appParameters.getRepoRootDir());
             }
 
         }

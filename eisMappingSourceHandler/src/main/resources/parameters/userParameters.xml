@@ -10,6 +10,7 @@
                 <project>Prj</project>
                 <product>PROD</product>
                 <version>loadV</version>
+                <sourceAlias>ALL</sourceAlias>>
             </downloadRepo>
         </action>
 

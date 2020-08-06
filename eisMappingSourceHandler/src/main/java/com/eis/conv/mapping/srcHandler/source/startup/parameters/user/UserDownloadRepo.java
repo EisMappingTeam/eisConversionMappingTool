@@ -13,6 +13,9 @@ public class UserDownloadRepo {
     @JacksonXmlProperty(localName = "version")
     private String version;
 
+    @JacksonXmlProperty(localName = "sourceAlias")
+    private String sourceAlias;
+
     public String getProject() {
         return project;
     }
@@ -35,5 +38,13 @@ public class UserDownloadRepo {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getSourceAlias() {
+        return sourceAlias;
+    }
+
+    public void setSourceAlias(String sourceAlias) {
+        this.sourceAlias = sourceAlias;
     }
 }
