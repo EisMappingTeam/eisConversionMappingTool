@@ -1,17 +1,23 @@
 package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.types.SourceFileContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JAnnotation;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.body.*;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.NormalAnnotationExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
+import java.util.List;
+
 
 public class JavaFileParser {
-
+    private static final String ANNOTATION_ENTITY = "Entity";
 
     //https://github.com/javaparser/javaparser/issues/1336
     public SourceJavaFile parse(String fileContent) {
@@ -27,6 +33,7 @@ public class JavaFileParser {
         if (cu.getPackageDeclaration().isPresent()) {
             fileAnnotations.setPackageValue(cu.getPackageDeclaration().get().getName().asString());
         }
+        fileAnnotations.setContentType(getContentType(fileAnnotations.getAnnotations()));
         return fileAnnotations;
     }
 
@@ -122,6 +129,14 @@ public class JavaFileParser {
             }
             super.visit(n, arg);
         }
+    }
+
+    private static SourceFileContentTypeJava getContentType(List<JAnnotation> annotations) {
+        long countOfEntity = annotations.stream().filter(item -> item.getAnnotation().equalsIgnoreCase(ANNOTATION_ENTITY) & item.isClassLevel()).count();
+        if (countOfEntity > 0) {
+            return SourceFileContentTypeJava.ENTITY;
+        }
+        return SourceFileContentTypeJava.UNKNOWN;
     }
 
 }

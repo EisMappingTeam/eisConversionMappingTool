@@ -1,6 +1,5 @@
 package com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files;
 
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceFile;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.types.SourceFileContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JAnnotation;
 
@@ -38,4 +37,9 @@ public class SourceJavaFile extends SourceFile {
     public void setAnnotations(List<JAnnotation> annotations) {
         this.annotations = annotations;
     }
+
+    public JAnnotation getAnnotationByName(String annotationName) {
+        return annotations.stream().filter(item -> item.getAnnotation().equalsIgnoreCase(annotationName)).findFirst().orElse(null);
+    }
+
 }

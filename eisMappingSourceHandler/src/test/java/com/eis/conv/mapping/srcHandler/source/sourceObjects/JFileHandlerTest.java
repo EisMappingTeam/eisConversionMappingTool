@@ -2,69 +2,41 @@ package com.eis.conv.mapping.srcHandler.source.sourceObjects;
 
 
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.types.SourceFileContentTypeJava;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JAnnotation;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
-//TODO: not completed
 public class JFileHandlerTest {
+    private final String DIR = "src/test/resources/source";
+    private final String FILE_NAME = "TestAnnotatedClass.java";
 
-    private final String fileName = "C:\\111\\jC.java";
-
-    private final String javaFileContent = "package com.eis.conv.mapping.srcHandler.sourceParser.java;\n" +
-            "\n" +
-            "import com.github.javaparser.ast.CompilationUnit;\n" +
-            "import com.github.javaparser.utils.CodeGenerationUtils;\n" +
-            "import com.github.javaparser.utils.SourceRoot;\n" +
-            "import java.io.File;\n" +
-            "\n" +
-            "@CanInvoke\n" +
-            "@CanExtend(integer=0, fraction=99)\n" +
-            "@Entity\n" +
-            "public class JavaFileParser {\n" +
-            "\t\n" +
-            "\t@Valid\n" +
-            "    private Address address, aaaddd;\n" +
-            "\t\n" +
-            "\t@Long (min=2, max=10)\n" +
-            "    private long lllXX;\n" +
-            "\tprivate long EEE;\n" +
-            "\n" +
-            "    public CompilationUnit XXXYYY(File file) {\n" +
-            "        SourceRoot sourceRoot = new SourceRoot(CodeGenerationUtils.mavenModuleRoot(JavaFileParser.class).resolve(file.getPath()));\n" +
-            "        CompilationUnit cu = sourceRoot.parse(\"\", file.getName());\n" +
-            "        return cu;\n" +
-            "    }\n" +
-            "\t\n" +
-            "\t@Digits(integer=3, fraction=6)\n" +
-            "\tpublic String getSdsdsds() {\n" +
-            "\t}\n" +
-            "}";
+    private final String J_PACKAGE = "com.eis.conv.mapping.srcHandler.sourceParser.java";
+    private final String ANNOTATION_CANINVOKE = "CanInvoke";
+    private final String ANNOTATION_DIGITS = "Digits";
 
     @Test
     public void loadFromFileTest() throws IOException {
-        SourceJavaFile jFileAnnotations = JFileHandler.loadFromFile("");
-        assertThat(jFileAnnotations.getFileName()).isEqualTo("");
-    }
+        Path workingDir = Path.of("", DIR);
+        Path file = workingDir.resolve(FILE_NAME);
 
-    @Test
-    public void loadFromStringTest() throws FileNotFoundException {
-        SourceJavaFile jFileAnnotations = JFileHandler.loadFromString(fileName, javaFileContent);
-
-        assertThat(jFileAnnotations.getFileName()).isEqualTo(fileName);
+        SourceJavaFile jFileAnnotations = JFileHandler.loadFromFile(file.toString());
+        assertThat(jFileAnnotations.getPackageValue()).isEqualTo(J_PACKAGE);
         assertThat(jFileAnnotations.getAnnotations().size()).isEqualTo(7);
+        assertThat(jFileAnnotations.getContentType()).isEqualTo(SourceFileContentTypeJava.ENTITY);
 
+        JAnnotation canInvoke = jFileAnnotations.getAnnotationByName(ANNOTATION_CANINVOKE);
+        JAnnotation digits = jFileAnnotations.getAnnotationByName(ANNOTATION_DIGITS);
+        assertThat(canInvoke).isNotEqualTo(null);
+        assertThat(canInvoke.isClassLevel()).isEqualTo(true);
+        assertThat(canInvoke.isMethodLevel()).isEqualTo(false);
+        assertThat(digits).isNotEqualTo(null);
+        assertThat(digits.isClassLevel()).isEqualTo(false);
+        assertThat(digits.isMethodLevel()).isEqualTo(true);
     }
 
-    @Test
-    public void loadFromFileListTest() throws IOException {
-        List<SourceJavaFile> result = JFileHandler.loadFromFileList(new ArrayList<String>());
-        assertThat(result.size()).isEqualTo(0);
-    }
 }

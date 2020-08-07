@@ -1,6 +1,5 @@
 package com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files;
 
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceFile;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.types.SourceFileContentTypeXML;
 
 public class SourceXmlFile extends SourceFile {
