@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.sourceParsers.jParser;
+package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JAnnotation;
@@ -9,14 +9,12 @@ import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.NormalAnnotationExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
-import java.io.FileNotFoundException;
-
 
 public class JavaFileParser {
 
 
     //https://github.com/javaparser/javaparser/issues/1336
-    public SourceJavaFile parse(String fileContent) throws FileNotFoundException {
+    public SourceJavaFile parse(String fileContent) {
         SourceJavaFile fileAnnotations = new SourceJavaFile();
 
         JavaParser jp = new JavaParser();
@@ -125,6 +123,5 @@ public class JavaFileParser {
             super.visit(n, arg);
         }
     }
-
 
 }

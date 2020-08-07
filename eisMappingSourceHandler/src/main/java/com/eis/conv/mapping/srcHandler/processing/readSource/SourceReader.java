@@ -82,6 +82,8 @@ public class SourceReader {
                 //XML load
             } else if (SourceFileHandler.getFileType(file) == SourceFileType.PROPERTIES) {
                 //properties load
+            } else {
+                unknownFiles.add(file);
             }
         }
     }

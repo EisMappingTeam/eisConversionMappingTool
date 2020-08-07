@@ -2,7 +2,7 @@ package com.eis.conv.mapping.srcHandler.source.sourceObjects;
 
 import com.eis.conv.mapping.core.files.FileHelper;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceJavaFile;
-import com.eis.conv.mapping.srcHandler.source.sourceParsers.jParser.JavaFileParser;
+import com.eis.conv.mapping.srcHandler.source.sourceParsers.JavaFileParser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
