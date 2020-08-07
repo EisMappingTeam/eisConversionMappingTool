@@ -1,6 +1,6 @@
 package com.eis.conv.mapping.srcHandler.source.sourceParsers.jParser;
 
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.jObjects.JAnnotation;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;

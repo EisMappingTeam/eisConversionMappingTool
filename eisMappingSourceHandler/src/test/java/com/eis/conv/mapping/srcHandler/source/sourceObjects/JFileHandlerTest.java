@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.sourceObjects;
 
 
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceJavaFile;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;

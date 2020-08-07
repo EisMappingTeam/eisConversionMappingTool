@@ -5,7 +5,7 @@ import com.eis.conv.mapping.core.xml.XmlDOMParser;
 import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.*;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.JFileHandler;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParametersReader;
 import com.eis.conv.mapping.srcHandler.source.startup.UserActionRunner;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParametersFileNameHelper;
@@ -39,6 +39,9 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         AppStartupParameters appParameters = getAppParameters(userParameters.getApplicationSettingsFile());
         //Run
         UserActionRunner.runActions(userParameters, appParameters);
+
+
+
 
         //*************Samples****************
         //Load java

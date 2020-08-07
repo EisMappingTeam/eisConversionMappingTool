@@ -1,11 +1,11 @@
-package com.eis.conv.mapping.srcHandler.source.sourceObjects.files;
+package com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files;
 
+import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.SourceFileHandler;
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.types.SourceFileType;
 
 public class SourceFile {
     private String fileName = "";
     private String fileExtension = "";
-    private SourceFileType type;
     private String project = "";
     private String product = "";
     private String version = "";
@@ -24,16 +24,17 @@ public class SourceFile {
     }
 
     public void setFileExtension(String fileExtension) {
+        //not from disk file - to avoid disk loading
         this.fileExtension = fileExtension;
     }
 
     public SourceFileType getType() {
-        return type;
+        return SourceFileHandler.getFileTypeByExtension(this.fileExtension);
     }
 
-    public void setType(SourceFileType type) {
-        this.type = type;
-    }
+//    public void setType(SourceFileType type) {
+//        this.type = type;
+//    }
 
     public String getProject() {
         return project;

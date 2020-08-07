@@ -3,7 +3,8 @@ package com.eis.conv.mapping.srcHandler.source.sourceObjects.files.types;
 public enum SourceFileType {
     XML("XML"),
     JAVA("java"),
-    PROPERTY("property");
+    PROPERTIES("properties"),
+    UNKNOWN("unknown");
 
     private final String type;
 
