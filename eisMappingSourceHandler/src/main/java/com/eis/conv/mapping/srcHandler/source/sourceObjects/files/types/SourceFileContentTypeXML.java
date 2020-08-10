@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.sourceObjects.files.types;
 
 public enum SourceFileContentTypeXML {
-    RULES("rules"),
+    CONSTRAINT_VALIDATION_RULES("constraint_validation_rules"),
     UNKNOWN("unknown");
 
     private final String type;

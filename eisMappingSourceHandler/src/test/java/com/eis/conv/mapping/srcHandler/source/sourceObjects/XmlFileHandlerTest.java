@@ -3,7 +3,9 @@ package com.eis.conv.mapping.srcHandler.source.sourceObjects;
 
 import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceXmlFile;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -14,7 +16,7 @@ public class XmlFileHandlerTest {
     private final String FILE_NAME = "TestCrm-validation-constraints.xml";
 
     @Test
-    public void loadFromFileTest() throws IOException {
+    public void loadFromFileTest() throws IOException, ParserConfigurationException, SAXException {
         Path workingDir = Path.of("", DIR);
         Path file = workingDir.resolve(FILE_NAME);
 

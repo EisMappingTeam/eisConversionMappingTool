@@ -1,5 +1,8 @@
 package com.eis.conv.mapping.srcHandler;
 
+import com.eis.conv.mapping.core.files.FileHelper;
+import com.eis.conv.mapping.core.xml.XmlDOMParser;
+import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.ParametersFileHelper;
 import com.eis.conv.mapping.srcHandler.source.startup.UserActionRunner;
 import com.eis.conv.mapping.srcHandler.source.startup.parameters.application.AppStartupParameters;
@@ -41,10 +44,10 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         //Load REPO: Project-Product-Versions
 //        List<RepoFolder> src = RepoHandler.loadRepo( "hotai","AC","S02","C:\\111");
 
-        //XML
-//        String xml = FileHelper.getFileAsSting("C:\\111\\hotai\\rules.xml");
-//        XmlDOMParser mp = new XmlDOMParser();
-//        mp.parseXml(xml);
+        //00XML
+        String xml = FileHelper.getFileAsSting("C:\\111\\repoTest\\hotai\\rules.xml");
+        XmlDOMParser mp = new XmlDOMParser();
+        XmlNode rn = mp.parseXml(xml);
 
 
         exit(0);

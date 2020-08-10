@@ -18,11 +18,11 @@ public final class UserActionRunner {
             //Actions selector
             if (action.getActionName().equalsIgnoreCase(UserAllActions.DOWNLOAD_REPO.getAction())) {
 
-
-                UserDownloadRepo userDownloadRepo = action.getDownloadRepo();
-                if (userDownloadRepo != null) {
-                    AppCommandRunner.runCommandDownloadRepo(userParameters.getUser(), userParameters.getPassword(), appParameters, userDownloadRepo.getProject(), userDownloadRepo.getProduct(), userDownloadRepo.getVersion());
-                }
+//
+//                UserDownloadRepo userDownloadRepo = action.getDownloadRepo();
+//                if (userDownloadRepo != null) {
+//                    AppCommandRunner.runCommandDownloadRepo(userParameters.getUser(), userParameters.getPassword(), appParameters, userDownloadRepo.getProject(), userDownloadRepo.getProduct(), userDownloadRepo.getVersion());
+//                }
 
 
             } else if (action.getActionName().equalsIgnoreCase(UserAllActions.LOAD_SOURCE.getAction())) {

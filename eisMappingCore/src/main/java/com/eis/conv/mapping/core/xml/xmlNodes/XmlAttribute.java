@@ -1,8 +1,8 @@
 package com.eis.conv.mapping.core.xml.xmlNodes;
 
 public class XmlAttribute {
-    private String name;
-    private String value;
+    private String name = "";
+    private String value = "";
 
     public XmlAttribute() {
     }
