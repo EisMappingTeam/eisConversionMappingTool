@@ -1,6 +1,6 @@
 package com.eis.conv.mapping.srcHandler.source.repo;
 
-import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoFolder;
+import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoDir;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class RepoHandlerTest {
     @Test
     public void loadFolders() {
         Path workingDir = Path.of("", DIR);
-        RepoFolder rf = RepoHandler.loadFolders(workingDir.toString(), "");
+        RepoDir rf = RepoHandler.loadFolders(workingDir.toString(), "");
 
         assertThat(rf.getName()).isEqualTo("");
         assertThat(rf.getPath()).isEqualTo(workingDir.toString());
@@ -36,11 +36,11 @@ public class RepoHandlerTest {
     public void loadRepo() throws IOException {
         Path workingDir = Path.of("", DIR);
 
-        List<RepoFolder> src = RepoHandler.loadRepo(PRJ_01, PRODUCT_01, VERSION_01, workingDir.toString());
+        List<RepoDir> src = RepoHandler.loadRepo(PRJ_01, PRODUCT_01, VERSION_01, workingDir.toString());
         assertThat(src.size()).isEqualTo(2);
 
-        RepoFolder srcPartBase = src.stream().filter(item -> item.getName().equalsIgnoreCase(SRCPART_BASE)).findFirst().orElse(null);
-        RepoFolder srcPartConv = src.stream().filter(item -> item.getName().equalsIgnoreCase(SRCPART_CONV)).findFirst().orElse(null);
+        RepoDir srcPartBase = src.stream().filter(item -> item.getName().equalsIgnoreCase(SRCPART_BASE)).findFirst().orElse(null);
+        RepoDir srcPartConv = src.stream().filter(item -> item.getName().equalsIgnoreCase(SRCPART_CONV)).findFirst().orElse(null);
         assertThat(srcPartBase).isNotEqualTo(null);
         assertThat(srcPartBase.getName()).isEqualTo(SRCPART_BASE);
         assertThat(srcPartConv).isNotEqualTo(null);

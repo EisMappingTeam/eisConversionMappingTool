@@ -9,9 +9,9 @@ import java.util.List;
 public final class RepoHandler {
 
 
-    public static RepoFolder loadFolders(String rootPath, String folderName) {
+    public static RepoDir loadFolders(String rootPath, String folderName) {
         String dir = FileHelper.extendPath(rootPath, folderName);
-        RepoFolder result = new RepoFolder(folderName, dir);
+        RepoDir result = new RepoDir(folderName, dir);
 
         List<String> folders = FileHelper.getDirs(dir);
         for (String item : folders) {
@@ -21,15 +21,15 @@ public final class RepoHandler {
     }
 
 
-    public static List<RepoFolder> loadRepo(String projectName, String productName, String versionName, String repoRootPath) {
-        List<RepoFolder> result = new ArrayList<>();
+    public static List<RepoDir> loadRepo(String projectName, String productName, String versionName, String repoRootPath) {
+        List<RepoDir> result = new ArrayList<>();
 
-        RepoFolder project = RepoHandler.loadFolders(repoRootPath, projectName);
-        RepoFolder product = RepoHandler.loadFolders(project.getPath(), productName);
-        RepoFolder version = RepoHandler.loadFolders(product.getPath(), versionName);
+        RepoDir project = RepoHandler.loadFolders(repoRootPath, projectName);
+        RepoDir product = RepoHandler.loadFolders(project.getPath(), productName);
+        RepoDir version = RepoHandler.loadFolders(product.getPath(), versionName);
 
         for (String sourcePartDir : version.getSubFolders()) {
-            RepoFolder sourcePart = RepoHandler.loadFolders(version.getPath(), sourcePartDir);
+            RepoDir sourcePart = RepoHandler.loadFolders(version.getPath(), sourcePartDir);
             result.add(sourcePart);
         }
         return result;

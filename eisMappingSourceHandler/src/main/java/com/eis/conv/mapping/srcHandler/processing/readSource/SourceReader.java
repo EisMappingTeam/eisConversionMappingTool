@@ -1,12 +1,12 @@
 package com.eis.conv.mapping.srcHandler.processing.readSource;
 
-import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoFolder;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.JFileHandler;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.SourceFileHandler;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceJavaFile;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourcePropertyFile;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceXmlFile;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.types.SourceFileType;
+import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoDir;
+import com.eis.conv.mapping.srcHandler.source.obj.JFileHandler;
+import com.eis.conv.mapping.srcHandler.source.obj.files.SourceFileHandler;
+import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourcePropertyFile;
+import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceXmlFile;
+import com.eis.conv.mapping.srcHandler.source.obj.files.types.SourceFileType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,9 +50,9 @@ public class SourceReader {
         this.unknownFiles = unknownFiles;
     }
 
-    public void readRepo(String project, String product, String version, List<RepoFolder> repoFolders) throws IOException {
+    public void readRepo(String project, String product, String version, List<RepoDir> repoFolders) throws IOException {
         cleanRepoData();
-        for (RepoFolder repoFolder : repoFolders) {
+        for (RepoDir repoFolder : repoFolders) {
             repoFolder.loadFilesAll();
             readOneRepo(project, product, version, repoFolder);
         }
@@ -65,7 +65,7 @@ public class SourceReader {
         unknownFiles = new ArrayList<>();
     }
 
-    private void readOneRepo(String project, String product, String version, RepoFolder repoFolder) throws IOException {
+    private void readOneRepo(String project, String product, String version, RepoDir repoFolder) throws IOException {
         for (String file : repoFolder.getFilesAll()) {
             if (SourceFileHandler.getFileType(file) == SourceFileType.JAVA) {
                 //java load

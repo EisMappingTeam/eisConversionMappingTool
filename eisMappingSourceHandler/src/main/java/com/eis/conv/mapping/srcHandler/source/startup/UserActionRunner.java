@@ -1,9 +1,12 @@
 package com.eis.conv.mapping.srcHandler.source.startup;
 
 import com.eis.conv.mapping.srcHandler.source.startup.actions.ReadSourceAction;
-import com.eis.conv.mapping.srcHandler.source.startup.actions.AppCommandRunner;
-import com.eis.conv.mapping.srcHandler.source.startup.parameters.application.AppStartupParameters;
-import com.eis.conv.mapping.srcHandler.source.startup.parameters.user.*;
+import com.eis.conv.mapping.srcHandler.source.startup.param.app.AppStartupParameters;
+import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserStartupParameters;
+import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserStartupActions;
+import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserStartupAction;
+import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserAllActions;
+import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserLoadSource;
 
 import java.io.IOException;
 

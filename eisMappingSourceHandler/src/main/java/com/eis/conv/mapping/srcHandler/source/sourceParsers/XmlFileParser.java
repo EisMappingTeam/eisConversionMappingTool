@@ -4,9 +4,9 @@ import com.eis.conv.mapping.core.strings.StringHelper;
 import com.eis.conv.mapping.core.xml.XmlDOMParser;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlAttribute;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.files.SourceXmlFile;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.files.types.SourceFileContentTypeXML;
-import com.eis.conv.mapping.srcHandler.source.sourceObjects.xmlObjects.XmlConstraintValidation;
+import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceXmlFile;
+import com.eis.conv.mapping.srcHandler.source.obj.files.types.SourceFileContentTypeXML;
+import com.eis.conv.mapping.srcHandler.source.obj.xmlObjects.XmlConstraintValidation;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
