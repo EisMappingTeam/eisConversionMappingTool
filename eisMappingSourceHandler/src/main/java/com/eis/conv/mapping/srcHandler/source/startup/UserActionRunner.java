@@ -1,5 +1,6 @@
 package com.eis.conv.mapping.srcHandler.source.startup;
 
+import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
 import com.eis.conv.mapping.srcHandler.source.startup.actions.ReadSourceAction;
 import com.eis.conv.mapping.srcHandler.source.startup.param.app.AppStartupParameters;
 import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserStartupParameters;
@@ -7,12 +8,14 @@ import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserStartupActio
 import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserStartupAction;
 import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserAllActions;
 import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserLoadSource;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 public final class UserActionRunner {
 
-    public static void runActions(UserStartupParameters userParameters, AppStartupParameters appParameters) throws IOException {
+    public static void runActions(UserStartupParameters userParameters, AppStartupParameters appParameters) throws IOException, ParserConfigurationException, SAXException {
         UserStartupActions actions = userParameters.getActions() != null ? userParameters.getActions() : new UserStartupActions();
 
         for (UserStartupAction action : actions.getAction()) {
@@ -31,7 +34,11 @@ public final class UserActionRunner {
             } else if (action.getActionName().equalsIgnoreCase(UserAllActions.LOAD_SOURCE.getAction())) {
                 //Read folders and sources
                 UserLoadSource userLoadSource = action.getLoadSource() != null ? action.getLoadSource() : new UserLoadSource();
-                ReadSourceAction.readRepo(userLoadSource.getProject(), userLoadSource.getProduct(), userLoadSource.getVersion(), appParameters.getRepoRootDir());
+                SourceFilesReader sourceFilesReader = ReadSourceAction.readRepo(userLoadSource.getProject(), userLoadSource.getProduct(), userLoadSource.getVersion(), appParameters.getRepoRootDir());
+                System.out.println("Java files: " + sourceFilesReader.getJavaFiles().size());
+                System.out.println("XML files: " + sourceFilesReader.getXmlFiles().size());
+                System.out.println("Properties files: " + sourceFilesReader.getPropertyFiles().size());
+                System.out.println("Unknown files: " + sourceFilesReader.getUnknownFiles().size());
             }
 
         }

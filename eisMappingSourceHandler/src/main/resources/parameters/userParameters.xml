@@ -17,9 +17,9 @@
         <action>
             <actionName>LOAD_SOURCE</actionName>
             <loadSource>
-                <project>hotai</project>
-                <product>AC</product>
-                <version>S02</version>
+                <project>Hotai</project>
+                <product>BASE</product>
+                <version>S000X</version>
             </loadSource>
         </action>
     </actions>

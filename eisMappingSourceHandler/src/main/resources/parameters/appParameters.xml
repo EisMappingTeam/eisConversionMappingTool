@@ -1,5 +1,5 @@
 <MappingToolApplication>
-    <repoRootDir>C:\111\repoTest</repoRootDir>
+    <repoRootDir>E:\tmp</repoRootDir>
 
     <repoCommand>
         <commandName>REPO_DOWNLOAD</commandName>

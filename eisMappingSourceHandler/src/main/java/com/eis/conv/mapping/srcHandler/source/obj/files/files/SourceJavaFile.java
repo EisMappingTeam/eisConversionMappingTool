@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SourceJavaFile extends SourceFile {
-    private SourceFileContentTypeJava contentType;
+    private SourceFileContentTypeJava contentType = SourceFileContentTypeJava.UNKNOWN;
     private String packageValue = "";
     private List<JAnnotation> annotations = new ArrayList<>();
 

@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SourceXmlFile extends SourceFile {
-    private SourceFileContentTypeXML contentType;
+    private SourceFileContentTypeXML contentType = SourceFileContentTypeXML.UNKNOWN;
     List<XmlConstraintValidation> xmlConstraintValidations = new ArrayList<>();
+
 
     public SourceFileContentTypeXML getContentType() {
         return contentType;

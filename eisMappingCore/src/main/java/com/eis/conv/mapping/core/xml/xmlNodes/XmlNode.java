@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class XmlNode {
-    private String name;
-    private String date;
+    private String name ="";
+    private String date ="";
     private List<XmlAttribute> attributes = new ArrayList<>();
     private List<XmlNode> children = new ArrayList<>();
 
