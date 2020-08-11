@@ -39,6 +39,7 @@ public final class UserActionRunner {
                 System.out.println("XML files: " + sourceFilesReader.getXmlFiles().size());
                 System.out.println("Properties files: " + sourceFilesReader.getPropertyFiles().size());
                 System.out.println("Unknown files: " + sourceFilesReader.getUnknownFiles().size());
+                System.out.println("Error files: " + sourceFilesReader.getErrorFiles().size());
             }
 
         }

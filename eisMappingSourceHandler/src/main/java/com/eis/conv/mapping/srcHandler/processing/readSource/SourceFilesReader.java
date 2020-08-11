@@ -84,8 +84,10 @@ public class SourceFilesReader {
     }
 
     private void readOneRepo(String project, String product, String version, RepoDir repoFolder) throws IOException, ParserConfigurationException, SAXException {
+        int i = 0;
         for (String file : repoFolder.getFilesAll()) {
-            System.out.println("File: " + file);
+            i++;
+            System.out.println("File (" + i + "): " + file);
 
             try {
                 if (SourceFileHandler.getFileType(file) == SourceFileType.JAVA) {
