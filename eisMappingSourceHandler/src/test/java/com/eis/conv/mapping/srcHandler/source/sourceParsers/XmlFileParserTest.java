@@ -17,6 +17,13 @@ public class XmlFileParserTest {
     private final String DIR = "src/test/resources/source";
     private final String FILE_NAME = "TestCrm-validation-constraints.xml";
 
+    private final String CONTENT_DATA_OBJ_ADDR = "com.exigen.ipb.base.datatypes.Address";
+    private final String CONTENT_DATA_OBJ_PHONE = "com.exigen.ipb.base.datatypes.Phone";
+    private final String CONTENT_REGEXP = "\\d*|\\(\\d{3}\\)\\s\\d{3}\\-\\d{4}";
+    private final String CONTENT_ERRMSG_077 = "crm00077";
+    private final String CONTENT_ERRMSG_113 = "crm00113";
+    private final String CONTENT_ERRMSG_114 = "crm00114";
+
     @Test
     public void parse() throws IOException, ParserConfigurationException, SAXException {
         Path workingDir = Path.of("", DIR);
@@ -27,17 +34,17 @@ public class XmlFileParserTest {
         assertThat(xmlFile.getXmlConstraintValidations().size()).isEqualTo(28);
 
         XmlConstraintValidation countryCdNotBlank = xmlFile.getValidationByCode("Address", "countryCd", "NotBlank");
-        assertThat(countryCdNotBlank.getErrorMessage()).isEqualTo("crm00077");
-        assertThat(countryCdNotBlank.getDataObject()).isEqualTo("com.exigen.ipb.base.datatypes.Address");
+        assertThat(countryCdNotBlank.getErrorMessage()).isEqualTo(CONTENT_ERRMSG_077);
+        assertThat(countryCdNotBlank.getDataObject()).isEqualTo(CONTENT_DATA_OBJ_ADDR);
 
         XmlConstraintValidation countryCdSize = xmlFile.getValidationByCode("Address", "countryCd", "Size");
-        assertThat(countryCdSize.getErrorMessage()).isEqualTo("crm00113");
+        assertThat(countryCdSize.getErrorMessage()).isEqualTo(CONTENT_ERRMSG_113);
         assertThat(countryCdSize.getMaximumLength()).isEqualTo("3");
-        assertThat(countryCdSize.getDataObject()).isEqualTo("com.exigen.ipb.base.datatypes.Address");
+        assertThat(countryCdSize.getDataObject()).isEqualTo(CONTENT_DATA_OBJ_ADDR);
 
         XmlConstraintValidation phoneNumberPattern = xmlFile.getValidationByCode("Phone", "phoneNumber", "Pattern");
-        assertThat(phoneNumberPattern.getErrorMessage()).isEqualTo("crm00114");
-        assertThat(phoneNumberPattern.getRegExpExpression()).isEqualTo("\\d*|\\(\\d{3}\\)\\s\\d{3}\\-\\d{4}");
-        assertThat(phoneNumberPattern.getDataObject()).isEqualTo("com.exigen.ipb.base.datatypes.Phone");
+        assertThat(phoneNumberPattern.getErrorMessage()).isEqualTo(CONTENT_ERRMSG_114);
+        assertThat(phoneNumberPattern.getRegExpExpression()).isEqualTo(CONTENT_REGEXP);
+        assertThat(phoneNumberPattern.getDataObject()).isEqualTo(CONTENT_DATA_OBJ_PHONE);
     }
 }

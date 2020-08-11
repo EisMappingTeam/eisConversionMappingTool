@@ -1,24 +1,26 @@
 <MappingTool>
-    <user>AAA</user>
-    <password>VVV</password>
-    <applicationSettingsFile></applicationSettingsFile>
+    <user>someone</user>
+    <password>xxx001</password>
+    <applicationSettingsFile>some_file_path</applicationSettingsFile>
 
     <actions>
         <action>
-            <actionName>LOAD_REPO</actionName>
+            <actionName>DOWNLOAD_REPO</actionName>
             <downloadRepo>
-                <project>Prj</project>
-                <product>PROD</product>
-                <version>loadV</version>
+                <project>BASE</project>
+                <product>AC</product>
+                <version>S12.4</version>
+                <sourceAlias>conv</sourceAlias>
             </downloadRepo>
         </action>
 
         <action>
             <actionName>LOAD_SOURCE</actionName>
             <loadSource>
-                <project>Prj</project>
-                <product>PROD</product>
-                <version>XXXXX</version>
+                <project>MAS</project>
+                <product>CR</product>
+                <version>S2.1.1</version>
+                <resultFile>some_result_file_path</resultFile>
             </loadSource>
         </action>
     </actions>

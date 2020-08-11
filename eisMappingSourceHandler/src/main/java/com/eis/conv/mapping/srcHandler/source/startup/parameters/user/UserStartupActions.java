@@ -14,13 +14,17 @@ public class UserStartupActions {
 
     public List<UserStartupAction> getAction() {
         if (action == null) {
-            return new ArrayList<UserStartupAction>();
+            return new ArrayList<>();
         }
         return Arrays.asList(action);
     }
 
     public void setAction(List<UserStartupAction> _action) {
-        this.action = _action.stream().toArray( UserStartupAction[]::new);
+        this.action = _action.stream().toArray(UserStartupAction[]::new);
     }
 
+    public UserStartupAction getActionByName(String actionName) {
+        List<UserStartupAction> act = getAction();
+        return act.stream().filter(item -> item.getActionName().equalsIgnoreCase(actionName)).findFirst().orElse(new UserStartupAction());
+    }
 }

@@ -12,6 +12,9 @@ public class UserLoadSource {
     @JacksonXmlProperty(localName = "version")
     private String version;
 
+    @JacksonXmlProperty(localName = "resultFile")
+    private String resultFile;
+
     public String getProject() {
         return project;
     }
@@ -34,5 +37,13 @@ public class UserLoadSource {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getResultFile() {
+        return resultFile;
+    }
+
+    public void setResultFile(String resultFile) {
+        this.resultFile = resultFile;
     }
 }
