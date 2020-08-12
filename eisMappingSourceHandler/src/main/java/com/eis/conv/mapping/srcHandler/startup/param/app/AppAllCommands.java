@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.startup.param.app;
+package com.eis.conv.mapping.srcHandler.startup.param.app;
 
 
 public enum AppAllCommands {

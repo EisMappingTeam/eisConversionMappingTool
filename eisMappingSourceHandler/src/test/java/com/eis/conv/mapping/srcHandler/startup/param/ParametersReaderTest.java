@@ -1,7 +1,7 @@
-package com.eis.conv.mapping.srcHandler.source.startup.param;
+package com.eis.conv.mapping.srcHandler.startup.param;
 
-import com.eis.conv.mapping.srcHandler.source.startup.param.app.AppStartupParameters;
-import com.eis.conv.mapping.srcHandler.source.startup.param.usr.*;
+import com.eis.conv.mapping.srcHandler.startup.param.app.AppStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.param.usr.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class ParametersReaderTest {
     private final String USRCONTENT_LOADSRC_PRJ = "MAS";
     private final String USRCONTENT_LOADSRC_PROD = "CR";
     private final String USRCONTENT_LOADSRC_VER = "S2.1.1";
-    private final String USRCONTENT_LOADSRC_RESULTFILE = "some_result_file_path";
+    private final String USRCONTENT_LOADSRC_RESULTFILE = "some_result_path";
 
     //App
     private final String APPCONTENT_MAIN_REPO_DIR = "repo_root_folder";
@@ -67,7 +67,7 @@ public class ParametersReaderTest {
         assertThat(userLoadSource.getProject()).isEqualTo(USRCONTENT_LOADSRC_PRJ);
         assertThat(userLoadSource.getProduct()).isEqualTo(USRCONTENT_LOADSRC_PROD);
         assertThat(userLoadSource.getVersion()).isEqualTo(USRCONTENT_LOADSRC_VER);
-        assertThat(userLoadSource.getResultFile()).isEqualTo(USRCONTENT_LOADSRC_RESULTFILE);
+        assertThat(userLoadSource.getResultDir()).isEqualTo(USRCONTENT_LOADSRC_RESULTFILE);
 
     }
 

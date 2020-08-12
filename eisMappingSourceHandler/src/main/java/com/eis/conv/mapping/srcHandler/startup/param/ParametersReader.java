@@ -1,9 +1,9 @@
-package com.eis.conv.mapping.srcHandler.source.startup.param;
+package com.eis.conv.mapping.srcHandler.startup.param;
 
 import com.eis.conv.mapping.core.files.FileHelper;
 import com.eis.conv.mapping.core.xml.XmlHandler;
-import com.eis.conv.mapping.srcHandler.source.startup.param.app.AppStartupParameters;
-import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.param.app.AppStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupParameters;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 

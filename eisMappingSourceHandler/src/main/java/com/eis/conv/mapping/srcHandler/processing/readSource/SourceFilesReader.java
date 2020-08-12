@@ -1,8 +1,10 @@
 package com.eis.conv.mapping.srcHandler.processing.readSource;
 
 import com.eis.conv.mapping.srcHandler.source.obj.JFileHandler;
+import com.eis.conv.mapping.srcHandler.source.obj.PropertiesFileHandler;
 import com.eis.conv.mapping.srcHandler.source.obj.XmlFileHandler;
 import com.eis.conv.mapping.srcHandler.source.obj.files.SourceFileHandler;
+import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceFile;
 import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourcePropertyFile;
 import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceXmlFile;
@@ -14,6 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SourceFilesReader {
     private List<SourceJavaFile> javaFiles = new ArrayList<>();
@@ -62,17 +65,12 @@ public class SourceFilesReader {
         this.errorFiles = errorFiles;
     }
 
-    public void readRepo(String project, String product, String version, List<RepoDir> repoFolders) throws IOException, ParserConfigurationException, SAXException {
+    public void readRepo(String project, String product, String version, List<RepoDir> repoFolders) throws IOException {
         cleanRepoData();
         for (RepoDir repoFolder : repoFolders) {
             repoFolder.loadFilesAll();
 
-            //TODO: refactor it
-            try {
-                readOneRepo(project, product, version, repoFolder);
-            } catch (IOException | ParserConfigurationException | SAXException e) {
-                errorFiles.add("");
-            }
+            readOneRepo(project, product, version, repoFolder);
         }
     }
 
@@ -83,24 +81,21 @@ public class SourceFilesReader {
         unknownFiles = new ArrayList<>();
     }
 
-    private void readOneRepo(String project, String product, String version, RepoDir repoFolder) throws IOException, ParserConfigurationException, SAXException {
-        int i = 0;
+    private void readOneRepo(String project, String product, String version, RepoDir repoFolder) {
+        AtomicInteger i = new AtomicInteger(1);
         for (String file : repoFolder.getFilesAll()) {
-            i++;
-            System.out.println("File (" + i + "): " + file);
+            System.out.println("File (" + i.getAndDecrement() + "): " + file);
 
             try {
-                if (SourceFileHandler.getFileType(file) == SourceFileType.JAVA) {
-                    //java load
+                if (SourceFileHandler.getFileType(file) == SourceFileType.JAVA) { //java load
                     readOneFileJava(project, product, version, repoFolder.getName(), file);
 
-                } else if (SourceFileHandler.getFileType(file) == SourceFileType.XML) {
-                    //XML load
+                } else if (SourceFileHandler.getFileType(file) == SourceFileType.XML) { //XML load
                     readOneFileXml(project, product, version, repoFolder.getName(), file);
 
-                } else if (SourceFileHandler.getFileType(file) == SourceFileType.PROPERTIES) {
-                    //properties load
-                    propertyFiles.add(new SourcePropertyFile());
+                } else if (SourceFileHandler.getFileType(file) == SourceFileType.PROPERTIES) { //properties load
+                    readOneFileProperties(project, product, version, repoFolder.getName(), file);
+
                 } else {
                     unknownFiles.add(file);
                 }
@@ -115,27 +110,29 @@ public class SourceFilesReader {
     private void readOneFileJava(String project, String product, String version, String partOfProduct, String file) throws IOException {
         //java load
         SourceJavaFile jFileAnnotations = JFileHandler.loadFromFile(file);
-
-        jFileAnnotations.setProject(project);
-        jFileAnnotations.setProduct(product);
-        jFileAnnotations.setVersion(version);
-        jFileAnnotations.setPartOfProduct(partOfProduct);
-
+        setRepoInfo(jFileAnnotations, project, product, version, partOfProduct, file);
         javaFiles.add(jFileAnnotations);
-
     }
-
 
     private void readOneFileXml(String project, String product, String version, String partOfProduct, String file) throws IOException, ParserConfigurationException, SAXException {
         //XML load
         SourceXmlFile xmlFile = XmlFileHandler.loadFromFile(file);
-        xmlFile.setProject(project);
-        xmlFile.setProduct(product);
-        xmlFile.setVersion(version);
-        xmlFile.setPartOfProduct(partOfProduct);
+        setRepoInfo(xmlFile, project, product, version, partOfProduct, file);
         xmlFiles.add(xmlFile);
-
     }
 
+    private void readOneFileProperties(String project, String product, String version, String partOfProduct, String file) throws IOException {
+        //Properties load
+        SourcePropertyFile pFile = PropertiesFileHandler.loadFromFile(file);
+        setRepoInfo(pFile, project, product, version, partOfProduct, file);
+        propertyFiles.add(pFile);
+    }
+
+    private void setRepoInfo(SourceFile sf, String project, String product, String version, String partOfProduct, String file) {
+        sf.setProject(project);
+        sf.setProduct(product);
+        sf.setVersion(version);
+        sf.setPartOfProduct(partOfProduct);
+    }
 
 }

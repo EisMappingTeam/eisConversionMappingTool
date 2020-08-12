@@ -20,6 +20,7 @@
                 <project>Hotai</project>
                 <product>BASE</product>
                 <version>S000X</version>
+                <resultDir></resultDir>
             </loadSource>
         </action>
     </actions>

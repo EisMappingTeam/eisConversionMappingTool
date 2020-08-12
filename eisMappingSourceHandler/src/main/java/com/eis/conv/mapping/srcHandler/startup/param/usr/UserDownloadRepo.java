@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.startup.param.usr;
+package com.eis.conv.mapping.srcHandler.startup.param.usr;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 

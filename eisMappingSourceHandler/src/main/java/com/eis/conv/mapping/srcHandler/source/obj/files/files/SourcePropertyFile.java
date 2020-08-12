@@ -1,9 +1,14 @@
 package com.eis.conv.mapping.srcHandler.source.obj.files.files;
 
 import com.eis.conv.mapping.srcHandler.source.obj.files.types.SourceFileContentTypeProperty;
+import com.eis.conv.mapping.srcHandler.source.obj.pObjects.PropertyKeyValue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SourcePropertyFile extends SourceFile {
     private SourceFileContentTypeProperty contentType = SourceFileContentTypeProperty.UNKNOWN;
+    private List<PropertyKeyValue> propertyKeyValues = new ArrayList<>();
 
     public SourceFileContentTypeProperty getContentType() {
         return contentType;
@@ -11,5 +16,13 @@ public class SourcePropertyFile extends SourceFile {
 
     public void setContentType(SourceFileContentTypeProperty contentType) {
         this.contentType = contentType;
+    }
+
+    public List<PropertyKeyValue> getPropertyKeyValues() {
+        return propertyKeyValues;
+    }
+
+    public void setPropertyKeyValues(List<PropertyKeyValue> propertyKeyValues) {
+        this.propertyKeyValues = propertyKeyValues;
     }
 }

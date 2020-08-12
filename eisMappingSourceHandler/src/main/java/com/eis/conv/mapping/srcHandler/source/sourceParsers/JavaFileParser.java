@@ -38,6 +38,7 @@ public class JavaFileParser {
     }
 
 
+
     private static class AnnotationPropertiesVisitor extends VoidVisitorAdapter<String> {
         SourceJavaFile fileAnnotations;
 

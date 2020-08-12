@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.startup.param;
+package com.eis.conv.mapping.srcHandler.startup.param;
 
 import java.io.File;
 

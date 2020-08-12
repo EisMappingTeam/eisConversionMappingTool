@@ -1,9 +1,9 @@
-package com.eis.conv.mapping.srcHandler.source.startup.actions;
+package com.eis.conv.mapping.srcHandler.startup.actions;
 
 
-import com.eis.conv.mapping.srcHandler.source.startup.param.app.AppAllCommands;
-import com.eis.conv.mapping.srcHandler.source.startup.param.app.AppRepoCommand;
-import com.eis.conv.mapping.srcHandler.source.startup.param.app.AppStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.param.app.AppAllCommands;
+import com.eis.conv.mapping.srcHandler.startup.param.app.AppRepoCommand;
+import com.eis.conv.mapping.srcHandler.startup.param.app.AppStartupParameters;
 
 
 import java.io.IOException;

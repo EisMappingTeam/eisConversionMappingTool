@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.startup.actions;
+package com.eis.conv.mapping.srcHandler.startup.actions;
 
 import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
 import com.eis.conv.mapping.srcHandler.source.repo.RepoHandler;

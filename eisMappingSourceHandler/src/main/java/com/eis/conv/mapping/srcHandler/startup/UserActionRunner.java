@@ -1,13 +1,13 @@
-package com.eis.conv.mapping.srcHandler.source.startup;
+package com.eis.conv.mapping.srcHandler.startup;
 
 import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
-import com.eis.conv.mapping.srcHandler.source.startup.actions.ReadSourceAction;
-import com.eis.conv.mapping.srcHandler.source.startup.param.app.AppStartupParameters;
-import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserStartupParameters;
-import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserStartupActions;
-import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserStartupAction;
-import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserAllActions;
-import com.eis.conv.mapping.srcHandler.source.startup.param.usr.UserLoadSource;
+import com.eis.conv.mapping.srcHandler.startup.actions.ReadSourceAction;
+import com.eis.conv.mapping.srcHandler.startup.param.app.AppStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupActions;
+import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupAction;
+import com.eis.conv.mapping.srcHandler.startup.param.usr.UserAllActions;
+import com.eis.conv.mapping.srcHandler.startup.param.usr.UserLoadSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;

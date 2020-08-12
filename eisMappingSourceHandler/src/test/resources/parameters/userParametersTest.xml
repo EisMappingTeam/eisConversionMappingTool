@@ -20,7 +20,7 @@
                 <project>MAS</project>
                 <product>CR</product>
                 <version>S2.1.1</version>
-                <resultFile>some_result_file_path</resultFile>
+                <resultDir>some_result_path</resultDir>
             </loadSource>
         </action>
     </actions>

@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.startup.param.usr;
+package com.eis.conv.mapping.srcHandler.startup.param.usr;
 
 public enum UserAllActions {
     DOWNLOAD_REPO("DOWNLOAD_REPO"), //download from Mercurial

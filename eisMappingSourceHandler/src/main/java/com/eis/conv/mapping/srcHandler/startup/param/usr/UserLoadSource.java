@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.startup.param.usr;
+package com.eis.conv.mapping.srcHandler.startup.param.usr;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -12,8 +12,8 @@ public class UserLoadSource {
     @JacksonXmlProperty(localName = "version")
     private String version;
 
-    @JacksonXmlProperty(localName = "resultFile")
-    private String resultFile;
+    @JacksonXmlProperty(localName = "resultDir")
+    private String resultDir;
 
     public String getProject() {
         return project;
@@ -39,11 +39,11 @@ public class UserLoadSource {
         this.version = version;
     }
 
-    public String getResultFile() {
-        return resultFile;
+    public String getResultDir() {
+        return resultDir;
     }
 
-    public void setResultFile(String resultFile) {
-        this.resultFile = resultFile;
+    public void setResultDir(String resultDir) {
+        this.resultDir = resultDir;
     }
 }
