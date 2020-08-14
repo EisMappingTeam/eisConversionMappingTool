@@ -8,7 +8,7 @@ import java.io.File;
 @CanInvoke
 @CanExtend(integer=0, fraction=99)
 @Entity
-public class JavaFileParser {
+public class TestAnnotatedClass {
 
     @Valid
     private Address address, aaaddd;
@@ -27,4 +27,6 @@ public class JavaFileParser {
     public String getSdsdsds() {
         int s;
     }
+
+
 }

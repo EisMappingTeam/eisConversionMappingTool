@@ -89,4 +89,26 @@ public class TableWithNamedColsTest {
 
 
     }
+
+    @Test
+    public void getRowAsString() {
+        String delimiter = "-";
+        String caption_00 = "Col_0";
+        String caption_01 = "Col_1";
+
+        String value_0_0 = "0x0";
+        String value_1_0 = "1x0";
+        String value_1_1 = "1x1";
+
+        String result_0 = "0x0-";
+        String result_1 = "1x0-1x1";
+
+        TableWithNamedCols t = new TableWithNamedCols();
+        t.putValue(0, caption_00, value_0_0) ;
+        t.putValue(1, caption_00, value_1_0 ) ;
+        t.putValue(1, caption_01, value_1_1) ;
+
+        assertThat(t.getRowAsString(0,delimiter) ).isEqualTo(result_0);
+        assertThat(t.getRowAsString(1,delimiter) ).isEqualTo(result_1);
+    }
 }

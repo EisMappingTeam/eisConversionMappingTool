@@ -18,6 +18,7 @@ public final class JFileHandler {
 
         result = loadFromString(fileContent);
         result.setFileName(fileName);
+        result.setClassName(FileHelper.getFileNameWithoutExtension(fileName));  //instead of code analysis. missed in 'loadFromString'
         result.setFileExtension(FileHelper.getFileExtension(fileName));
         return result;
     }
@@ -27,6 +28,7 @@ public final class JFileHandler {
         SourceJavaFile jFileAnnotation = jfp.parse(fileContent);
         return jFileAnnotation;
     }
+
 
 
 }

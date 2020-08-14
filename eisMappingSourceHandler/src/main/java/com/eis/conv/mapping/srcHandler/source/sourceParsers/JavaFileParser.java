@@ -38,7 +38,6 @@ public class JavaFileParser {
     }
 
 
-
     private static class AnnotationPropertiesVisitor extends VoidVisitorAdapter<String> {
         SourceJavaFile fileAnnotations;
 
@@ -55,6 +54,7 @@ public class JavaFileParser {
             jAnnotation.setAnnotation(n.getName().toString());
             jAnnotation.setMethod(arg);
             jAnnotation.setRawValue(n.toString());
+            setParameters(n, jAnnotation);
 
             fileAnnotations.getAnnotations().add(jAnnotation);
             super.visit(n.getPairs(), arg);
@@ -99,6 +99,7 @@ public class JavaFileParser {
                         jAnnotation.setVariable(vd.getName().asString());
                         jAnnotation.setAnnotation(ae.getName().asString());
                         jAnnotation.setRawValue(ae.toString());
+                        setParameters(ae, jAnnotation);
 
                         fileAnnotations.getAnnotations().add(jAnnotation);
                     }
@@ -125,12 +126,14 @@ public class JavaFileParser {
                 jAnnotation.setClassLevel(true);
                 jAnnotation.setAnnotation(ae.getName().toString());
                 jAnnotation.setRawValue(ae.toString());
+                setParameters(ae, jAnnotation);
 
                 fileAnnotations.getAnnotations().add(jAnnotation);
             }
             super.visit(n, arg);
         }
     }
+
 
     private static SourceFileContentTypeJava getContentType(List<JAnnotation> annotations) {
         long countOfEntity = annotations.stream().filter(item -> item.getAnnotation().equalsIgnoreCase(ANNOTATION_ENTITY) & item.isClassLevel()).count();
@@ -140,4 +143,17 @@ public class JavaFileParser {
         return SourceFileContentTypeJava.UNKNOWN;
     }
 
+    private static void setParameters(AnnotationExpr ae, JAnnotation jAnnotation) {
+        if (ae.getChildNodes() != null) {
+            if (ae.getChildNodes().size() > 0) {
+                ae.getChildNodes().stream().forEach(item -> {
+                    if (!jAnnotation.getAnnotation().equalsIgnoreCase(item.toString())) {
+                        jAnnotation.getParameters().add(item.toString());
+                    }
+                });
+            }
+
+        }
+
+    }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 public class SourceJavaFile extends SourceFile {
     private SourceFileContentTypeJava contentType = SourceFileContentTypeJava.UNKNOWN;
     private String packageValue = "";
+    private String className = "";
     private List<JAnnotation> annotations = new ArrayList<>();
 
     public SourceJavaFile() {
@@ -28,6 +29,14 @@ public class SourceJavaFile extends SourceFile {
 
     public void setPackageValue(String packageValue) {
         this.packageValue = packageValue;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public List<JAnnotation> getAnnotations() {

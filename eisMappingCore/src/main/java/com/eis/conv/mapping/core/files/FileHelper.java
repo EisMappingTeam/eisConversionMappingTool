@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+
 public final class FileHelper {
 
     public static List<String> getDirs(String rootPath) {
@@ -24,7 +25,20 @@ public final class FileHelper {
         return result;
     }
 
-    public static String getFileExtension(String filename) {   //Guava
+    public static String getFileName(String fullPathName) {
+        Path p = Paths.get(fullPathName);
+        String fileName = p.getFileName().toString();
+        return fileName;
+    }
+
+    public static String getFileNameWithoutExtension(String fullPathName) {
+        //Guava
+        String result=com.google.common.io.Files.getNameWithoutExtension(fullPathName);
+        return result;
+    }
+
+    public static String getFileExtension(String filename) {
+        //Guava
         return com.google.common.io.Files.getFileExtension(filename);
     }
 

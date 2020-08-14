@@ -47,6 +47,16 @@ public class TableWithNamedCols {
         return getCellValue(oneRow, col, "");
     }
 
+    public String getRowAsString(int row, String delimiter) {
+        String result = "";
+        for (int i =0 ; i<cols.size();i++) {
+            result = result + getCellValue(row,i);
+            if (i<cols.size()-1) {
+                result=result+ delimiter;
+            }
+        }
+        return result;
+    }
 
     private void addRows(int rowNum) {
         for (int i = rows.size(); i <= rowNum; i++) {

@@ -1,5 +1,8 @@
 package com.eis.conv.mapping.srcHandler.source.obj.jObjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JAnnotation {
     //TODO: append with detailed annotation parameters
     private String variable = "";
@@ -8,7 +11,7 @@ public class JAnnotation {
     private String rawValue = "";
     private boolean classLevel;
     private boolean methodLevel;
-    private String parameters = "";
+    private List<String> parameters = new ArrayList();
 
     public String getVariable() {
         return variable;
@@ -60,12 +63,11 @@ public class JAnnotation {
         this.classLevel = !this.methodLevel;
     }
 
-    public String getParameters() {
+    public List<String> getParameters() {
         return parameters;
     }
 
-    public void setParameters(String parameters) {
+    public void setParameters(List<String> parameters) {
         this.parameters = parameters;
     }
-
 }
