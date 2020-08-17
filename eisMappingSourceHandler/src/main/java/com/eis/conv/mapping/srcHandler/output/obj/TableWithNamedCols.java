@@ -16,10 +16,12 @@ public class TableWithNamedCols {
         }
     }
 
-    public void putInNewRow(String columnCaption, String value) {
+    public int putInNewRow(String columnCaption, String value) {
+        int row = rows.size();
         addColumn(columnCaption);
-        addRows(rows.size());
-        putCellValue(rows.size()-1, columnCaption, value);
+        addRows(row);
+        putCellValue(row, columnCaption, value);
+        return row;
     }
 
     public void putValue(int row, String columnCaption, String value) {

@@ -1,5 +1,8 @@
 package com.eis.conv.mapping.srcHandler.startup;
 
+import com.eis.conv.mapping.srcHandler.output.OutputRepoAnalyzerHandler;
+import com.eis.conv.mapping.srcHandler.output.OutputRepoAnalyzerWriter;
+import com.eis.conv.mapping.srcHandler.output.obj.TableWithNamedCols;
 import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
 import com.eis.conv.mapping.srcHandler.startup.actions.ReadSourceAction;
 import com.eis.conv.mapping.srcHandler.startup.param.app.AppStartupParameters;
@@ -35,6 +38,18 @@ public final class UserActionRunner {
                 //Read folders and sources
                 UserLoadSource userLoadSource = action.getLoadSource() != null ? action.getLoadSource() : new UserLoadSource();
                 SourceFilesReader sourceFilesReader = ReadSourceAction.readRepo(userLoadSource.getProject(), userLoadSource.getProduct(), userLoadSource.getVersion(), appParameters.getRepoRootDir());
+                TableWithNamedCols errorReport = OutputRepoAnalyzerHandler.createErrorFilesReport(sourceFilesReader);
+                TableWithNamedCols unknownReport = OutputRepoAnalyzerHandler.createUnknownFilesReport(sourceFilesReader) ;
+                TableWithNamedCols summaryReport = OutputRepoAnalyzerHandler.createSummaryReport(sourceFilesReader) ;
+                TableWithNamedCols rulesReport = OutputRepoAnalyzerHandler.createRulesReport(sourceFilesReader) ;
+
+                String resultDir = userLoadSource.getResultDir();
+                OutputRepoAnalyzerWriter.saveToFileErrorReport(errorReport, resultDir);
+                OutputRepoAnalyzerWriter.saveToFileRulesReport(rulesReport , resultDir) ;
+                OutputRepoAnalyzerWriter.saveToFileSummaryInfoReport(summaryReport  , resultDir) ;
+                OutputRepoAnalyzerWriter.saveToFileUnknownReport(unknownReport , resultDir) ;
+
+
                 System.out.println("Java files: " + sourceFilesReader.getJavaFiles().size());
                 System.out.println("XML files: " + sourceFilesReader.getXmlFiles().size());
                 System.out.println("Properties files: " + sourceFilesReader.getPropertyFiles().size());

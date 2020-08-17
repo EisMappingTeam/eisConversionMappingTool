@@ -33,7 +33,7 @@ public final class FileHelper {
 
     public static String getFileNameWithoutExtension(String fullPathName) {
         //Guava
-        String result=com.google.common.io.Files.getNameWithoutExtension(fullPathName);
+        String result = com.google.common.io.Files.getNameWithoutExtension(fullPathName);
         return result;
     }
 
@@ -68,6 +68,19 @@ public final class FileHelper {
         } else {
             return rootPath + "\\" + appendValue;
         }
+    }
+
+    public static boolean isFileExist(String fileName) {
+        return new File(fileName).exists();
+    }
+
+    public static boolean fileDelete(String fileName) {
+        try {
+            Files.deleteIfExists(Paths.get(fileName));
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
     }
 }
 
