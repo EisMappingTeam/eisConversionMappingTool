@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TableWithNamedCols {
     private List<String> cols = new ArrayList<>();
@@ -49,13 +50,19 @@ public class TableWithNamedCols {
         return getCellValue(oneRow, col, "");
     }
 
+    public String getCaptionsAsString(String delimiter) {
+        return cols.stream().collect(Collectors.joining(delimiter));
+    }
+
     public String getRowAsString(int row, String delimiter) {
-        String result = "";
-        for (int i =0 ; i<cols.size();i++) {
-            result = result + getCellValue(row,i);
-            if (i<cols.size()-1) {
-                result=result+ delimiter;
-            }
+        String result = getRowAsList(row).stream().collect(Collectors.joining(delimiter));
+        return result;
+    }
+
+    public List<String> getRowAsList(int row) {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < cols.size(); i++) {
+            result.add(getCellValue(row, i));
         }
         return result;
     }

@@ -84,7 +84,7 @@ public class SourceFilesReader {
     private void readOneRepo(String project, String product, String version, RepoDir repoFolder) {
         AtomicInteger i = new AtomicInteger(1);
         for (String file : repoFolder.getFilesAll()) {
-            System.out.println("File (" + i.getAndDecrement() + "): " + file);
+            System.out.println("File (" + String.valueOf( i.getAndIncrement()) + "): " + file);
 
             try {
                 if (SourceFileHandler.getFileType(file) == SourceFileType.JAVA) { //java load

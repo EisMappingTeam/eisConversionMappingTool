@@ -44,11 +44,13 @@ public final class OutputRepoAnalyzerWriter {
         }
 
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileFullName));
+            writer.write(report.getCaptionsAsString(COL_SPLITTER) + END_ROW);
+
             for (int i = 0; i < report.getRowsCount(); i++) {
                 String s;
                 s = report.getRowAsString(i, COL_SPLITTER);
-                writer.write(s);
+                writer.write(s + END_ROW);
             }
             writer.close();
         } catch (IOException e) {

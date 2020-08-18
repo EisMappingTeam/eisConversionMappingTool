@@ -1,8 +1,10 @@
 package com.eis.conv.mapping.srcHandler.output;
 
+import com.eis.conv.mapping.core.files.FileHelper;
 import com.eis.conv.mapping.srcHandler.output.obj.TableWithNamedCols;
 import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
 import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourcePropertyFile;
 import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceXmlFile;
 import com.eis.conv.mapping.srcHandler.source.obj.files.types.SourceFileContentTypeXML;
 
@@ -24,6 +26,11 @@ public final class OutputRepoAnalyzerHandler {
     private static String RULES_REPORT_COL_MESSAGE = "Message";
     private static String RULES_REPORT_COL_PACKAGE = "JPackage";
     private static String RULES_REPORT_COL_REPO = "Repository";
+    private static String RULES_REPORT_COL_TYPE = "Type";
+
+    //Hardcoded values
+    private static String VAL_JSORCE_TYPE_ENTITY = "Entity";
+    private static String VAL_XSORCE_TYPE_CVALIDATIONS = "Constraint validations";
 
 
     public static TableWithNamedCols createSummaryReport(SourceFilesReader sourceFilesReader) {
@@ -84,6 +91,7 @@ public final class OutputRepoAnalyzerHandler {
         result.addColumn(RULES_REPORT_COL_MESSAGE);
         result.addColumn(RULES_REPORT_COL_PACKAGE);
         result.addColumn(RULES_REPORT_COL_REPO);
+        result.addColumn(RULES_REPORT_COL_TYPE);
         return result;
     }
 
@@ -95,7 +103,7 @@ public final class OutputRepoAnalyzerHandler {
 
     private static void populateRulesXml(TableWithNamedCols report, SourceFilesReader sourceFilesReader) {
         sourceFilesReader.getXmlFiles().stream().forEach(item -> {
-            populateRulesReportXml(report, item);
+            populateRulesReportXml(report, sourceFilesReader.getPropertyFiles(), item);
         });
     }
 
@@ -104,9 +112,10 @@ public final class OutputRepoAnalyzerHandler {
         jFile.getAnnotations().stream().forEach(item -> {
             //File part
             int row = report.putInNewRow(RULES_REPORT_COL_REPO, jFile.getPartOfProduct());
-            report.putValue(row, RULES_REPORT_COL_SOURCE, jFile.getFileName());
+            report.putValue(row, RULES_REPORT_COL_SOURCE, FileHelper.getFileName(jFile.getFileName()));
             report.putValue(row, RULES_REPORT_COL_CONTEXT, jFile.getClassName());
             report.putValue(row, RULES_REPORT_COL_PACKAGE, jFile.getPackageValue());
+            report.putValue(row, RULES_REPORT_COL_TYPE, getJSourceType(jFile));
 
             //Annotation part
             if (item.getVariable().length() < 1) {
@@ -121,22 +130,45 @@ public final class OutputRepoAnalyzerHandler {
         });
     }
 
-    private static void populateRulesReportXml(TableWithNamedCols report, SourceXmlFile xFile) {
+    private static void populateRulesReportXml(TableWithNamedCols report, List<SourcePropertyFile> pFiles, SourceXmlFile xFile) {
         if (xFile.getContentType() == SourceFileContentTypeXML.CONSTRAINT_VALIDATION_RULES) {
             xFile.getXmlConstraintValidations().stream().forEach(item -> {
                 //File part
                 int row = report.putInNewRow(RULES_REPORT_COL_REPO, xFile.getPartOfProduct());
-                report.putValue(row, RULES_REPORT_COL_SOURCE, xFile.getFileName());
+                report.putValue(row, RULES_REPORT_COL_SOURCE, FileHelper.getFileName(xFile.getFileName()));
+                report.putValue(row, RULES_REPORT_COL_TYPE, getXmlSourceType(xFile));
 
                 //Rules part
                 report.putValue(row, RULES_REPORT_COL_CONTEXT, item.getContext());
                 report.putValue(row, RULES_REPORT_COL_APPLYEDTO, item.getApplyedTo());
                 report.putValue(row, RULES_REPORT_COL_CODE, "");
                 report.putValue(row, RULES_REPORT_COL_ERROR, item.getErrorMessage());
+                if (item.getErrorMessage().length() > 0) {
+                    report.putValue(row, RULES_REPORT_COL_MESSAGE, findFirstInProperties(pFiles, item.getErrorMessage()));
+                } else {
+                    report.putValue(row, RULES_REPORT_COL_MESSAGE, "");
+                }
                 report.putValue(row, RULES_REPORT_COL_ANNOTATION, "");
-                report.putValue(row, RULES_REPORT_COL_MESSAGE, "");
             });
         }
     }
 
+    private static String getJSourceType(SourceJavaFile jFile) {
+        if (jFile.isEntity()) {
+            return VAL_JSORCE_TYPE_ENTITY;
+        }
+        return "";
+    }
+
+    private static String getXmlSourceType(SourceXmlFile xFile) {
+        if (xFile.isConstraintValidation()) {
+            return VAL_XSORCE_TYPE_CVALIDATIONS;
+        }
+        return "";
+    }
+
+    private static String findFirstInProperties(List<SourcePropertyFile> pFiles, String key) {
+        SourcePropertyFile sourcePropertyFile = pFiles.stream().findFirst().filter(item -> item.isKeyPresent(key)).orElse(new SourcePropertyFile());
+        return sourcePropertyFile.getProperty(key).getValue();
+    }
 }

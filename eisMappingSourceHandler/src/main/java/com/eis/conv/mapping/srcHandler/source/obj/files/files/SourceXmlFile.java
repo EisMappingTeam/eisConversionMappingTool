@@ -35,4 +35,9 @@ public class SourceXmlFile extends SourceFile {
                 .findFirst()
                 .orElse(new XmlConstraintValidation());
     }
+
+    public boolean isConstraintValidation() {
+        return xmlConstraintValidations.size() > 0;
+
+    }
 }

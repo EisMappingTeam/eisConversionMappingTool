@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SourceJavaFile extends SourceFile {
+
+    private final String ANNOTATION_ENTITY = "Entity";
+
     private SourceFileContentTypeJava contentType = SourceFileContentTypeJava.UNKNOWN;
     private String packageValue = "";
     private String className = "";
@@ -51,4 +54,7 @@ public class SourceJavaFile extends SourceFile {
         return annotations.stream().filter(item -> item.getAnnotation().equalsIgnoreCase(annotationName)).findFirst().orElse(null);
     }
 
+    public boolean isEntity() {
+        return annotations.stream().findFirst().filter(item -> item.getAnnotation().equalsIgnoreCase(ANNOTATION_ENTITY)).isPresent();
+    }
 }

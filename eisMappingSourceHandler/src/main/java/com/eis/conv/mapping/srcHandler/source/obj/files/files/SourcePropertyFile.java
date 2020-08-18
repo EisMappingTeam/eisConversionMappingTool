@@ -25,4 +25,12 @@ public class SourcePropertyFile extends SourceFile {
     public void setPropertyKeyValues(List<PropertyKeyValue> propertyKeyValues) {
         this.propertyKeyValues = propertyKeyValues;
     }
+
+    public boolean isKeyPresent(String key) {
+        return propertyKeyValues.stream().findFirst().filter(item -> item.getKey().equals(key)).isPresent();
+    }
+
+    public PropertyKeyValue getProperty(String key) {
+        return propertyKeyValues.stream().findFirst().filter(item -> item.getKey().equals(key)).orElse(new PropertyKeyValue());
+    }
 }
