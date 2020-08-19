@@ -5,6 +5,7 @@ import com.eis.conv.mapping.srcHandler.source.obj.jObjects.JAnnotation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SourceJavaFile extends SourceFile {
 
@@ -55,6 +56,9 @@ public class SourceJavaFile extends SourceFile {
     }
 
     public boolean isEntity() {
-        return annotations.stream().findFirst().filter(item -> item.getAnnotation().equalsIgnoreCase(ANNOTATION_ENTITY)).isPresent();
+        long cnt =annotations.stream()
+                .filter(item -> item.getAnnotation().equalsIgnoreCase(ANNOTATION_ENTITY))
+                .count();
+        return cnt>0;
     }
 }

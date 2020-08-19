@@ -27,7 +27,7 @@ public class SourcePropertyFile extends SourceFile {
     }
 
     public boolean isKeyPresent(String key) {
-        return propertyKeyValues.stream().findFirst().filter(item -> item.getKey().equals(key)).isPresent();
+        return propertyKeyValues.stream().findFirst().filter(item -> item.getKey().trim().equals(key.trim())).isPresent();
     }
 
     public PropertyKeyValue getProperty(String key) {

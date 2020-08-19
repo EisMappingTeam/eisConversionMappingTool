@@ -2,9 +2,12 @@ package com.eis.conv.mapping.srcHandler.source.obj.jObjects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class JAnnotation {
     //TODO: append with detailed annotation parameters
+    private final String PARAMETER_KEY_VALUE_SPLITTER = "=";
+
     private String variable = "";
     private String method = "";
     private String annotation = "";
@@ -69,5 +72,28 @@ public class JAnnotation {
 
     public void setParameters(List<String> parameters) {
         this.parameters = parameters;
+    }
+
+    public String getParameterValues(String key) {
+        if (key.trim().length() < 1) {
+            return "";
+        }
+        return getParameterValuesByKey(key.trim());
+    }
+
+
+    private String getParameterValuesByKey(String key) {
+        List<String> values = new ArrayList<>();
+        parameters.stream().forEach(item -> {
+            String str[] = item.split(PARAMETER_KEY_VALUE_SPLITTER);
+            if (str.length > 1) {
+                str[0] = str[0].trim();
+                str[1] = str[1].trim();
+                if (str[0].equalsIgnoreCase(key)) {
+                    values.add(str[1].replace("\"", ""));
+                }
+            }
+        });
+        return "" + values.stream().collect(Collectors.joining(", "));  //not null
     }
 }

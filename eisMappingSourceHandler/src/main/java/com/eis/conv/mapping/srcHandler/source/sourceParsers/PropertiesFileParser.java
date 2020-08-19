@@ -24,7 +24,7 @@ public class PropertiesFileParser {
         for (Object objKey : keys) {
             String key = (String) objKey;
             String value = pf.getProperty(key);
-            result.getPropertyKeyValues().add(new PropertyKeyValue(key, value));
+            result.getPropertyKeyValues().add(new PropertyKeyValue(key.trim(), value.trim()));
         }
         return result;
     }
