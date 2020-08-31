@@ -6,4 +6,11 @@ public final class StringHelper {
         String[] arr = str.split("\\.");
         return arr[arr.length - 1];
     }
+
+    public static String notNullString(String str) {
+        if (str == null) {
+            return "";
+        }
+        return str;
+    }
 }

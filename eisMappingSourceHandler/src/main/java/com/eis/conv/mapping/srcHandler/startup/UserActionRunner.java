@@ -1,16 +1,12 @@
 package com.eis.conv.mapping.srcHandler.startup;
 
-import com.eis.conv.mapping.srcHandler.output.OutputRepoAnalyzerHandler;
-import com.eis.conv.mapping.srcHandler.output.OutputRepoAnalyzerWriter;
-import com.eis.conv.mapping.srcHandler.output.obj.TableWithNamedCols;
-import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
-import com.eis.conv.mapping.srcHandler.startup.actions.ReadSourceAction;
+import com.eis.conv.mapping.srcHandler.startup.actions.UserActionRunnerDownloadRepo;
+import com.eis.conv.mapping.srcHandler.startup.actions.UserActionRunnerLoadSource;
 import com.eis.conv.mapping.srcHandler.startup.param.app.AppStartupParameters;
-import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupParameters;
-import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupActions;
-import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupAction;
 import com.eis.conv.mapping.srcHandler.startup.param.usr.UserAllActions;
-import com.eis.conv.mapping.srcHandler.startup.param.usr.UserLoadSource;
+import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupAction;
+import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupActions;
+import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupParameters;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -22,39 +18,13 @@ public final class UserActionRunner {
         UserStartupActions actions = userParameters.getActions() != null ? userParameters.getActions() : new UserStartupActions();
 
         for (UserStartupAction action : actions.getAction()) {
-            System.out.println("Startup action: " + action.getActionName());
 
-            //Actions selector
-            if (action.getActionName().equalsIgnoreCase(UserAllActions.DOWNLOAD_REPO.getAction())) {
-
-//
-//                UserDownloadRepo userDownloadRepo = action.getDownloadRepo();
-//                if (userDownloadRepo != null) {
-//                    AppCommandRunner.runCommandDownloadRepo(userParameters.getUser(), userParameters.getPassword(), appParameters, userDownloadRepo.getProject(), userDownloadRepo.getProduct(), userDownloadRepo.getVersion());
-//                }
+            if (action.getActionName().equalsIgnoreCase(UserAllActions.DOWNLOAD_REPO.getAction())) { //Download repo
+                UserActionRunnerDownloadRepo.run(appParameters, action, userParameters.getUser(), userParameters.getPassword());
 
 
-            } else if (action.getActionName().equalsIgnoreCase(UserAllActions.LOAD_SOURCE.getAction())) {
-                //Read folders and sources
-                UserLoadSource userLoadSource = action.getLoadSource() != null ? action.getLoadSource() : new UserLoadSource();
-                SourceFilesReader sourceFilesReader = ReadSourceAction.readRepo(userLoadSource.getProject(), userLoadSource.getProduct(), userLoadSource.getVersion(), appParameters.getRepoRootDir());
-                TableWithNamedCols errorReport = OutputRepoAnalyzerHandler.createErrorFilesReport(sourceFilesReader);
-                TableWithNamedCols unknownReport = OutputRepoAnalyzerHandler.createUnknownFilesReport(sourceFilesReader) ;
-                TableWithNamedCols summaryReport = OutputRepoAnalyzerHandler.createSummaryReport(sourceFilesReader) ;
-                TableWithNamedCols rulesReport = OutputRepoAnalyzerHandler.createRulesReport(sourceFilesReader) ;
-
-                String resultDir = userLoadSource.getResultDir();
-                OutputRepoAnalyzerWriter.saveToFileErrorReport(errorReport, resultDir);
-                OutputRepoAnalyzerWriter.saveToFileRulesReport(rulesReport , resultDir) ;
-                OutputRepoAnalyzerWriter.saveToFileSummaryInfoReport(summaryReport  , resultDir) ;
-                OutputRepoAnalyzerWriter.saveToFileUnknownReport(unknownReport , resultDir) ;
-
-
-                System.out.println("Java files: " + sourceFilesReader.getJavaFiles().size());
-                System.out.println("XML files: " + sourceFilesReader.getXmlFiles().size());
-                System.out.println("Properties files: " + sourceFilesReader.getPropertyFiles().size());
-                System.out.println("Unknown files: " + sourceFilesReader.getUnknownFiles().size());
-                System.out.println("Error files: " + sourceFilesReader.getErrorFiles().size());
+            } else if (action.getActionName().equalsIgnoreCase(UserAllActions.LOAD_SOURCE.getAction())) { //Read folders and sources
+                UserActionRunnerLoadSource.run(appParameters, action);
             }
 
         }

@@ -5,7 +5,7 @@
 
     <actions>
         <action>
-            <actionName>_DOWNLOAD_REPO</actionName>
+            <actionName>DOWNLOAD_REPO</actionName>
             <downloadRepo>
                 <project>Prj</project>
                 <product>PROD</product>
@@ -15,7 +15,7 @@
         </action>
 
         <action>
-            <actionName>LOAD_SOURCE</actionName>
+            <actionName>_LOAD_SOURCE</actionName>
             <loadSource>
                 <project>Hotai</project>
                 <product>BASE</product>

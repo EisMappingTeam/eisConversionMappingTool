@@ -9,7 +9,7 @@
         <userPattern>@user@</userPattern>
         <passwordPattern>@passw@</passwordPattern>
         <resultDirPattern>@resultDir@</resultDirPattern>
-        <command>XXXX_YYYY</command>
+        <command>notepad.exe</command>
     </repoCommand>
 
 </MappingToolApplication>

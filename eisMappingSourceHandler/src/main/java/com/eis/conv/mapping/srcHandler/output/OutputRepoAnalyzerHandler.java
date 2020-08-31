@@ -21,7 +21,7 @@ public final class OutputRepoAnalyzerHandler {
     private static String ANNOTATION_PARAMETERS_LENGTH = "length";
     private static String ANNOTATION_PARAMETERS_GROUPS = "groups";
 
-    //Hardcoded values
+    //Hardcoded report values
     private static String VAL_JSORCE_TYPE_ENTITY = "Entity";
     private static String VAL_XSORCE_TYPE_CVALIDATIONS = "Constraint validations";
 

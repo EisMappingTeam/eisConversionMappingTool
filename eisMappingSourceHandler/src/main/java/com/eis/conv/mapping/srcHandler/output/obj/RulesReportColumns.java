@@ -3,7 +3,7 @@ package com.eis.conv.mapping.srcHandler.output.obj;
 public enum RulesReportColumns {
     COL_SOURCE("Source"),
     COL_CONTEXT("Context"),
-    COL_APPLIED_TO("Applyed to"),
+    COL_APPLIED_TO("Applied to"),
     COL_CODE("Code"),
     COL_ERROR_CODE("Error Message"),
     COL_ERROR_MESSAGE("Message"),
@@ -14,7 +14,7 @@ public enum RulesReportColumns {
     COL_ANNOTATION("Annotation"),
     COL_PACKAGE("JPackage"),
     COL_REPO("Repository"),
-    COL_TYPE("Type");
+    COL_TYPE("Repository Type");
 
 
     private final String col;

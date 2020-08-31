@@ -75,6 +75,9 @@ public class AppRepoCommand {
     }
 
     public String getCommand() {
+        if (this.command == null) {
+            return "";
+        }
         return command;
     }
 
