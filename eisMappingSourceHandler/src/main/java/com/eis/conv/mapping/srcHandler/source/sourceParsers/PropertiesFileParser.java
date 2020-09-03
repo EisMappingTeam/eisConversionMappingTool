@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 
-import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourcePropertyFile;
-import com.eis.conv.mapping.srcHandler.source.obj.pObjects.PropertyKeyValue;
+import com.eis.conv.mapping.srcHandler.source.entities.files.files.SourcePropertyFile;
+import com.eis.conv.mapping.srcHandler.source.entities.pObjects.PropertyKeyValue;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

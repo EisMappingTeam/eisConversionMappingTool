@@ -1,12 +1,12 @@
 package com.eis.conv.mapping.srcHandler.startup;
 
-import com.eis.conv.mapping.srcHandler.startup.actions.UserActionRunnerDownloadRepo;
-import com.eis.conv.mapping.srcHandler.startup.actions.UserActionRunnerLoadSource;
-import com.eis.conv.mapping.srcHandler.startup.param.app.AppStartupParameters;
-import com.eis.conv.mapping.srcHandler.startup.param.usr.UserAllActions;
-import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupAction;
-import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupActions;
-import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.acts.UserActionRunnerDownloadRepo;
+import com.eis.conv.mapping.srcHandler.startup.acts.UserActionRunnerLoadSource;
+import com.eis.conv.mapping.srcHandler.startup.params.app.AppStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.params.usr.UserAllActions;
+import com.eis.conv.mapping.srcHandler.startup.params.usr.UserStartupAction;
+import com.eis.conv.mapping.srcHandler.startup.params.usr.UserStartupActions;
+import com.eis.conv.mapping.srcHandler.startup.params.usr.UserStartupParameters;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,6 +18,7 @@ public final class UserActionRunner {
         UserStartupActions actions = userParameters.getActions() != null ? userParameters.getActions() : new UserStartupActions();
 
         for (UserStartupAction action : actions.getAction()) {
+            System.out.println("Startup action: " + action.getActionName());
 
             if (action.getActionName().equalsIgnoreCase(UserAllActions.DOWNLOAD_REPO.getAction())) { //Download repo
                 UserActionRunnerDownloadRepo.run(appParameters, action, userParameters.getUser(), userParameters.getPassword());
@@ -29,6 +30,5 @@ public final class UserActionRunner {
 
         }
     }
-
 
 }

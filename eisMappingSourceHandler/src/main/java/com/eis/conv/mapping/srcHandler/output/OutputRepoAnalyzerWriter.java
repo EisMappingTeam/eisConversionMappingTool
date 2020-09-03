@@ -1,6 +1,6 @@
 package com.eis.conv.mapping.srcHandler.output;
 
-import com.eis.conv.mapping.core.files.FileHelper;
+import com.eis.conv.mapping.core.filesSupport.FileHelper;
 import com.eis.conv.mapping.srcHandler.output.obj.TableWithNamedCols;
 
 import java.io.BufferedWriter;

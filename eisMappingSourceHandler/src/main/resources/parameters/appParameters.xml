@@ -1,15 +1,15 @@
 <MappingToolApplication>
-    <repoRootDir>E:\tmp</repoRootDir>
+<repoRootDir>E:\tmp</repoRootDir>
 
-    <repoCommand>
-        <commandName>REPO_DOWNLOAD</commandName>
-        <project>Prj</project>
-        <product>PROD</product>
+<repoCommand>
+    <commandName>REPO_DOWNLOAD</commandName>
+    <project>Prj</project>
+    <product>PROD</product>
 
-        <userPattern>@user@</userPattern>
-        <passwordPattern>@passw@</passwordPattern>
-        <resultDirPattern>@resultDir@</resultDirPattern>
-        <command>notepad.exe</command>
-    </repoCommand>
+    <userPattern>@user@</userPattern>
+    <passwordPattern>@passw@</passwordPattern>
+    <resultDirPattern>@resultDir@</resultDirPattern>
+    <command>notepad.exe</command>
+</repoCommand>
 
 </MappingToolApplication>

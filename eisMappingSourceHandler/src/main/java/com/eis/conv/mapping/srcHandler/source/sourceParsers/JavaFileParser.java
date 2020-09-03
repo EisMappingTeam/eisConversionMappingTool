@@ -1,8 +1,8 @@
 package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 
-import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceJavaFile;
-import com.eis.conv.mapping.srcHandler.source.obj.files.types.SourceFileContentTypeJava;
-import com.eis.conv.mapping.srcHandler.source.obj.jObjects.JAnnotation;
+import com.eis.conv.mapping.srcHandler.source.entities.files.files.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.types.SourceFileContentTypeJava;
+import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;

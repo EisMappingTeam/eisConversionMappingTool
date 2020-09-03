@@ -1,14 +1,14 @@
 package com.eis.conv.mapping.srcHandler.processing.readSource;
 
-import com.eis.conv.mapping.srcHandler.source.obj.JFileHandler;
-import com.eis.conv.mapping.srcHandler.source.obj.PropertiesFileHandler;
-import com.eis.conv.mapping.srcHandler.source.obj.XmlFileHandler;
-import com.eis.conv.mapping.srcHandler.source.obj.files.SourceFileHandler;
-import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceFile;
-import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceJavaFile;
-import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourcePropertyFile;
-import com.eis.conv.mapping.srcHandler.source.obj.files.files.SourceXmlFile;
-import com.eis.conv.mapping.srcHandler.source.obj.files.types.SourceFileType;
+import com.eis.conv.mapping.srcHandler.source.entities.JFileHandler;
+import com.eis.conv.mapping.srcHandler.source.entities.PropertiesFileHandler;
+import com.eis.conv.mapping.srcHandler.source.entities.XmlFileHandler;
+import com.eis.conv.mapping.srcHandler.source.entities.files.SourceFileHandler;
+import com.eis.conv.mapping.srcHandler.source.entities.files.files.SourceFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.files.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.files.SourcePropertyFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.files.SourceXmlFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.types.SourceFileType;
 import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoDir;
 import org.xml.sax.SAXException;
 

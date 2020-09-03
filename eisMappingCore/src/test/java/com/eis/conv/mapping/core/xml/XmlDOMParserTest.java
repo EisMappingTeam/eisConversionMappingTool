@@ -1,6 +1,6 @@
 package com.eis.conv.mapping.core.xml;
 
-import com.eis.conv.mapping.core.files.FileHelper;
+import com.eis.conv.mapping.core.filesSupport.FileHelper;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlAttribute;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,9 @@
 package com.eis.conv.mapping.srcHandler;
 
 import com.eis.conv.mapping.srcHandler.startup.UserActionRunner;
-import com.eis.conv.mapping.srcHandler.startup.param.ParametersFileHelper;
-import com.eis.conv.mapping.srcHandler.startup.param.app.AppStartupParameters;
-import com.eis.conv.mapping.srcHandler.startup.param.usr.UserStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.params.ParametersFileHelper;
+import com.eis.conv.mapping.srcHandler.startup.params.app.AppStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.params.usr.UserStartupParameters;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,6 +26,7 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         //Parameters
         UserStartupParameters userParameters = ParametersFileHelper.getUserParametersFromArgs(args);
         AppStartupParameters appParameters = ParametersFileHelper.getAppParameters(userParameters.getApplicationSettingsFile());
+
         //Run
         UserActionRunner.runActions(userParameters, appParameters);
 

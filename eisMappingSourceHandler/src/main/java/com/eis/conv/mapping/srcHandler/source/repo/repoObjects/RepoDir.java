@@ -1,6 +1,6 @@
 package com.eis.conv.mapping.srcHandler.source.repo.repoObjects;
 
-import com.eis.conv.mapping.core.files.FileHelper;
+import com.eis.conv.mapping.core.filesSupport.FileHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
