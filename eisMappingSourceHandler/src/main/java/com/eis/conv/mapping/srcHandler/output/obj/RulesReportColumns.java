@@ -14,7 +14,7 @@ public enum RulesReportColumns {
     COL_ANNOTATION("Annotation"),
     COL_PACKAGE("JPackage"),
     COL_REPO("Repository"),
-    COL_TYPE("Repository Type");
+    COL_COND_DEFINED_IN("Defined in");
 
 
     private final String col;

@@ -47,7 +47,7 @@ public class JavaFileParser {
 
         @Override
         public void visit(NormalAnnotationExpr n, String arg) {
-            //Method annotations
+            //Method annotations. Variable cannot be set
             //System.out.println("Method: " + arg + ", Annotation: " + n.getName());
             JAnnotation jAnnotation = new JAnnotation();
             jAnnotation.setClassLevel(false);

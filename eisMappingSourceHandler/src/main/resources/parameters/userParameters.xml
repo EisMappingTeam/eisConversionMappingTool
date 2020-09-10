@@ -5,7 +5,7 @@
 
     <actions>
         <action>
-            <actionName>DOWNLOAD_REPO</actionName>
+            <actionName>_DOWNLOAD_REPO</actionName>
             <downloadRepo>
                 <project>Prj</project>
                 <product>PROD</product>
@@ -17,9 +17,9 @@
         <action>
             <actionName>LOAD_SOURCE</actionName>
             <loadSource>
-                <project>Hotai</project>
-                <product>BASE</product>
-                <version>S000X</version>
+                <project>TTT</project>
+                <product>ac</product>
+                <version>4_9</version>
                 <resultDir>C://111//TTT</resultDir>
             </loadSource>
         </action>

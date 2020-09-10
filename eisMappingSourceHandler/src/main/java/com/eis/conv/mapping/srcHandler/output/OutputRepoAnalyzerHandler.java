@@ -1,6 +1,7 @@
 package com.eis.conv.mapping.srcHandler.output;
 
 import com.eis.conv.mapping.core.filesSupport.FileHelper;
+import com.eis.conv.mapping.core.stringsSupport.StringHelper;
 import com.eis.conv.mapping.srcHandler.output.obj.FilesListReportColumns;
 import com.eis.conv.mapping.srcHandler.output.obj.RulesReportColumns;
 import com.eis.conv.mapping.srcHandler.output.obj.SummaryReportColumns;
@@ -101,11 +102,11 @@ public final class OutputRepoAnalyzerHandler {
             report.putValue(row, RulesReportColumns.COL_SOURCE.getCaption(), FileHelper.getFileName(jFile.getFileName()));
             report.putValue(row, RulesReportColumns.COL_CONTEXT.getCaption(), jFile.getClassName());
             report.putValue(row, RulesReportColumns.COL_PACKAGE.getCaption(), jFile.getPackageValue());
-            report.putValue(row, RulesReportColumns.COL_TYPE.getCaption(), getJSourceType(jFile));
+            report.putValue(row, RulesReportColumns.COL_COND_DEFINED_IN.getCaption(), getJSourceType(jFile));
 
             //Annotation part
             if (item.getVariable().length() < 1) {
-                report.putValue(row, RulesReportColumns.COL_APPLIED_TO.getCaption(), item.getMethod());
+                report.putValue(row, RulesReportColumns.COL_APPLIED_TO.getCaption(), parseMethodSetGetToVariable(item.getMethod()));
             } else {
                 report.putValue(row, RulesReportColumns.COL_APPLIED_TO.getCaption(), item.getVariable());
             }
@@ -128,7 +129,7 @@ public final class OutputRepoAnalyzerHandler {
                 //File part
                 int row = report.putInNewRow(RulesReportColumns.COL_REPO.getCaption(), xFile.getPartOfProduct());
                 report.putValue(row, RulesReportColumns.COL_SOURCE.getCaption(), FileHelper.getFileName(xFile.getFileName()));
-                report.putValue(row, RulesReportColumns.COL_TYPE.getCaption(), getXmlSourceType(xFile));
+                report.putValue(row, RulesReportColumns.COL_COND_DEFINED_IN.getCaption(), getXmlSourceType(xFile));
 
                 //Rules part
                 report.putValue(row, RulesReportColumns.COL_CONTEXT.getCaption(), item.getContext());
@@ -170,5 +171,17 @@ public final class OutputRepoAnalyzerHandler {
 
     private static String fixErrorMessage(String errMsg) {
         return errMsg.replace("{", "").replace("}", "");
+    }
+
+    private static String parseMethodSetGetToVariable(String methodName) {
+        String result = methodName;
+        if (methodName.length() > 3) {
+            String prefix = StringHelper.getLeft(methodName, 3);
+            if (prefix.equals("set") || prefix.equals("get")) {
+                result = StringHelper.getRight(result, result.length() - 3);
+                result = StringHelper.lowerFirst(result);
+            }
+        }
+        return result;
     }
 }
