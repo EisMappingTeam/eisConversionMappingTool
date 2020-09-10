@@ -5,6 +5,7 @@ import com.eis.conv.mapping.srcHandler.source.entities.pObjects.PropertyKeyValue
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SourcePropertyFile extends SourceFile {
     private SourceFileContentTypeProperty contentType = SourceFileContentTypeProperty.UNKNOWN;
@@ -27,10 +28,12 @@ public class SourcePropertyFile extends SourceFile {
     }
 
     public boolean isKeyPresent(String key) {
-        return propertyKeyValues.stream().findFirst().filter(item -> item.getKey().trim().equals(key.trim())).isPresent();
+        Optional<PropertyKeyValue> s=  propertyKeyValues.stream().filter(item -> item.getKey().trim().equalsIgnoreCase(key.trim()) ).findFirst();
+        return s.isPresent();
     }
 
     public PropertyKeyValue getProperty(String key) {
-        return propertyKeyValues.stream().findFirst().filter(item -> item.getKey().equals(key)).orElse(new PropertyKeyValue());
+        PropertyKeyValue s=  propertyKeyValues.stream().filter(item -> item.getKey().trim().equalsIgnoreCase(key.trim()) ).findFirst().orElse(new PropertyKeyValue());
+        return s;
     }
 }

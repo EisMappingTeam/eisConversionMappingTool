@@ -11,6 +11,7 @@ public enum RulesReportColumns {
     COL_PARAM_MIN("Min"),
     COL_PARAM_LENGTH("Length"),
     COL_PARAM_GROUP_COND("Group conditions"),
+    COL_PARAM_REGEXP("Regexp"),
     COL_ANNOTATION("Annotation"),
     COL_PACKAGE("JPackage"),
     COL_REPO("Repository"),

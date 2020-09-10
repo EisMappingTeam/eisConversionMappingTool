@@ -21,6 +21,7 @@ public final class OutputRepoAnalyzerHandler {
     private static String ANNOTATION_PARAMETERS_MIN = "min";
     private static String ANNOTATION_PARAMETERS_LENGTH = "length";
     private static String ANNOTATION_PARAMETERS_GROUPS = "groups";
+    private static String ANNOTATION_PARAMETERS_REGEXP = "regexp";
 
     //Hardcoded report values
     private static String VAL_JSORCE_TYPE_ENTITY = "Entity";
@@ -57,19 +58,19 @@ public final class OutputRepoAnalyzerHandler {
     private static TableWithNamedCols createSummaryReportBody(SourceFilesReader sourceFilesReader) {
         TableWithNamedCols result = new TableWithNamedCols();
 
-        result.putValue(0, SummaryReportColumns.COL_FILES.getCaption(), "Java filesSupport");
+        result.putValue(0, SummaryReportColumns.COL_FILES.getCaption(), "Java files");
         result.putValue(0, SummaryReportColumns.COL_COUNT.getCaption(), String.valueOf(sourceFilesReader.getJavaFiles().size()));
 
-        result.putValue(1, SummaryReportColumns.COL_FILES.getCaption(), "XML filesSupport");
+        result.putValue(1, SummaryReportColumns.COL_FILES.getCaption(), "XML files");
         result.putValue(1, SummaryReportColumns.COL_COUNT.getCaption(), String.valueOf(sourceFilesReader.getXmlFiles().size()));
 
-        result.putValue(2, SummaryReportColumns.COL_FILES.getCaption(), "Properties filesSupport");
+        result.putValue(2, SummaryReportColumns.COL_FILES.getCaption(), "Properties files");
         result.putValue(2, SummaryReportColumns.COL_COUNT.getCaption(), String.valueOf(sourceFilesReader.getPropertyFiles().size()));
 
-        result.putValue(3, SummaryReportColumns.COL_FILES.getCaption(), "Unknown filesSupport");
+        result.putValue(3, SummaryReportColumns.COL_FILES.getCaption(), "Unknown files");
         result.putValue(3, SummaryReportColumns.COL_COUNT.getCaption(), String.valueOf(sourceFilesReader.getUnknownFiles().size()));
 
-        result.putValue(4, SummaryReportColumns.COL_FILES.getCaption(), "Error filesSupport");
+        result.putValue(4, SummaryReportColumns.COL_FILES.getCaption(), "Error files");
         result.putValue(4, SummaryReportColumns.COL_COUNT.getCaption(), String.valueOf(sourceFilesReader.getErrorFiles().size()));
         return result;
     }
@@ -119,6 +120,7 @@ public final class OutputRepoAnalyzerHandler {
             report.putValue(row, RulesReportColumns.COL_PARAM_MAX.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_MAX));
             report.putValue(row, RulesReportColumns.COL_PARAM_LENGTH.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_LENGTH));
             report.putValue(row, RulesReportColumns.COL_PARAM_GROUP_COND.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_GROUPS));
+            report.putValue(row, RulesReportColumns.COL_PARAM_REGEXP.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_REGEXP));
         });
     }
 
@@ -163,7 +165,8 @@ public final class OutputRepoAnalyzerHandler {
     private static String findFirstInProperties(List<SourcePropertyFile> pFiles, String key) {
         for (SourcePropertyFile pF : pFiles) {
             if (pF.isKeyPresent(key)) {
-                return pF.getProperty(key).getValue();
+                String result = pF.getProperty(key).getValue();
+                return result;
             }
         }
         return "";
