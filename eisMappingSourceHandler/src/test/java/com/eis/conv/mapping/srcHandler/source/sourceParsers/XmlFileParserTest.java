@@ -25,7 +25,7 @@ public class XmlFileParserTest {
     private final String CONTENT_ERRMSG_114 = "crm00114";
 
     @Test
-    public void parse() throws IOException, ParserConfigurationException, SAXException {
+    public void parseTest() throws IOException, ParserConfigurationException, SAXException {
         Path workingDir = Path.of("", DIR);
         Path file = workingDir.resolve(FILE_NAME);
 

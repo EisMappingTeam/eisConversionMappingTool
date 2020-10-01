@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TableWithNamedColsTest {
 
     @Test
-    public void addColumn() {
+    public void addColumnTest() {
         TableWithNamedCols t = new TableWithNamedCols();
         t.addColumn("One");
         t.addColumn("Two");
@@ -19,7 +19,7 @@ public class TableWithNamedColsTest {
 
 
     @Test
-    public void getColumnsCount() {
+    public void getColumnsCountTest() {
         TableWithNamedCols t = new TableWithNamedCols();
         t.addColumn("One");
         t.addColumn("Two");
@@ -28,7 +28,7 @@ public class TableWithNamedColsTest {
     }
 
     @Test
-    public void putValue() {
+    public void putValueTest() {
 
         String caption_00 = "Col_0";
         String caption_01 = "Col_1";
@@ -69,7 +69,7 @@ public class TableWithNamedColsTest {
     }
 
     @Test
-    public void putInNewRow() {
+    public void putInNewRowTest() {
         int row;
         String caption_00 = "Col_0";
         String caption_01 = "Col_1";
@@ -94,7 +94,7 @@ public class TableWithNamedColsTest {
     }
 
     @Test
-    public void getRowAsString() {
+    public void getRowAsStringTest() {
         String delimiter = "-";
         String caption_00 = "Col_0";
         String caption_01 = "Col_1";

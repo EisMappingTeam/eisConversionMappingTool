@@ -21,7 +21,7 @@ public class RepoHandlerTest {
     private final String SRCPART_CONV = "conv";
 
     @Test
-    public void loadFolders() {
+    public void loadFoldersTest() {
         Path workingDir = Path.of("", DIR);
         RepoDir rf = RepoHandler.loadFolders(workingDir.toString(), "");
 
@@ -33,7 +33,7 @@ public class RepoHandlerTest {
     }
 
     @Test
-    public void loadRepo() throws IOException {
+    public void loadRepoTest() throws IOException {
         Path workingDir = Path.of("", DIR);
 
         List<RepoDir> src = RepoHandler.loadRepo(PRJ_01, PRODUCT_01, VERSION_01, workingDir.toString());
