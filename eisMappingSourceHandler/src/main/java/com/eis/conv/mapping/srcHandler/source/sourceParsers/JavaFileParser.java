@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 
-import com.eis.conv.mapping.srcHandler.source.entities.files.files.SourceJavaFile;
-import com.eis.conv.mapping.srcHandler.source.entities.files.types.SourceFileContentTypeJava;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -135,12 +135,12 @@ public class JavaFileParser {
     }
 
 
-    private static SourceFileContentTypeJava getContentType(List<JAnnotation> annotations) {
+    private static ContentTypeJava getContentType(List<JAnnotation> annotations) {
         long countOfEntity = annotations.stream().filter(item -> item.getAnnotation().equalsIgnoreCase(ANNOTATION_ENTITY) & item.isClassLevel()).count();
         if (countOfEntity > 0) {
-            return SourceFileContentTypeJava.ENTITY;
+            return ContentTypeJava.ENTITY;
         }
-        return SourceFileContentTypeJava.UNKNOWN;
+        return ContentTypeJava.UNKNOWN;
     }
 
     private static void setParameters(AnnotationExpr ae, JAnnotation jAnnotation) {

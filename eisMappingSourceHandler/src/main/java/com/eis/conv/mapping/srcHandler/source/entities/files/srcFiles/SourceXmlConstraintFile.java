@@ -1,23 +1,13 @@
-package com.eis.conv.mapping.srcHandler.source.entities.files.files;
+package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles;
 
-import com.eis.conv.mapping.srcHandler.source.entities.files.types.SourceFileContentTypeXML;
+
 import com.eis.conv.mapping.srcHandler.source.entities.xmlObjects.XmlConstraintValidation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SourceXmlFile extends SourceFile {
-    private SourceFileContentTypeXML contentType = SourceFileContentTypeXML.UNKNOWN;
+public class SourceXmlConstraintFile extends SourceXmlFile {
     List<XmlConstraintValidation> xmlConstraintValidations = new ArrayList<>();
-
-
-    public SourceFileContentTypeXML getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(SourceFileContentTypeXML contentType) {
-        this.contentType = contentType;
-    }
 
     public List<XmlConstraintValidation> getXmlConstraintValidations() {
         return xmlConstraintValidations;

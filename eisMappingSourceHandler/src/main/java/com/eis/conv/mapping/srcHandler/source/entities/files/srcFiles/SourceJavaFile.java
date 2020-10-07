@@ -1,6 +1,6 @@
-package com.eis.conv.mapping.srcHandler.source.entities.files.files;
+package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles;
 
-import com.eis.conv.mapping.srcHandler.source.entities.files.types.SourceFileContentTypeJava;
+import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ public class SourceJavaFile extends SourceFile {
 
     private final String ANNOTATION_ENTITY = "Entity";
 
-    private SourceFileContentTypeJava contentType = SourceFileContentTypeJava.UNKNOWN;
+    private ContentTypeJava contentType = ContentTypeJava.UNKNOWN;
     private String packageValue = "";
     private String className = "";
     private List<JAnnotation> annotations = new ArrayList<>();
@@ -18,11 +18,11 @@ public class SourceJavaFile extends SourceFile {
     public SourceJavaFile() {
     }
 
-    public SourceFileContentTypeJava getContentType() {
+    public ContentTypeJava getContentType() {
         return contentType;
     }
 
-    public void setContentType(SourceFileContentTypeJava contentType) {
+    public void setContentType(ContentTypeJava contentType) {
         this.contentType = contentType;
     }
 

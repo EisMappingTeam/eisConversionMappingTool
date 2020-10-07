@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.entities.files.files;
+package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles;
 
 import com.eis.conv.mapping.srcHandler.source.entities.files.SourceFileHandler;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.SourceFileType;

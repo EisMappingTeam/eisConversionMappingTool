@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.entities;
 
 import com.eis.conv.mapping.core.filesSupport.FileHelper;
-import com.eis.conv.mapping.srcHandler.source.entities.files.files.SourceXmlFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceXmlConstraintFile;
 import com.eis.conv.mapping.srcHandler.source.sourceParsers.XmlFileParser;
 import org.xml.sax.SAXException;
 
@@ -11,10 +11,10 @@ import java.io.IOException;
 public final class XmlFileHandler {
 
 
-    public static SourceXmlFile loadFromFile(String fileName) throws IOException, ParserConfigurationException, SAXException {
-        SourceXmlFile result;
+    public static SourceXmlConstraintFile loadFromFile(String fileName) throws IOException, ParserConfigurationException, SAXException {
+        SourceXmlConstraintFile result;
         if (fileName.length() < 1) {
-            return new SourceXmlFile();
+            return new SourceXmlConstraintFile();
         }
         String fileContent = FileHelper.getFileAsSting(fileName);
 
@@ -24,9 +24,9 @@ public final class XmlFileHandler {
         return result;
     }
 
-    public static SourceXmlFile loadFromString(String fileContent) throws IOException, ParserConfigurationException, SAXException {
+    public static SourceXmlConstraintFile loadFromString(String fileContent) throws IOException, ParserConfigurationException, SAXException {
         XmlFileParser xmlFp = new XmlFileParser();
-        SourceXmlFile xmlFileData = xmlFp.parse(fileContent);
+        SourceXmlConstraintFile xmlFileData = xmlFp.parse(fileContent);
         return xmlFileData;
     }
 

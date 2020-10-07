@@ -1,12 +1,12 @@
 package com.eis.conv.mapping.srcHandler.source.entities.files.types;
 
-public enum SourceFileContentTypeProperty {
+public enum ContentTypeProperty {
     MESSAGES("messages"),
     UNKNOWN("unknown");
 
     private final String type;
 
-    SourceFileContentTypeProperty(String type) {
+    ContentTypeProperty(String type) {
         this.type = type;
     }
 

@@ -3,8 +3,8 @@ package com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers;
 import com.eis.conv.mapping.core.stringsSupport.StringHelper;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlAttribute;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
-import com.eis.conv.mapping.srcHandler.source.entities.files.files.SourceXmlFile;
-import com.eis.conv.mapping.srcHandler.source.entities.files.types.SourceFileContentTypeXML;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceXmlConstraintFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
 import com.eis.conv.mapping.srcHandler.source.entities.xmlObjects.XmlConstraintValidation;
 
 import java.util.ArrayList;
@@ -31,12 +31,12 @@ public final class XmlFileParserConstraintValidation {
     private static final String ATTRVALUE_CONSTRAINT_VALIDATION_REGEXP = "regexp";
 
 
-    public static SourceXmlFile parse(XmlNode root) {
-        SourceXmlFile result = new SourceXmlFile();
+    public static SourceXmlConstraintFile parse(XmlNode root) {
+        SourceXmlConstraintFile result = new SourceXmlConstraintFile();
 
         List<XmlConstraintValidation> xmlConstraintValidations = getConstraintsValidations(root);
 
-        result.setContentType(SourceFileContentTypeXML.CONSTRAINT_VALIDATION_RULES);
+        result.setContentType(ContentTypeXML.CONSTRAINT_VALIDATION_RULES);
         cleanTextValidations(xmlConstraintValidations);
 
         result.setXmlConstraintValidations(xmlConstraintValidations);

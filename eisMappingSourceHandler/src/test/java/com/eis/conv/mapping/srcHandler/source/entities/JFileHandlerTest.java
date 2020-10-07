@@ -1,8 +1,8 @@
 package com.eis.conv.mapping.srcHandler.source.entities;
 
 
-import com.eis.conv.mapping.srcHandler.source.entities.files.files.SourceJavaFile;
-import com.eis.conv.mapping.srcHandler.source.entities.files.types.SourceFileContentTypeJava;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +27,7 @@ public class JFileHandlerTest {
         SourceJavaFile jFileAnnotations = JFileHandler.loadFromFile(file.toString());
         assertThat(jFileAnnotations.getPackageValue()).isEqualTo(J_PACKAGE);
         assertThat(jFileAnnotations.getAnnotations().size()).isEqualTo(7);
-        assertThat(jFileAnnotations.getContentType()).isEqualTo(SourceFileContentTypeJava.ENTITY);
+        assertThat(jFileAnnotations.getContentType()).isEqualTo(ContentTypeJava.ENTITY);
 
         JAnnotation canInvoke = jFileAnnotations.getAnnotationByName(ANNOTATION_CANINVOKE);
         JAnnotation digits = jFileAnnotations.getAnnotationByName(ANNOTATION_DIGITS);
