@@ -25,8 +25,7 @@ public final class XmlFileHandler {
     }
 
     public static SourceXmlConstraintFile loadFromString(String fileContent) throws IOException, ParserConfigurationException, SAXException {
-        XmlFileParser xmlFp = new XmlFileParser();
-        SourceXmlConstraintFile xmlFileData = xmlFp.parse(fileContent);
+        SourceXmlConstraintFile xmlFileData = XmlFileParser.parse(fileContent);
         return xmlFileData;
     }
 

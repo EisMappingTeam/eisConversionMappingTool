@@ -1,6 +1,6 @@
 package com.eis.conv.mapping.srcHandler.startup.acts;
 
-import com.eis.conv.mapping.srcHandler.output.OutputRepoAnalyzerHandler;
+import com.eis.conv.mapping.srcHandler.output.reports.OutputRepoAnalyzerHandler;
 import com.eis.conv.mapping.srcHandler.output.OutputRepoAnalyzerWriter;
 import com.eis.conv.mapping.srcHandler.output.obj.TableWithNamedCols;
 import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
@@ -22,12 +22,14 @@ public final class UserActionRunnerLoadSource {
         TableWithNamedCols unknownReport = OutputRepoAnalyzerHandler.createUnknownFilesReport(sourceFilesReader);
         TableWithNamedCols summaryReport = OutputRepoAnalyzerHandler.createSummaryReport(sourceFilesReader);
         TableWithNamedCols rulesReport = OutputRepoAnalyzerHandler.createRulesReport(sourceFilesReader);
+        TableWithNamedCols successFilesReport = OutputRepoAnalyzerHandler.createSuccessFilesReport(sourceFilesReader) ;
 
         String resultDir = userLoadSource.getResultDir();
         OutputRepoAnalyzerWriter.saveToFileErrorReport(errorReport, resultDir);
         OutputRepoAnalyzerWriter.saveToFileRulesReport(rulesReport, resultDir);
         OutputRepoAnalyzerWriter.saveToFileSummaryInfoReport(summaryReport, resultDir);
         OutputRepoAnalyzerWriter.saveToFileUnknownReport(unknownReport, resultDir);
+        OutputRepoAnalyzerWriter.saveToFileSuccessFilesReport(successFilesReport, resultDir);
 
         System.out.println("Java filesSupport: " + sourceFilesReader.getJavaFiles().size());
         System.out.println("XML filesSupport: " + sourceFilesReader.getXmlFiles().size());

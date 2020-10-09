@@ -19,7 +19,7 @@
             <loadSource>
                 <project>TTT</project>
                 <product>ac</product>
-                <version>5_2</version>
+                <version>4_9</version>
                 <resultDir>C://111//TTT</resultDir>
             </loadSource>
         </action>

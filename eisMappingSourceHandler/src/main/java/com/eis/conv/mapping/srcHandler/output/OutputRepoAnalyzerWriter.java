@@ -16,6 +16,7 @@ public final class OutputRepoAnalyzerWriter {
     private static String OUTPUT_FILE_UNKNOWN_REPORT = "UnknownFiles.csv";
     private static String OUTPUT_FILE_SUMMARYINFO_REPORT = "SummaryInfo.txt";
     private static String OUTPUT_FILE_RULES_REPORT = "rules.csv";
+    private static String OUTPUT_FILE_SUCCESS_REPORT = "successFiles.csv";
 
 
     public static boolean saveToFileErrorReport(TableWithNamedCols report, String resultDir) {
@@ -32,6 +33,10 @@ public final class OutputRepoAnalyzerWriter {
 
     public static boolean saveToFileRulesReport(TableWithNamedCols report, String resultDir) {
         return saveToFile(report, resultDir, OUTPUT_FILE_RULES_REPORT);
+    }
+
+    public static boolean saveToFileSuccessFilesReport(TableWithNamedCols report, String resultDir) {
+        return saveToFile(report, resultDir, OUTPUT_FILE_SUCCESS_REPORT);
     }
 
 
