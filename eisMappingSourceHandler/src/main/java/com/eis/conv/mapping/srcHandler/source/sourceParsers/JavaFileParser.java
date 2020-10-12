@@ -3,6 +3,7 @@ package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
+import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JVariableDeclaration;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -129,6 +130,18 @@ public class JavaFileParser {
                 setParameters(ae, jAnnotation);
 
                 fileAnnotations.getAnnotations().add(jAnnotation);
+            }
+
+            //Class header variables
+            for (FieldDeclaration fd : n.getFields()) {
+                for (VariableDeclarator vd : fd.getVariables()) {
+                    JVariableDeclaration variableDeclaration = new JVariableDeclaration();
+                    variableDeclaration.setVariable(vd.getName().asString());
+                    if (vd.getInitializer().isPresent()) {
+                        variableDeclaration.setInitializationValue(vd.getInitializer().get().toString());
+                    }
+                    fileAnnotations.getVariables().add(variableDeclaration);
+                }
             }
             super.visit(n, arg);
         }

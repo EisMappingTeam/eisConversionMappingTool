@@ -2,6 +2,7 @@ package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles;
 
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
+import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JVariableDeclaration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class SourceJavaFile extends SourceFile {
     private String packageValue = "";
     private String className = "";
     private List<JAnnotation> annotations = new ArrayList<>();
+    private List<JVariableDeclaration> variables = new ArrayList<>();
 
     public SourceJavaFile() {
     }
@@ -48,6 +50,14 @@ public class SourceJavaFile extends SourceFile {
 
     public void setAnnotations(List<JAnnotation> annotations) {
         this.annotations = annotations;
+    }
+
+    public List<JVariableDeclaration> getVariables() {
+        return variables;
+    }
+
+    public void setVariables(List<JVariableDeclaration> variables) {
+        this.variables = variables;
     }
 
     public JAnnotation getAnnotationByName(String annotationName) {
