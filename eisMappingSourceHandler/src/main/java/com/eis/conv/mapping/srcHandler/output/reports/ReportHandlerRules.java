@@ -9,6 +9,7 @@ import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceJava
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourcePropertyFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceXmlConstraintFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
+import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JVariableDeclaration;
 
 import java.util.List;
 
@@ -35,8 +36,6 @@ public final class ReportHandlerRules {
     }
 
 
-
-
     private static TableWithNamedCols createRulesReportEmptyColumns() {
         TableWithNamedCols result = new TableWithNamedCols();
         for (RulesReportColumns col : RulesReportColumns.values()) {
@@ -47,7 +46,7 @@ public final class ReportHandlerRules {
 
     private static void populateRulesJava(TableWithNamedCols report, SourceFilesReader sourceFilesReader) {
         sourceFilesReader.getJavaFiles().stream().forEach(item -> {
-            populateRulesReportAnnotation(report, sourceFilesReader.getPropertyFiles(), item);
+            populateRulesReportAnnotation(report, sourceFilesReader, item);
         });
     }
 
@@ -58,7 +57,7 @@ public final class ReportHandlerRules {
     }
 
 
-    private static void populateRulesReportAnnotation(TableWithNamedCols report, List<SourcePropertyFile> pFiles, SourceJavaFile jFile) {
+    private static void populateRulesReportAnnotation(TableWithNamedCols report, SourceFilesReader sourceFilesReader, SourceJavaFile jFile) {
         jFile.getAnnotations().stream().forEach(item -> {
             //File part
             int row = report.putInNewRow(RulesReportColumns.COL_REPO.getCaption(), jFile.getPartOfProduct());
@@ -77,10 +76,14 @@ public final class ReportHandlerRules {
             report.putValue(row, RulesReportColumns.COL_ANNOTATION.getCaption(), item.getRawValue());
             //Parse annotation parameters
             report.putValue(row, RulesReportColumns.COL_ERROR_CODE.getCaption(), fixErrorMessage(item.getParameterValues(ANNOTATION_PARAMETERS_MESSAGE)));
-            report.putValue(row, RulesReportColumns.COL_ERROR_MESSAGE.getCaption(), findFirstInProperties(pFiles, fixErrorMessage(item.getParameterValues(ANNOTATION_PARAMETERS_MESSAGE))));
-            report.putValue(row, RulesReportColumns.COL_PARAM_MIN.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_MIN));
-            report.putValue(row, RulesReportColumns.COL_PARAM_MAX.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_MAX));
-            report.putValue(row, RulesReportColumns.COL_PARAM_LENGTH.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_LENGTH));
+            report.putValue(row, RulesReportColumns.COL_ERROR_MESSAGE.getCaption(), findFirstInProperties(sourceFilesReader.getPropertyFiles(), fixErrorMessage(item.getParameterValues(ANNOTATION_PARAMETERS_MESSAGE))));
+
+            //Constraints
+            report.putValue(row, RulesReportColumns.COL_PARAM_MIN.getCaption(), getConstraintValue(item.getParameterValues(ANNOTATION_PARAMETERS_MIN), sourceFilesReader.getJavaFiles()));
+            report.putValue(row, RulesReportColumns.COL_PARAM_MAX.getCaption(), getConstraintValue(item.getParameterValues(ANNOTATION_PARAMETERS_MAX), sourceFilesReader.getJavaFiles()));
+            report.putValue(row, RulesReportColumns.COL_PARAM_LENGTH.getCaption(), getConstraintValue(item.getParameterValues(ANNOTATION_PARAMETERS_LENGTH), sourceFilesReader.getJavaFiles()));
+
+
             report.putValue(row, RulesReportColumns.COL_PARAM_GROUP_COND.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_GROUPS));
             report.putValue(row, RulesReportColumns.COL_PARAM_REGEXP.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_REGEXP));
         });
@@ -149,4 +152,38 @@ public final class ReportHandlerRules {
         }
         return result;
     }
+
+    private static String getConstraintValue(String value, List<SourceJavaFile> jFiles) {
+        if (value == null || isNumberConst(value) || value.length() < 1 || value.indexOf(".") < 0) {
+            return value;
+        }
+        String jClassName = value.split("\\.")[0];
+        String varName = value.split("\\.")[1];
+
+        JVariableDeclaration variableDeclaration = getVarDeclaration(jClassName, varName, jFiles);
+        if (variableDeclaration.getVariable().equals(varName)) {
+            return variableDeclaration.getInitializationValue();
+        }
+        return value;
+    }
+
+    private static boolean isNumberConst(String constraintValue) {
+        return StringHelper.isNumeric(constraintValue);
+    }
+
+    private static JVariableDeclaration getVarDeclaration(String className, String variableName, List<SourceJavaFile> jFiles) {
+        for (SourceJavaFile jF : jFiles) {
+            if (jF.getClassName().equals(className)) {
+
+                for (JVariableDeclaration variableDeclaration : jF.getVariables()) {
+                    if (variableDeclaration.getVariable().equals(variableName)) {
+                        return variableDeclaration;
+                    }
+                }
+            }
+        }
+        return new JVariableDeclaration();
+    }
+
+
 }

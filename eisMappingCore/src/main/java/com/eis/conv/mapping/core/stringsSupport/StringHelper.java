@@ -45,4 +45,12 @@ public final class StringHelper {
         return getLeft(str, 1).toLowerCase() + getRight(str, str.length() - 1);
     }
 
+    public static boolean isNumeric(final String str) {
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+
+        return str.matches("-?\\d+(\\.\\d+)?");
+
+    }
 }

@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StringHelperTest {
 
     @Test
-    public void getLastSplitted() {
+    public void getLastSplittedTest() {
         String r1 = StringHelper.getLastDotSplitted("com.exigen.ipb.base.datatypes.Address");
         assertThat(r1).isEqualTo("Address");
 
@@ -19,7 +19,7 @@ public class StringHelperTest {
     }
 
     @Test
-    public void getLeft() {
+    public void getLeftTest() {
         String s1 = StringHelper.getLeft(null, 1);
         assertThat(s1).isEqualTo("");
 
@@ -40,7 +40,7 @@ public class StringHelperTest {
     }
 
     @Test
-    public void getRight() {
+    public void getRightTest() {
         String s1 = StringHelper.getRight(null, 1);
         assertThat(s1).isEqualTo("");
 
@@ -61,7 +61,19 @@ public class StringHelperTest {
     }
 
     @Test
-    public void lowerFirst() {
+    public void isNumericTest() {
+        assertThat(StringHelper.isNumeric("sdfdsf")).isEqualTo(false);
+        assertThat(StringHelper.isNumeric("")).isEqualTo(false);
+        assertThat(StringHelper.isNumeric(null)).isEqualTo(false);
+        assertThat(StringHelper.isNumeric(".2143")).isEqualTo(false);
+
+        assertThat(StringHelper.isNumeric("1312")).isEqualTo(true);
+        assertThat(StringHelper.isNumeric("0.4")).isEqualTo(true);
+        assertThat(StringHelper.isNumeric("23.4234")).isEqualTo(true);
+    }
+
+    @Test
+    public void lowerFirstTest() {
         String s1 = StringHelper.lowerFirst(null);
         assertThat(s1).isEqualTo("");
 
