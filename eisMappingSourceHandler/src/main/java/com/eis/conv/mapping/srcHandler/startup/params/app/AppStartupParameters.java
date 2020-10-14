@@ -40,19 +40,4 @@ public class AppStartupParameters {
         this.fileName = fileName;
     }
 
-    public AppRepoCommand getAppRepoCommand(AppAllCommands cmd, String project, String product) {
-        for (AppRepoCommand item : this.repoCommand) {
-            if (item != null) {
-                if (item.getCommandName().equalsIgnoreCase(cmd.getCommang())) {
-                    if (project != null && product != null && item.getProject() != null && item.getProduct() != null) {
-                        if (project.equalsIgnoreCase(item.getProject()) && product.equalsIgnoreCase(item.getProduct())) {
-                            return item;
-                        }
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
 }

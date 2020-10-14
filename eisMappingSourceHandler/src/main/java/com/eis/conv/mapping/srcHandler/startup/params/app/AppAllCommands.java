@@ -2,7 +2,8 @@ package com.eis.conv.mapping.srcHandler.startup.params.app;
 
 
 public enum AppAllCommands {
-    DOWNLOAD_REPO("REPO_DOWNLOAD");
+    DOWNLOAD_REPO("REPO_DOWNLOAD"),
+    LOAD_SOURCE("LOAD_SOURCE");
 
     private final String commang;
 

@@ -1,5 +1,6 @@
 package com.eis.conv.mapping.srcHandler.startup.params.app;
 
+import com.eis.conv.mapping.core.stringsSupport.StringHelper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class AppRepoCommand {
@@ -25,6 +26,9 @@ public class AppRepoCommand {
 
     @JacksonXmlProperty(localName = "command")
     private String command;
+
+    @JacksonXmlProperty(localName = "ignoreAnnotationList")
+    private String ignoreAnnotationList;
 
     public String getCommandName() {
         return commandName;
@@ -75,13 +79,18 @@ public class AppRepoCommand {
     }
 
     public String getCommand() {
-        if (this.command == null) {
-            return "";
-        }
-        return command;
+        return StringHelper.notNullString(command);
     }
 
     public void setCommand(String command) {
         this.command = command;
+    }
+
+    public String getIgnoreAnnotationList() {
+        return StringHelper.notNullString(ignoreAnnotationList);
+    }
+
+    public void setIgnoreAnnotationList(String ignoreAnnotationList) {
+        this.ignoreAnnotationList = ignoreAnnotationList;
     }
 }

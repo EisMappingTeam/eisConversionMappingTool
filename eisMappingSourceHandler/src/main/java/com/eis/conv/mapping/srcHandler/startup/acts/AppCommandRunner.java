@@ -6,6 +6,7 @@ import com.eis.conv.mapping.core.stringsSupport.StringHelper;
 import com.eis.conv.mapping.srcHandler.startup.params.app.AppAllCommands;
 import com.eis.conv.mapping.srcHandler.startup.params.app.AppRepoCommand;
 import com.eis.conv.mapping.srcHandler.startup.params.app.AppStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.params.app.handlers.AppStartupParametersHandler;
 
 
 import java.io.IOException;
@@ -14,7 +15,9 @@ public final class AppCommandRunner {
 
     public static boolean runCommandDownloadRepo(String user, String password, AppStartupParameters appParameters, String project, String product, String version, String sourceAlias) throws IOException {
 
-        AppRepoCommand appRepoCommand = appParameters.getAppRepoCommand(AppAllCommands.DOWNLOAD_REPO, project, product);
+        //AppRepoCommand appRepoCommand =  appParameters.getAppRepoCommand(AppAllCommands.DOWNLOAD_REPO, project, product);
+        AppRepoCommand appRepoCommand = AppStartupParametersHandler.getAppRepoCommand(appParameters, AppAllCommands.DOWNLOAD_REPO, project, product);
+
         if (appRepoCommand == null) {
             System.out.println("Tag with 'commandName' = " + AppAllCommands.DOWNLOAD_REPO.toString() + "\n 'project' = " + project + "\n 'product' = " + product + "\nNot found in " + appParameters.getFileName());
             return false;
