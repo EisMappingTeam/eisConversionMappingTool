@@ -39,6 +39,7 @@ public class JavaFileParser {
     }
 
 
+
     private static class AnnotationPropertiesVisitor extends VoidVisitorAdapter<String> {
         SourceJavaFile fileAnnotations;
 
@@ -61,6 +62,7 @@ public class JavaFileParser {
             super.visit(n.getPairs(), arg);
         }
     }
+
 
 
     private static class MethodVisitor extends VoidVisitorAdapter<String> {

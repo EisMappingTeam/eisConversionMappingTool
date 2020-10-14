@@ -60,6 +60,11 @@ public class SourceJavaFile extends SourceFile {
         this.variables = variables;
     }
 
+    public JVariableDeclaration getVariableByName(String varName) {
+        return variables.stream().filter(item -> item.getVariable().equalsIgnoreCase(varName)).findFirst().orElse(null);
+    }
+
+
     public JAnnotation getAnnotationByName(String annotationName) {
         return annotations.stream().filter(item -> item.getAnnotation().equalsIgnoreCase(annotationName)).findFirst().orElse(null);
     }
