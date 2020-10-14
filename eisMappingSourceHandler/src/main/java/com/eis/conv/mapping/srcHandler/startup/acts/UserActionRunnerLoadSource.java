@@ -21,7 +21,7 @@ public final class UserActionRunnerLoadSource {
         TableWithNamedCols errorReport = OutputRepoAnalyzerHandler.createErrorFilesReport(sourceFilesReader);
         TableWithNamedCols unknownReport = OutputRepoAnalyzerHandler.createUnknownFilesReport(sourceFilesReader);
         TableWithNamedCols summaryReport = OutputRepoAnalyzerHandler.createSummaryReport(sourceFilesReader);
-        TableWithNamedCols rulesReport = OutputRepoAnalyzerHandler.createRulesReport(sourceFilesReader);
+        TableWithNamedCols rulesReport = OutputRepoAnalyzerHandler.createRulesReport(appParameters, sourceFilesReader);
         TableWithNamedCols successFilesReport = OutputRepoAnalyzerHandler.createSuccessFilesReport(sourceFilesReader) ;
 
         String resultDir = userLoadSource.getResultDir();

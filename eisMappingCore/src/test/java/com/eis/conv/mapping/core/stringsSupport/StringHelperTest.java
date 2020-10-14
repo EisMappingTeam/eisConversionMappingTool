@@ -2,6 +2,8 @@ package com.eis.conv.mapping.core.stringsSupport;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringHelperTest {
@@ -88,5 +90,45 @@ public class StringHelperTest {
 
         String s5 = StringHelper.lowerFirst("Abs");
         assertThat(s5).isEqualTo("abs");
+    }
+
+    @Test
+    public void splitToListAndTrimTest(){
+        List<String> result;
+        String str = "";
+        result= StringHelper.splitToListAndTrim(str,";");
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0)).isEqualTo("");
+
+        str = " ";
+        result= StringHelper.splitToListAndTrim(str,";");
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0)).isEqualTo("");
+
+        str = "3423";
+        result= StringHelper.splitToListAndTrim(str,";");
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0)).isEqualTo("3423");
+
+        str = " 3423 ";
+        result= StringHelper.splitToListAndTrim(str,";");
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0)).isEqualTo("3423");
+
+        str = ";3423";
+        result= StringHelper.splitToListAndTrim(str,";");
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result.get(1)).isEqualTo("3423");
+
+        str = "3423;";
+        result= StringHelper.splitToListAndTrim(str,";");
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result.get(1)).isEqualTo("");
+
+        str = "34;23";
+        result= StringHelper.splitToListAndTrim(str,";");
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result.get(0)).isEqualTo("34");
+        assertThat(result.get(1)).isEqualTo("23");
     }
 }

@@ -1,5 +1,9 @@
 package com.eis.conv.mapping.core.stringsSupport;
 
+import com.google.common.base.Splitter;
+
+import java.util.List;
+
 public final class StringHelper {
 
     public static String getLastDotSplitted(String str) {
@@ -51,6 +55,12 @@ public final class StringHelper {
         }
 
         return str.matches("-?\\d+(\\.\\d+)?");
+    }
 
+    public static List<String> splitToListAndTrim(String source, String splitter) {
+        List<String> convertedCountriesList = Splitter.on(splitter)
+                .trimResults()
+                .splitToList(source);
+        return convertedCountriesList;
     }
 }

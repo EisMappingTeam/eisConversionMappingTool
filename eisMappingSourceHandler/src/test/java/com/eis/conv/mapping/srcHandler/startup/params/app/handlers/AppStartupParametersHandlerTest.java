@@ -23,7 +23,7 @@ public class AppStartupParametersHandlerTest {
     private final String RCMD_PROJECT_02 = "project_02";
     private final String RCMD_PROD_01 = "product_01";
     private final String RCMD_PROD_02 = "product_02";
-    private final String RCMD_ANNOTATIONS_LIST = "annotations_list";
+    private final String RCMD_ANNOTATIONS_LIST = "annotations_list01;annotations_list02";
 
 
     @Test
@@ -39,6 +39,9 @@ public class AppStartupParametersHandlerTest {
         AppRepoCommand res02 = AppStartupParametersHandler.getAppRepoCommand(appStartupParameters, AppAllCommands.LOAD_SOURCE);
         assertThat(res02).isNotEqualTo(null);
         assertThat(res02.getIgnoreAnnotationList()).isEqualTo(RCMD_ANNOTATIONS_LIST);
+
+        List<String> ignoredAnnotations= AppStartupParametersHandler.getIgnoredAnnotations(appStartupParameters, AppAllCommands.LOAD_SOURCE);
+        assertThat(ignoredAnnotations.size()).isEqualTo(2);
     }
 
     private AppStartupParameters getAppStartupParameters() {

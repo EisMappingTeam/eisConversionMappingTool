@@ -9,7 +9,11 @@ import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceJava
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourcePropertyFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceXmlConstraintFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
+import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JVariableDeclaration;
+import com.eis.conv.mapping.srcHandler.startup.params.app.AppAllCommands;
+import com.eis.conv.mapping.srcHandler.startup.params.app.AppStartupParameters;
+import com.eis.conv.mapping.srcHandler.startup.params.app.handlers.AppStartupParametersHandler;
 
 import java.util.List;
 
@@ -28,9 +32,10 @@ public final class ReportHandlerRules {
     private static String VAL_XSORCE_TYPE_CVALIDATIONS = "Constraint validations";
 
 
-    public static TableWithNamedCols createRulesReport(SourceFilesReader sourceFilesReader) {
+    public static TableWithNamedCols createRulesReport(AppStartupParameters appStartupParameters, SourceFilesReader sourceFilesReader) {
+        List<String> ignoredAnnotations = AppStartupParametersHandler.getIgnoredAnnotations(appStartupParameters, AppAllCommands.LOAD_SOURCE);
         TableWithNamedCols result = createRulesReportEmptyColumns();
-        populateRulesJava(result, sourceFilesReader);
+        populateRulesJava(result, sourceFilesReader, ignoredAnnotations);
         populateRulesXml(result, sourceFilesReader);
         return result;
     }
@@ -44,9 +49,9 @@ public final class ReportHandlerRules {
         return result;
     }
 
-    private static void populateRulesJava(TableWithNamedCols report, SourceFilesReader sourceFilesReader) {
+    private static void populateRulesJava(TableWithNamedCols report, SourceFilesReader sourceFilesReader, List<String> ignoredAnnotations) {
         sourceFilesReader.getJavaFiles().stream().forEach(item -> {
-            populateRulesReportAnnotation(report, sourceFilesReader, item);
+            processJFile(report, sourceFilesReader, item, ignoredAnnotations);
         });
     }
 
@@ -57,36 +62,44 @@ public final class ReportHandlerRules {
     }
 
 
-    private static void populateRulesReportAnnotation(TableWithNamedCols report, SourceFilesReader sourceFilesReader, SourceJavaFile jFile) {
+    private static void processJFile(TableWithNamedCols report, SourceFilesReader sourceFilesReader, SourceJavaFile jFile, List<String> ignoredAnnotations) {
         jFile.getAnnotations().stream().forEach(item -> {
-            //File part
-            int row = report.putInNewRow(RulesReportColumns.COL_REPO.getCaption(), jFile.getPartOfProduct());
-            report.putValue(row, RulesReportColumns.COL_SOURCE.getCaption(), FileHelper.getFileName(jFile.getFileName()));
-            report.putValue(row, RulesReportColumns.COL_CONTEXT.getCaption(), jFile.getClassName());
-            report.putValue(row, RulesReportColumns.COL_PACKAGE.getCaption(), jFile.getPackageValue());
-            report.putValue(row, RulesReportColumns.COL_COND_DEFINED_IN.getCaption(), getJSourceType(jFile));
-
-            //Annotation part
-            if (item.getVariable().length() < 1) {
-                report.putValue(row, RulesReportColumns.COL_APPLIED_TO.getCaption(), parseMethodSetGetToVariable(item.getMethod()));
-            } else {
-                report.putValue(row, RulesReportColumns.COL_APPLIED_TO.getCaption(), item.getVariable());
+            if (!isIgnoredAnnotation(ignoredAnnotations, item.getAnnotation())) {
+                populateRulesReportAnnotation(report, sourceFilesReader, jFile, item);
             }
-            report.putValue(row, RulesReportColumns.COL_CODE.getCaption(), item.getAnnotation());
-            report.putValue(row, RulesReportColumns.COL_ANNOTATION.getCaption(), item.getRawValue());
-            //Parse annotation parameters
-            report.putValue(row, RulesReportColumns.COL_ERROR_CODE.getCaption(), fixErrorMessage(item.getParameterValues(ANNOTATION_PARAMETERS_MESSAGE)));
-            report.putValue(row, RulesReportColumns.COL_ERROR_MESSAGE.getCaption(), findFirstInProperties(sourceFilesReader.getPropertyFiles(), fixErrorMessage(item.getParameterValues(ANNOTATION_PARAMETERS_MESSAGE))));
-
-            //Constraints
-            report.putValue(row, RulesReportColumns.COL_PARAM_MIN.getCaption(), getConstraintValue(item.getParameterValues(ANNOTATION_PARAMETERS_MIN), sourceFilesReader.getJavaFiles()));
-            report.putValue(row, RulesReportColumns.COL_PARAM_MAX.getCaption(), getConstraintValue(item.getParameterValues(ANNOTATION_PARAMETERS_MAX), sourceFilesReader.getJavaFiles()));
-            report.putValue(row, RulesReportColumns.COL_PARAM_LENGTH.getCaption(), getConstraintValue(item.getParameterValues(ANNOTATION_PARAMETERS_LENGTH), sourceFilesReader.getJavaFiles()));
-
-
-            report.putValue(row, RulesReportColumns.COL_PARAM_GROUP_COND.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_GROUPS));
-            report.putValue(row, RulesReportColumns.COL_PARAM_REGEXP.getCaption(), item.getParameterValues(ANNOTATION_PARAMETERS_REGEXP));
         });
+    }
+
+
+    private static void populateRulesReportAnnotation(TableWithNamedCols report, SourceFilesReader sourceFilesReader, SourceJavaFile jFile, JAnnotation jAnnotation) {
+        //File part
+        int row = report.putInNewRow(RulesReportColumns.COL_REPO.getCaption(), jFile.getPartOfProduct());
+        report.putValue(row, RulesReportColumns.COL_SOURCE.getCaption(), FileHelper.getFileName(jFile.getFileName()));
+        report.putValue(row, RulesReportColumns.COL_CONTEXT.getCaption(), jFile.getClassName());
+        report.putValue(row, RulesReportColumns.COL_PACKAGE.getCaption(), jFile.getPackageValue());
+        report.putValue(row, RulesReportColumns.COL_COND_DEFINED_IN.getCaption(), getJSourceType(jFile));
+
+        //Annotation part
+        if (jAnnotation.getVariable().length() < 1) {
+            report.putValue(row, RulesReportColumns.COL_APPLIED_TO.getCaption(), parseMethodSetGetToVariable(jAnnotation.getMethod()));
+        } else {
+            report.putValue(row, RulesReportColumns.COL_APPLIED_TO.getCaption(), jAnnotation.getVariable());
+        }
+        report.putValue(row, RulesReportColumns.COL_CODE.getCaption(), jAnnotation.getAnnotation());
+        report.putValue(row, RulesReportColumns.COL_ANNOTATION.getCaption(), jAnnotation.getRawValue());
+        //Parse annotation parameters
+        report.putValue(row, RulesReportColumns.COL_ERROR_CODE.getCaption(), fixErrorMessage(jAnnotation.getParameterValues(ANNOTATION_PARAMETERS_MESSAGE)));
+        report.putValue(row, RulesReportColumns.COL_ERROR_MESSAGE.getCaption(), findFirstInProperties(sourceFilesReader.getPropertyFiles(), fixErrorMessage(jAnnotation.getParameterValues(ANNOTATION_PARAMETERS_MESSAGE))));
+
+        //Constraints
+        report.putValue(row, RulesReportColumns.COL_PARAM_MIN.getCaption(), getConstraintValue(jAnnotation.getParameterValues(ANNOTATION_PARAMETERS_MIN), sourceFilesReader.getJavaFiles()));
+        report.putValue(row, RulesReportColumns.COL_PARAM_MAX.getCaption(), getConstraintValue(jAnnotation.getParameterValues(ANNOTATION_PARAMETERS_MAX), sourceFilesReader.getJavaFiles()));
+        report.putValue(row, RulesReportColumns.COL_PARAM_LENGTH.getCaption(), getConstraintValue(jAnnotation.getParameterValues(ANNOTATION_PARAMETERS_LENGTH), sourceFilesReader.getJavaFiles()));
+
+
+        report.putValue(row, RulesReportColumns.COL_PARAM_GROUP_COND.getCaption(), jAnnotation.getParameterValues(ANNOTATION_PARAMETERS_GROUPS));
+        report.putValue(row, RulesReportColumns.COL_PARAM_REGEXP.getCaption(), jAnnotation.getParameterValues(ANNOTATION_PARAMETERS_REGEXP));
+
     }
 
 
@@ -186,4 +199,12 @@ public final class ReportHandlerRules {
     }
 
 
+    private static boolean isIgnoredAnnotation(List<String> lst, String item) {
+        for (String s : lst) {
+            if (s.trim().equals(item.trim()) && s.trim().length() > 0 && item.trim().length() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
