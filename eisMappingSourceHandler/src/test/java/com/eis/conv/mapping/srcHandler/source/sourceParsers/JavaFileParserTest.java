@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 
 import com.eis.conv.mapping.core.filesSupport.FileHelper;
-import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.java.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JVariableDeclaration;
 import org.junit.jupiter.api.Test;

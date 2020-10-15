@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.entities;
 
 import com.eis.conv.mapping.core.filesSupport.FileHelper;
-import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceXmlConstraintFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
 import com.eis.conv.mapping.srcHandler.source.sourceParsers.XmlFileParser;
 import org.xml.sax.SAXException;
 

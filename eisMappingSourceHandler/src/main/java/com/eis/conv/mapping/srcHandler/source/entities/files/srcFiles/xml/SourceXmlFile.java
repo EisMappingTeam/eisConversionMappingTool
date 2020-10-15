@@ -1,5 +1,6 @@
-package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles;
+package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml;
 
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
 
 public class SourceXmlFile extends SourceFile {

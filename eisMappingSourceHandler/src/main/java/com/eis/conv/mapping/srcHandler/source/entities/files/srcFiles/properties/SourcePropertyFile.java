@@ -1,5 +1,6 @@
-package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles;
+package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.properties;
 
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeProperty;
 import com.eis.conv.mapping.srcHandler.source.entities.pObjects.PropertyKeyValue;
 

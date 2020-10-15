@@ -3,7 +3,7 @@ package com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers;
 import com.eis.conv.mapping.core.stringsSupport.StringHelper;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlAttribute;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
-import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceXmlConstraintFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
 import com.eis.conv.mapping.srcHandler.source.entities.xmlObjects.XmlConstraintValidation;
 

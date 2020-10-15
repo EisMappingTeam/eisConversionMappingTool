@@ -31,11 +31,11 @@ public final class UserActionRunnerLoadSource {
         OutputRepoAnalyzerWriter.saveToFileUnknownReport(unknownReport, resultDir);
         OutputRepoAnalyzerWriter.saveToFileSuccessFilesReport(successFilesReport, resultDir);
 
-        System.out.println("Java filesSupport: " + sourceFilesReader.getJavaFiles().size());
-        System.out.println("XML filesSupport: " + sourceFilesReader.getXmlFiles().size());
-        System.out.println("Properties filesSupport: " + sourceFilesReader.getPropertyFiles().size());
-        System.out.println("Unknown filesSupport: " + sourceFilesReader.getUnknownFiles().size());
-        System.out.println("Error filesSupport: " + sourceFilesReader.getErrorFiles().size());
+        System.out.println("Java files: " + sourceFilesReader.getJavaFiles().size());
+        System.out.println("XML files: " + sourceFilesReader.getXmlFiles().size());
+        System.out.println("Properties files: " + sourceFilesReader.getPropertyFiles().size());
+        System.out.println("Unknown files: " + sourceFilesReader.getUnknownFiles().size());
+        System.out.println("Error files: " + sourceFilesReader.getErrorFiles().size());
     }
 
 

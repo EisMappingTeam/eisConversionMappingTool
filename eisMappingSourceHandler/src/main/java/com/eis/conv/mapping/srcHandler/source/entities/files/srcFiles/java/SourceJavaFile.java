@@ -1,5 +1,6 @@
-package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles;
+package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.java;
 
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JVariableDeclaration;

@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 
 import com.eis.conv.mapping.srcHandler.source.entities.XmlFileHandler;
-import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceXmlConstraintFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
 import com.eis.conv.mapping.srcHandler.source.entities.xmlObjects.XmlConstraintValidation;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;

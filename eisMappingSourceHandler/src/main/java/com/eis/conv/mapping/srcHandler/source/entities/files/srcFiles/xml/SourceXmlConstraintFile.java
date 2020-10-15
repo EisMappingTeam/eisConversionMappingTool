@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles;
+package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml;
 
 
 import com.eis.conv.mapping.srcHandler.source.entities.xmlObjects.XmlConstraintValidation;

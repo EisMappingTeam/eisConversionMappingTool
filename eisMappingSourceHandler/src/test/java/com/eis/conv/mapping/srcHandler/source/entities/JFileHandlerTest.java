@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.entities;
 
 
-import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.java.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
 import org.junit.jupiter.api.Test;
