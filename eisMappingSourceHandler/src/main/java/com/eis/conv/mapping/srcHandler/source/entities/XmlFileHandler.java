@@ -12,13 +12,12 @@ public final class XmlFileHandler {
 
 
     public static SourceXmlConstraintFile loadFromFile(String fileName) throws IOException, ParserConfigurationException, SAXException {
-        SourceXmlConstraintFile result;
         if (fileName.length() < 1) {
             return new SourceXmlConstraintFile();
         }
         String fileContent = FileHelper.getFileAsSting(fileName);
 
-        result = loadFromString(fileContent);
+        SourceXmlConstraintFile  result = loadFromString(fileContent);
         result.setFileName(fileName);
         result.setFileExtension(FileHelper.getFileExtension(fileName));
         return result;
@@ -28,6 +27,7 @@ public final class XmlFileHandler {
         SourceXmlConstraintFile xmlFileData = XmlFileParser.parse(fileContent);
         return xmlFileData;
     }
+
 
 
 }
