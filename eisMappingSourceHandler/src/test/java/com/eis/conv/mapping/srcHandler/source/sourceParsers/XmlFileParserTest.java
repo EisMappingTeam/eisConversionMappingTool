@@ -2,6 +2,8 @@ package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 
 import com.eis.conv.mapping.srcHandler.source.entities.XmlFileHandler;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
 import com.eis.conv.mapping.srcHandler.source.entities.xmlObjects.XmlConstraintValidation;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
@@ -29,20 +31,22 @@ public class XmlFileParserTest {
         Path workingDir = Path.of("", DIR);
         Path file = workingDir.resolve(FILE_NAME);
 
-        SourceXmlConstraintFile xmlFile = XmlFileHandler.loadFromFile(file.toString());
+        SourceXmlFile xmlFile = XmlFileHandler.loadFromFile(file.toString());
 
-        assertThat(xmlFile.getXmlConstraintValidations().size()).isEqualTo(28);
+        assertThat(xmlFile.getContentType()).isEqualTo(ContentTypeXML.CONSTRAINT_VALIDATION_RULES);
+        SourceXmlConstraintFile constraintFile = (SourceXmlConstraintFile) xmlFile;
 
-        XmlConstraintValidation countryCdNotBlank = xmlFile.getValidationByCode("Address", "countryCd", "NotBlank");
+        assertThat(constraintFile.getXmlConstraintValidations().size()).isEqualTo(28);
+        XmlConstraintValidation countryCdNotBlank = constraintFile.getValidationByCode("Address", "countryCd", "NotBlank");
         assertThat(countryCdNotBlank.getErrorMessage()).isEqualTo(CONTENT_ERRMSG_077);
         assertThat(countryCdNotBlank.getDataObject()).isEqualTo(CONTENT_DATA_OBJ_ADDR);
 
-        XmlConstraintValidation countryCdSize = xmlFile.getValidationByCode("Address", "countryCd", "Size");
+        XmlConstraintValidation countryCdSize = constraintFile.getValidationByCode("Address", "countryCd", "Size");
         assertThat(countryCdSize.getErrorMessage()).isEqualTo(CONTENT_ERRMSG_113);
         assertThat(countryCdSize.getMaximumLength()).isEqualTo("3");
         assertThat(countryCdSize.getDataObject()).isEqualTo(CONTENT_DATA_OBJ_ADDR);
 
-        XmlConstraintValidation phoneNumberPattern = xmlFile.getValidationByCode("Phone", "phoneNumber", "Pattern");
+        XmlConstraintValidation phoneNumberPattern = constraintFile.getValidationByCode("Phone", "phoneNumber", "Pattern");
         assertThat(phoneNumberPattern.getErrorMessage()).isEqualTo(CONTENT_ERRMSG_114);
         assertThat(phoneNumberPattern.getRegExpExpression()).isEqualTo(CONTENT_REGEXP);
         assertThat(phoneNumberPattern.getDataObject()).isEqualTo(CONTENT_DATA_OBJ_PHONE);

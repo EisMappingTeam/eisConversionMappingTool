@@ -6,9 +6,9 @@ import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
 import com.eis.conv.mapping.srcHandler.source.entities.xmlObjects.XmlConstraintValidation;
-import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.XmlAttributesConstraints;
-import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.XmlNodesConstraints;
-import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.XmlValuesConstraints;
+import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.constraints.XmlAttributesConstraints;
+import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.constraints.XmlNodesConstraints;
+import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.constraints.XmlValuesConstraints;
 
 import java.util.ArrayList;
 import java.util.List;

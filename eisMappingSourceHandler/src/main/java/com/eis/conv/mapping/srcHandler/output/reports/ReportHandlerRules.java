@@ -8,6 +8,7 @@ import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.java.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.properties.SourcePropertyFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JAnnotation;
 import com.eis.conv.mapping.srcHandler.source.entities.jObjects.JVariableDeclaration;
@@ -103,27 +104,34 @@ public final class ReportHandlerRules {
     }
 
 
-    private static void populateRulesReportXml(TableWithNamedCols report, List<SourcePropertyFile> pFiles, SourceXmlConstraintFile xFile) {
+    private static void populateRulesReportXml(TableWithNamedCols report, List<SourcePropertyFile> pFiles, SourceXmlFile xFile) {
         if (xFile.getContentType() == ContentTypeXML.CONSTRAINT_VALIDATION_RULES) {
-            xFile.getXmlConstraintValidations().stream().forEach(item -> {
-                //File part
-                int row = report.putInNewRow(RulesReportColumns.COL_REPO.getCaption(), xFile.getPartOfProduct());
-                report.putValue(row, RulesReportColumns.COL_SOURCE.getCaption(), FileHelper.getFileName(xFile.getFileName()));
-                report.putValue(row, RulesReportColumns.COL_COND_DEFINED_IN.getCaption(), getXmlSourceType(xFile));
-
-                //Rules part
-                report.putValue(row, RulesReportColumns.COL_CONTEXT.getCaption(), item.getContext());
-                report.putValue(row, RulesReportColumns.COL_APPLIED_TO.getCaption(), item.getApplyedTo());
-                report.putValue(row, RulesReportColumns.COL_CODE.getCaption(), "");
-                report.putValue(row, RulesReportColumns.COL_ERROR_CODE.getCaption(), item.getErrorMessage());
-                if (item.getErrorMessage().length() > 0) {
-                    report.putValue(row, RulesReportColumns.COL_ERROR_MESSAGE.getCaption(), findFirstInProperties(pFiles, item.getErrorMessage()));
-                } else {
-                    report.putValue(row, RulesReportColumns.COL_ERROR_MESSAGE.getCaption(), "");
-                }
-                report.putValue(row, RulesReportColumns.COL_ANNOTATION.getCaption(), "");
-            });
+            populateConstraintRulesReportXml(report, pFiles, (SourceXmlConstraintFile) xFile);
+        } else {
+            //
         }
+    }
+
+    private static void populateConstraintRulesReportXml(TableWithNamedCols report, List<SourcePropertyFile> pFiles, SourceXmlConstraintFile xFile) {
+        xFile.getXmlConstraintValidations().stream().forEach(item -> {
+            //File part
+            int row = report.putInNewRow(RulesReportColumns.COL_REPO.getCaption(), xFile.getPartOfProduct());
+            report.putValue(row, RulesReportColumns.COL_SOURCE.getCaption(), FileHelper.getFileName(xFile.getFileName()));
+            report.putValue(row, RulesReportColumns.COL_COND_DEFINED_IN.getCaption(), getXmlSourceType(xFile));
+
+            //Rules part
+            report.putValue(row, RulesReportColumns.COL_CONTEXT.getCaption(), item.getContext());
+            report.putValue(row, RulesReportColumns.COL_APPLIED_TO.getCaption(), item.getApplyedTo());
+            report.putValue(row, RulesReportColumns.COL_CODE.getCaption(), "");
+            report.putValue(row, RulesReportColumns.COL_ERROR_CODE.getCaption(), item.getErrorMessage());
+            if (item.getErrorMessage().length() > 0) {
+                report.putValue(row, RulesReportColumns.COL_ERROR_MESSAGE.getCaption(), findFirstInProperties(pFiles, item.getErrorMessage()));
+            } else {
+                report.putValue(row, RulesReportColumns.COL_ERROR_MESSAGE.getCaption(), "");
+            }
+            report.putValue(row, RulesReportColumns.COL_ANNOTATION.getCaption(), "");
+        });
+
     }
 
     private static String getJSourceType(SourceJavaFile jFile) {

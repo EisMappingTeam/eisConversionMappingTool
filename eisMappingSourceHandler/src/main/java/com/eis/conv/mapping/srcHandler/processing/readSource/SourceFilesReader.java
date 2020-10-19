@@ -7,7 +7,7 @@ import com.eis.conv.mapping.srcHandler.source.entities.files.SourceFileHandler;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.SourceFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.java.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.properties.SourcePropertyFile;
-import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.SourceFileType;
 import com.eis.conv.mapping.srcHandler.source.repo.repoObjects.RepoDir;
 import org.xml.sax.SAXException;
@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SourceFilesReader {
     private List<SourceJavaFile> javaFiles = new ArrayList<>();
-    private List<SourceXmlConstraintFile> xmlFiles = new ArrayList<>();
+    private List<SourceXmlFile> xmlFiles = new ArrayList<>();
     private List<SourcePropertyFile> propertyFiles = new ArrayList<>();
     private List<String> unknownFiles = new ArrayList<>();
     private List<String> errorFiles = new ArrayList<>();
@@ -33,11 +33,11 @@ public class SourceFilesReader {
         this.javaFiles = javaFiles;
     }
 
-    public List<SourceXmlConstraintFile> getXmlFiles() {
+    public List<SourceXmlFile> getXmlFiles() {
         return xmlFiles;
     }
 
-    public void setXmlFiles(List<SourceXmlConstraintFile> xmlFiles) {
+    public void setXmlFiles(List<SourceXmlFile> xmlFiles) {
         this.xmlFiles = xmlFiles;
     }
 
@@ -84,7 +84,7 @@ public class SourceFilesReader {
     private void readOneRepo(String project, String product, String version, RepoDir repoFolder) {
         AtomicInteger i = new AtomicInteger(1);
         for (String file : repoFolder.getFilesAll()) {
-            System.out.println("File (" + String.valueOf( i.getAndIncrement()) + "): " + file);
+            System.out.println("File (" + String.valueOf(i.getAndIncrement()) + "): " + file);
 
             try {
                 if (SourceFileHandler.getFileType(file) == SourceFileType.JAVA) { //java load
@@ -116,7 +116,7 @@ public class SourceFilesReader {
 
     private void readOneFileXml(String project, String product, String version, String partOfProduct, String file) throws IOException, ParserConfigurationException, SAXException {
         //XML load
-        SourceXmlConstraintFile xmlFile = XmlFileHandler.loadFromFile(file);
+        SourceXmlFile xmlFile = XmlFileHandler.loadFromFile(file);
         setRepoInfo(xmlFile, project, product, version, partOfProduct, file);
         xmlFiles.add(xmlFile);
     }

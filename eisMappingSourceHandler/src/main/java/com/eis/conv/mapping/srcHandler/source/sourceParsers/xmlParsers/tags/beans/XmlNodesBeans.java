@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags;
+package com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.beans;
 
 public enum XmlNodesBeans {
     BEANS("beans"),

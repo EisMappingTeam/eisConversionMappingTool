@@ -2,11 +2,14 @@ package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 
 import com.eis.conv.mapping.core.xml.XmlDOMParser;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlBeanFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
+import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.XmlFileParserBeanValidation;
 import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.XmlFileParserConstraintValidation;
-import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.XmlNodesBeans;
-import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.XmlNodesConstraints;
+import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.beans.XmlNodesBeans;
+import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.constraints.XmlNodesConstraints;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,24 +18,21 @@ import java.io.IOException;
 public final class XmlFileParser {
 
 
-    public static SourceXmlConstraintFile parse(String fileContent) throws IOException, SAXException, ParserConfigurationException {
-        ContentTypeXML contentType;
-        SourceXmlConstraintFile result = new SourceXmlConstraintFile();
-
+    public static SourceXmlFile  parse(String fileContent) throws IOException, SAXException, ParserConfigurationException {
         XmlNode root = parseDOM(fileContent);
-        contentType = getContentType(root);
+        ContentTypeXML contentType = getContentType(root);
 
         if (contentType == ContentTypeXML.CONSTRAINT_VALIDATION_RULES) {
-            result = XmlFileParserConstraintValidation.parse(root);
+            return XmlFileParserConstraintValidation.parse(root);
 
         } else if (contentType == ContentTypeXML.BEAN_VALIDATION_RULES) {
-            //System.out.println("BEAN-VALIDATION-RULES");
+            return XmlFileParserBeanValidation.parse(root);
 
         } else {
             //do nothing
         }
 
-        return result;
+        return new SourceXmlFile();
     }
 
 

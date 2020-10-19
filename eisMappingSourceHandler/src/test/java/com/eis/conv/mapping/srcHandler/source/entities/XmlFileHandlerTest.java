@@ -2,6 +2,7 @@ package com.eis.conv.mapping.srcHandler.source.entities;
 
 
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
+import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlFile;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
@@ -20,7 +21,7 @@ public class XmlFileHandlerTest {
         Path workingDir = Path.of("", DIR);
         Path file = workingDir.resolve(FILE_NAME);
 
-        SourceXmlConstraintFile xmlFile = XmlFileHandler.loadFromFile(file.toString());
+        SourceXmlFile xmlFile = XmlFileHandler.loadFromFile(file.toString());
         assertThat("").isEqualTo("");
     }
 
