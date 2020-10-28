@@ -62,4 +62,5 @@ public class XmlNode {
                 .orElse(new XmlAttribute());
         return result;
     }
+
 }

@@ -1,9 +1,8 @@
 package com.eis.conv.mapping.srcHandler.source.sourceParsers;
 
+import com.eis.conv.mapping.core.stringsSupport.StringHelper;
 import com.eis.conv.mapping.core.xml.XmlDOMParser;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
-import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlBeanFile;
-import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlFile;
 import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
 import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.XmlFileParserBeanValidation;
@@ -18,7 +17,7 @@ import java.io.IOException;
 public final class XmlFileParser {
 
 
-    public static SourceXmlFile  parse(String fileContent) throws IOException, SAXException, ParserConfigurationException {
+    public static SourceXmlFile parse(String fileContent) throws IOException, SAXException, ParserConfigurationException {
         XmlNode root = parseDOM(fileContent);
         ContentTypeXML contentType = getContentType(root);
 
@@ -38,7 +37,8 @@ public final class XmlFileParser {
 
     private static XmlNode parseDOM(String fileContent) throws ParserConfigurationException, SAXException, IOException {
         XmlDOMParser mp = new XmlDOMParser();
-        XmlNode result = mp.parseXml(fileContent);
+        //Encode to UTF-8
+        XmlNode result = mp.parseXml(StringHelper.encodingToUTF8(fileContent));
         return result;
     }
 

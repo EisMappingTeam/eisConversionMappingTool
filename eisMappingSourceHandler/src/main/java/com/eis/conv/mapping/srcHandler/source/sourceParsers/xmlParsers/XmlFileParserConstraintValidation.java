@@ -17,6 +17,7 @@ public final class XmlFileParserConstraintValidation {
 
 
     public static SourceXmlConstraintFile parse(XmlNode root) {
+        //System.out.println("Parse XML constraints");
         SourceXmlConstraintFile result = new SourceXmlConstraintFile();
 
         List<XmlConstraintValidation> xmlConstraintValidations = getConstraintsValidations(root);

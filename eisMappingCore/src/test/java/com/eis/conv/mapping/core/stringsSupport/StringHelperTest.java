@@ -2,6 +2,7 @@ package com.eis.conv.mapping.core.stringsSupport;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -131,4 +132,12 @@ public class StringHelperTest {
         assertThat(result.get(0)).isEqualTo("34");
         assertThat(result.get(1)).isEqualTo("23");
     }
+
+    @Test
+    public void encodingToUTF8Test() throws UnsupportedEncodingException {
+        String rawString = "Entwickeln Sie mit Vergnügen";
+        String utf8EncodedString = StringHelper.encodingToUTF8(rawString);
+        assertThat(rawString).isEqualTo(utf8EncodedString);
+    }
+
 }
