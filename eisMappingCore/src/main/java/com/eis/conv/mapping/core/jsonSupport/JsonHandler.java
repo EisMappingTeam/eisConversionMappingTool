@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public final class JsonHandler {
+
     public static List<Map<String, Object>> parseModelReportJson(String jsonString, String rootNode) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 

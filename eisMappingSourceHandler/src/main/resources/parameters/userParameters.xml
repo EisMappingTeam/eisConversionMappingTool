@@ -17,9 +17,9 @@
         <action>
             <actionName>LOAD_SOURCE</actionName>
             <loadSource>
-                <project>TTT</project>
+                <project>Liberty</project>
                 <product>ac</product>
-                <version>5_2</version>
+                <version>5_3</version>
                 <resultDir>C://111//TTT</resultDir>
             </loadSource>
             <!--

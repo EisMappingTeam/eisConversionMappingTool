@@ -1,5 +1,6 @@
 <MappingToolApplication>
     <repoRootDir>E:\tmp</repoRootDir>
+    <repoBlackList>IgnoredRepo01;IgnoredRepo02</repoBlackList>
 
     <repoCommand>
         <commandName>REPO_DOWNLOAD</commandName>
@@ -14,6 +15,6 @@
 
     <repoCommand>
         <commandName>LOAD_SOURCE</commandName>
-        <ignoreAnnotationList>PrepareForTest;Test;Mock</ignoreAnnotationList>
+        <ignoreAnnotationList>PrepareForTest;Test;Mock;Transactional;Spy;MockSpy;XmlElement;XmlValue;Fetch;ApiModelProperty;ApiOperation;ApiImplicitParam;DatabaseSetup;DatabaseTearDown;Captor;ApiParam;ApiResponses;Autowired;InjectMocks;ExpectedDatabase;Parameter;ResourceManagedProperty;Qualifier;XmlElementRef;Value;ResponseHeader;Mojo;CanExtend;CanInvoke;SuppressWarnings;ActiveProfiles;Api;ApiModel;ApiResponse;ApplicationScoped;Cascade;AutowireInjectionTestExecutionListener.AutowireType;AutowireType;Deprecated;Temporal;Table;SkipLazyLoading;CollectionTable;JoinTable;JoinColumn;LazyCollection;JsonTypeInfo;JsonSubTypes;MappedSuperclass;ManyToOne;OneToOne;OneToMany;OrderBy;FacesValidator;XmlRootElement;XmlType;XmlAccessorType;XmlSeeAlso;ViewScoped;XmlTransient;TestExecutionListeners</ignoreAnnotationList>
     </repoCommand>
 </MappingToolApplication>

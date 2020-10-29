@@ -13,6 +13,10 @@ public class AppStartupParameters {
     @JacksonXmlProperty(localName = "repoRootDir")
     private String repoRootDir;
 
+    @JacksonXmlProperty(localName = "repoBlackList")
+    private String repoBlackList;
+
+
     @JacksonXmlElementWrapper(localName = "repoCommand", useWrapping = false)
     private AppRepoCommand[] repoCommand;
 
@@ -22,6 +26,14 @@ public class AppStartupParameters {
 
     public void setRepoRootDir(String repoRootDir) {
         this.repoRootDir = repoRootDir;
+    }
+
+    public String getRepoBlackList() {
+        return repoBlackList;
+    }
+
+    public void setRepoBlackList(String repoBlackList) {
+        this.repoBlackList = repoBlackList;
     }
 
     public AppRepoCommand[] getRepoCommand() {
