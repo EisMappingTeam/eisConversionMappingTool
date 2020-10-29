@@ -1,10 +1,10 @@
-package com.eis.conv.mapping.srcHandler.source.sourceParsers;
+package com.eis.conv.mapping.srcHandler.source.parsers;
 
-import com.eis.conv.mapping.srcHandler.source.entities.XmlFileHandler;
-import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlConstraintFile;
-import com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml.SourceXmlFile;
-import com.eis.conv.mapping.srcHandler.source.entities.files.types.ContentTypeXML;
-import com.eis.conv.mapping.srcHandler.source.entities.xmlObjects.XmlConstraintValidation;
+import com.eis.conv.mapping.srcHandler.source.files.handlers.XmlFileHandler;
+import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlConstraintFile;
+import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlFile;
+import com.eis.conv.mapping.srcHandler.source.files.types.ContentTypeXML;
+import com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects.XmlConstraintValidation;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 

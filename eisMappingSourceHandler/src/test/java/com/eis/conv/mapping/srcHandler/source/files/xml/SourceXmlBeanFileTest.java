@@ -1,8 +1,8 @@
-package com.eis.conv.mapping.srcHandler.source.entities.files.srcFiles.xml;
+package com.eis.conv.mapping.srcHandler.source.files.xml;
 
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlAttribute;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
-import com.eis.conv.mapping.srcHandler.source.sourceParsers.xmlParsers.tags.beans.XmlNodesBeans;
+import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.tags.beans.XmlNodesBeans;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
