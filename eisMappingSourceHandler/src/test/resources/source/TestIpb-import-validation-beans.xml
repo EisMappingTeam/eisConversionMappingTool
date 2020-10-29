@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <bean id="importBasePolicyRuleSet" parent="importBasePolicyRuleSetParent" />
+    <bean id="importBasePolicyRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="ruleSet">
+            <set>
+                <ref bean="importPreConversionPolicyNumberRule" />
+                <ref bean="importCurrencyCdRule" />
+                <ref bean="importContractTermTypeCdLookupRule" />
+                <ref bean="importImportedLookupRule" />
+                <ref bean="importSubProducerCdIsAgentExistsRule" />
+                <ref bean="importProducerCdIsBrokerAgencyExistsRule" />
+                <ref bean="importProductCdIsProductExistRule" />
+
+                <ref bean="importPaymentOptionRuleSet" />
+                <ref bean="importContractTermRuleSet" />
+                <ref bean="importPolicyDetailRuleSet" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importMiniPolicyRuleSet" parent="importMiniPolicyRuleSetParent" />
+    <bean id="importMiniPolicyRuleSetParent" parent="importBasePolicyRuleSet" abstract="true">
+        <property name="ruleSet">
+            <set merge="true">
+                <ref bean="importPolicyTxDetailRuleSet" />
+                <ref bean="importPolicyTxInceptionDateRule" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importPolicyTxInceptionDateRule" parent="importPolicyTxInceptionDateRuleParent" />
+    <bean id="importPolicyTxInceptionDateRuleParent"
+          class="com.exigen.ipb.imp.validation.rules.impl.ImportInceptionDateRule" parent="importAbstractRule" >
+        <property name="fieldName" value="inceptionDate" />
+    </bean>
+
+    <bean id="importPolicyTxDetailRuleSet" parent="importPolicyTxDetailRuleSetParent" />
+    <bean id="importPolicyTxDetailRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="policyDetail" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importRiskItemsRuleSet"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importRiskItemsRuleSet" parent="importRiskItemsRuleSetParent" />
+    <bean id="importRiskItemsRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="riskItems" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importAdditionalInterestsRuleSet"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importAdditionalInterestsRuleSet" parent="importAdditionalInterestsRuleSetParent" />
+    <bean id="importAdditionalInterestsRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="additionalInterests" />
+        <property name="instanceOfCondition"  value="com.exigen.ipb.policy.domain.AdditionalInterestEntity" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importAddressContactEntityRule"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importAddressContactEntityRule" parent="importAddressContactEntityRuleParent" />
+    <bean id="importAddressContactEntityRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="addressContactEntity" />
+        <property name="mandatory" value="true" />
+    </bean>
+
+    <bean id="importPolicyRuleSet" parent="importPolicyRuleSetParent" />
+    <bean id="importPolicyRuleSetParent" parent="importBasePolicyRuleSet" abstract="true"/>
+
+    <bean id="importPaymentOptionRuleSet" parent="importPaymentOptionRuleSetParent" />
+    <bean id="importPaymentOptionRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="paymentOption" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importPaymentPlanCdIsValidRule"/>
+            </set>
+        </property>
+        <property name="onlyForStages">
+            <set>
+                <value>Renewal Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importContractTermRuleSet" parent="importContractTermRuleSetParent" />
+    <bean id="importContractTermRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="contractTerm" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importEffectiveRule"/>
+                <ref bean="importExpirationRule"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importPolicyDetailRuleSet" parent="importPolicyDetailRuleSetParent" />
+    <bean id="importPolicyDetailRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="policyDetail" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importInsuredPrincipalRuleSet"/>
+                <ref bean="importSinglePrimaryInsuredRule"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importInsuredPrincipalRuleSet" parent="importInsuredPrincipalRuleSetParent" />
+    <bean id="importInsuredPrincipalRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="insuredAndPrincipals" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importAddressRuleSet"/>
+                <ref bean="importAddressContactEntityRuleSet"/>
+                <ref bean="importInsuredInfoBusinessRuleSet"/>
+                <ref bean="importInsuredInfoPersonalRuleSet"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importSinglePrimaryInsuredRule" parent="importSinglePrimaryInsuredRuleParent" />
+    <bean id="importSinglePrimaryInsuredRuleParent" class="com.exigen.ipb.imp.validation.rules.impl.ImportSinglePrimaryInsuredRule" parent="importAbstractRule" abstract="true">
+        <property name="description" value="Validate that primary insured provided" />
+    </bean>
+
+    <bean id="importInsuredInfoBusinessRuleSet" parent="importInsuredInfoBusinessRuleSetParent" />
+    <bean id="importInsuredInfoBusinessRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="ruleCondition" ref="isBusiness" />
+        <property name="fieldName" value="insuredInfo" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importCompanyStructureRuleSet"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importInsuredInfoPersonalRuleSet" parent="importInsuredInfoPersonalRuleSetParent" />
+    <bean id="importInsuredInfoPersonalRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="ruleCondition" ref="isIndividual" />
+        <property name="fieldName" value="insuredInfo" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importNameInfoRuleSet"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importNameInfoRuleSet" parent="importNameInfoRuleSetParent" />
+    <bean id="importNameInfoRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="nameInfo" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importFirstNameRule"/>
+                <ref bean="importMiddleNameRule"/>
+                <ref bean="importLastNameRule"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importCompanyStructureRuleSet" parent="importCompanyStructureRuleSetParent" />
+    <bean id="importCompanyStructureRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="companyStructure" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importLegalEntityLookupRule" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importAddressRuleSet" parent="importAddressRuleSetParent" />
+    <bean id="importAddressRuleSetParent" class="com.exigen.ipb.imp.validation.rules.impl.ImportMainAddressRule" parent="importInsuredPrincipalRuleSet" abstract="true">
+        <property name="fieldName" value="insuredPrimaryAdress" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importAddressLine1Rule" />
+                <ref bean="importAddressLine2Rule" />
+                <ref bean="importAddressLine3Rule" />
+                <ref bean="importCityRule" />
+                <ref bean="importCountryCdLookupRule" />
+                <ref bean="importPostalCodeUSRule" />
+                <ref bean="importPostalCodeNonUSRule" />
+                <ref bean="importStateProvCdValidRule" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importAddressContactEntityRuleSet" parent="importAddressContactEntityRuleSetParent" />
+    <bean id="importAddressContactEntityRuleSetParent" class="com.exigen.ipb.imp.validation.rules.impl.ImportMainAddressContactEntityRule" parent="importInsuredPrincipalRuleSet" abstract="true">
+        <property name="ruleSet">
+            <set>
+                <ref bean="importAddressTypeLookupRule" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importLegalEntityLookupRule" parent="importLegalEntityLookupRuleParent" />
+    <bean id="importLegalEntityLookupRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="legalEntity" />
+        <property name="lookupName" value="NonIndividualType" />
+    </bean>
+
+    <bean id="importFirstNameRule" parent="importFirstNameRuleParent" />
+    <bean id="importFirstNameRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="firstName" />
+        <property name="maxSize" value="50" />
+    </bean>
+
+    <bean id="importMiddleNameRule" parent="importMiddleNameRuleParent" />
+    <bean id="importMiddleNameRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="middleName" />
+        <property name="maxSize" value="50" />
+    </bean>
+
+    <bean id="importLastNameRule" parent="importLastNameRuleParent" />
+    <bean id="importLastNameRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="lastName" />
+        <property name="maxSize" value="50" />
+    </bean>
+
+    <bean id="importAddressTypeLookupRule" parent="importAddressTypeLookupRuleParent" />
+    <bean id="importAddressTypeLookupRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="addressType" />
+        <property name="lookupName" value="AddressEntityType" />
+    </bean>
+
+    <bean id="importAddressLine1Rule" parent="importAddressLine1RuleParent" />
+    <bean id="importAddressLine1RuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="addressLine1" />
+        <property name="maxSize" value="40" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importBaseAddressLine1Rule" parent="importBaseAddressLine1RuleParent" />
+    <bean id="importBaseAddressLine1RuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="addressLine1" />
+        <property name="mandatory" value="true" />
+        <property name="maxSize" value="100" />
+    </bean>
+
+    <bean id="importBaseAddressLine2Rule" parent="importBaseAddressLine2RuleParent" />
+    <bean id="importBaseAddressLine2RuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="addressLine2" />
+        <property name="mandatory" value="false" />
+        <property name="maxSize" value="40" />
+    </bean>
+
+    <bean id="importBaseAddressLine3Rule" parent="importBaseAddressLine3RuleParent" />
+    <bean id="importBaseAddressLine3RuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="addressLine3" />
+        <property name="mandatory" value="false" />
+        <property name="maxSize" value="40" />
+    </bean>
+
+    <bean id="importAddressLine2Rule" parent="importAddressLine2RuleParent" />
+    <bean id="importAddressLine2RuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="addressLine2" />
+        <property name="maxSize" value="40" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importAddressLine3Rule" parent="importAddressLine3RuleParent" />
+    <bean id="importAddressLine3RuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="addressLine3" />
+        <property name="maxSize" value="40" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importCityRule" parent="importCityRuleParent" />
+    <bean id="importCityRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="city" />
+        <property name="maxSize" value="30" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importCountryCdLookupRule" parent="importCountryCdLookupRuleParent" />
+    <bean id="importCountryCdLookupRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="countryCd" />
+        <property name="lookupName" value="Country" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importPostalCodeUSRule" parent="importPostalCodeUSRuleParent" />
+    <bean id="importPostalCodeUSRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="regExPattern" value="^[0-9]{5}(?:-[0-9]{4})?$" />
+        <property name="ruleCondition" ref="checkUSCountryCd" />
+        <property name="fieldName" value="postalCode" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <!-- protection from saving to DB values with length more then 10 -->
+    <bean id="importPostalCodeNonUSRule" parent="importPostalCodeNonUSRuleParent" />
+    <bean id="importPostalCodeNonUSRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="regExPattern" value="^[0-9]{0,10}$" />
+        <property name="ruleCondition" ref="checkNonUSCountryCd" />
+        <property name="fieldName" value="postalCode" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importStateProvCdValidRule" parent="importStateProvCdValidRuleParent" />
+    <bean id="importStateProvCdValidRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="ruleCondition" ref="checkUSCountryCd" />
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="stateProvCd" />
+        <property name="lookupName" value="StateProvCd" />
+        <property name="importLookupParams" ref="importStateProvCdLookupParams" />
+        <property name="maxSize" value="255" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importPaymentPlanCdIsValidRule" parent="importPaymentPlanCdIsValidRuleParent" />
+    <bean id="importPaymentPlanCdIsValidRuleParent" class="com.exigen.ipb.imp.validation.rules.impl.ImportPaymentPlanCdIsValidRule" parent="importAbstractRule" abstract="true">
+        <property name="description" value="Validate that the Payment Plan is valid" />
+        <property name="fieldName" value="paymentPlanCd" />
+        <property name="billingPaymentPlanDao" ref="billingPaymentPlanDao" />
+        <property name="onlyForStages">
+            <set>
+                <value>Renewal Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importEffectiveRule" parent="importEffectiveRuleParent" />
+    <bean id="importEffectiveRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="effective" />
+        <property name="onlyForStages">
+            <set>
+                <value>Quote Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importExpirationRule" parent="importExpirationRuleParent" />
+    <bean id="importExpirationRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="expiration" />
+    </bean>
+
+    <bean id="importSubProducerCdIsAgentExistsRule" parent="importSubProducerCdIsAgentExistsRuleParent" />
+    <bean id="importSubProducerCdIsAgentExistsRuleParent" class="com.exigen.ipb.imp.validation.rules.impl.ImportSubProducerCdIsAgentExistsRule" parent="importAbstractRule" abstract="true">
+        <property name="description" value=" Validate that the sub-producer belongs to the agency specified by Policy.producer." />
+        <property name="fieldName" value="subProducerCd" />
+        <property name="mandatory" value="true" />
+        <property name="onlyForStages">
+            <set>
+                <value>Renewal Stage</value>
+            </set>
+        </property>
+        <property name="thirdPartyManager" ref="thirdPartyManager" />
+    </bean>
+
+    <bean id="importContractTermTypeCdLookupRule" parent="importContractTermTypeCdLookupRuleParent" />
+    <bean id="importContractTermTypeCdLookupRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="contractTermTypeCd" />
+        <property name="lookupName" value="ContractTermType"/>
+    </bean>
+
+    <bean id="importImportedLookupRule" parent="importImportedLookupRuleParent" />
+    <bean id="importImportedLookupRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="imported" />
+        <property name="lookupName" value="SourceCd"/>
+    </bean>
+
+    <bean id="importProductCdIsProductExistRule" parent="importProductCdIsProductExistRuleParent" />
+    <bean id="importProductCdIsProductExistRuleParent" class="com.exigen.ipb.imp.validation.rules.impl.ImportProductCdIsProductExistRule" parent="importAbstractRule" abstract="true">
+        <property name="description" value="Validate that the product definition exists for the productCd" />
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="productCd" />
+        <property name="productDao" ref="productDao" />
+    </bean>
+
+    <bean id="importPreConversionPolicyNumberRule" parent="importPreConversionPolicyNumberRuleParent" />
+    <bean id="importPreConversionPolicyNumberRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="preConversionPolicyNumber" />
+        <property name="maxSize" value="255" />
+    </bean>
+
+    <bean id="importCurrencyCdRule" parent="importCurrencyCdRuleParent" />
+    <bean id="importCurrencyCdRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="currencyCd" />
+        <property name="lookupName" value="Currency" />
+    </bean>
+
+    <bean id="importProducerCdIsBrokerAgencyExistsRule" parent="importProducerCdIsBrokerAgencyExistsRuleParent" />
+    <bean id="importProducerCdIsBrokerAgencyExistsRuleParent" class="com.exigen.ipb.imp.validation.rules.impl.ImportProducerCdIsBrokerAgencyExistsRule" parent="importAbstractRule" abstract="true">
+        <property name="description" value="Validate that Broker Agency exists by producerCd" />
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="producerCd" />
+        <property name="brokerAgencyDao" ref="importBrokerAgencyDao" />
+        <property name="onlyForStages">
+            <set>
+                <value>Renewal Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <!--Billing Stage-->
+    <bean id="importBillingAccountRuleSet" parent="importBillingAccountRuleSetParent" />
+    <bean id="importBillingAccountRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="ruleSet">
+            <set>
+                <ref bean="importAccountNumberRule" />
+                <ref bean="importPaymentMethodsRule" />
+
+                <ref bean="importBillingInfoRuleSet" />
+                <ref bean="importBillableTermRuleSet" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importBillingInfoRuleSet" parent="importBillingInfoRuleSetParent" />
+    <bean id="importBillingInfoRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="billingInfo" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importProducerCdIsBrokerAgencyExistsRule" />
+                <ref bean="imprtBillingAccountNameRule" />
+                <ref bean="importPhoneNumberRule" />
+                <ref bean="importEmailRule" />
+                <ref bean="importDefaultPaymentMethodRule" />
+
+                <ref bean="importBillingAddressRuleSet" />
+                <ref bean="importBillingNameInfoRuleSet" />
+                <ref bean="importMonthlyDueDayConfigRuleSet" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importBillableTermRuleSet" parent="importBillableTermRuleSetParent" />
+    <bean id="importBillableTermRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="actualPolicies" />
+        <property name="ruleCondition" ref="isImportedTerm" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importHoldsRuleSet" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importHoldsRuleSet" parent="importHoldsRuleSetParent" />
+    <bean id="importHoldsRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="holds" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importAdditionalInfoRule" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importAdditionalInfoRule" parent="importAdditionalInfoRuleParent" />
+    <bean id="importAdditionalInfoRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="ruleCondition" ref="isReasonEqualsOT" />
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="additionalInfo" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Holds Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importBillingAddressRuleSet" parent="importBillingAddressRuleSetParent" />
+    <bean id="importBillingAddressRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="billingAddress" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importAddressLine1Rule" />
+                <ref bean="importAddressLine2Rule" />
+                <ref bean="importAddressLine3Rule" />
+                <ref bean="importCityRule" />
+                <ref bean="importCountryCdLookupRule" />
+                <ref bean="importPostalCodeUSRule" />
+                <ref bean="importPostalCodeNonUSRule" />
+                <ref bean="importStateProvCdValidRule" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importBillingNameInfoRuleSet" parent="importBillingNameInfoRuleSetParent" />
+    <bean id="importBillingNameInfoRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="billingNameInfo" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importNameTypeCdRule" />
+                <ref bean="importBillingFirstNameRule" />
+                <ref bean="importBillingLastNameRule" />
+                <ref bean="importBillingMiddleNameRule" />
+                <ref bean="importOtherNameMandatoryRule" />
+                <ref bean="importOtherNameSizeRule" />
+                <ref bean="importSalutationRule" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importMonthlyDueDayConfigRuleSet" parent="importMonthlyDueDayConfigRuleSetParent" />
+    <bean id="importMonthlyDueDayConfigRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="ruleCondition" ref="isMonthlyDueDayConfig" />
+        <property name="fieldName" value="dueDayConfig" />
+        <property name="ruleSet">
+            <set>
+                <ref bean="importMonthDaysRule" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importMonthDaysRule" parent="importMonthDaysRuleParent" />
+    <bean id="importMonthDaysRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="min" value="1" />
+        <property name="max" value="31" />
+        <property name="fieldName" value="monthDays" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importAccountNumberRule" parent="importAccountNumberRuleParent" />
+    <bean id="importAccountNumberRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="accountNumber" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importNameTypeCdRule" parent="importNameTypeCdRuleParent" />
+    <bean id="importNameTypeCdRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="nameTypeCd" />
+        <property name="lookupName" value="NameTypeCd" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importBillingFirstNameRule" parent="importBillingFirstNameRuleParent" />
+    <bean id="importBillingFirstNameRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="ruleCondition" ref="isBillingIndividual" />
+        <property name="mandatory" value="true" />
+        <property name="maxSize" value="50" />
+        <property name="fieldName" value="firstName" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importBillingLastNameRule" parent="importBillingLastNameRuleParent" />
+    <bean id="importBillingLastNameRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="ruleCondition" ref="isBillingIndividual" />
+        <property name="mandatory" value="true" />
+        <property name="maxSize" value="50" />
+        <property name="fieldName" value="lastName" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importBillingMiddleNameRule" parent="importBillingMiddleNameRuleParent" />
+    <bean id="importBillingMiddleNameRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="maxSize" value="50" />
+        <property name="fieldName" value="middleName" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importOtherNameMandatoryRule" parent="importOtherNameMandatoryRuleParent" />
+    <bean id="importOtherNameMandatoryRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="ruleCondition" ref="isBillingOther" />
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="otherName" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importOtherNameSizeRule" parent="importOtherNameSizeRuleParent" />
+    <bean id="importOtherNameSizeRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="maxSize" value="100" />
+        <property name="fieldName" value="otherName" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importSalutationRule" parent="importSalutationRuleParent" />
+    <bean id="importSalutationRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="lookupName" value="Title" />
+        <property name="fieldName" value="salutation" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="imprtBillingAccountNameRule" parent="imprtBillingAccountNameRuleParent" />
+    <bean id="imprtBillingAccountNameRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="mandatory" value="true" />
+        <property name="maxSize" value="100" />
+        <property name="fieldName" value="billingAccountName" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importPhoneNumberRule" parent="importPhoneNumberRuleParent" />
+    <bean id="importPhoneNumberRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="maxSize" value="20" />
+        <property name="regExPattern" value="^0[0-9]+$" />
+        <property name="fieldName" value="phoneNumber" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importEmailRule" parent="importEmailRuleParent" />
+    <bean id="importEmailRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="regExPattern" value="^[a-zA-Z0-9_!#$%&amp;'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$" />
+        <property name="fieldName" value="email" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importDefaultPaymentMethodRule" parent="importDefaultPaymentMethodRuleParent" />
+    <bean id="importDefaultPaymentMethodRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="ruleCondition" ref="isRecurringPaymentsEnabled" />
+        <property name="mandatory" value="true" />
+        <property name="fieldName" value="defaultPaymentMethod" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importPaymentMethodsRule" parent="importPaymentMethodsRuleParent" />
+    <bean id="importPaymentMethodsRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="ruleCondition" ref="isRecurringPaymentsEnabled" />
+        <property name="mandatory" value="true" />
+        <property name="errorMandatoryStrCd" value="CONV_VALIDATION_018" />
+        <property name="fieldName" value="paymentMethods" />
+        <property name="onlyForStages">
+            <set>
+                <value>Billing Stage</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="abstractImportRuleSet" parent="abstractImportRuleSetParent" />
+    <bean id="abstractImportRuleSetParent" class="com.exigen.ipb.imp.validation.rules.impl.ImportRuleSet" parent="importAbstractRule" abstract="true" />
+
+    <bean id="abstractImportRuleSetMap" parent="abstractImportRuleSetMapParent" />
+    <bean id="abstractImportRuleSetMapParent" class="com.exigen.ipb.imp.validation.rules.impl.ImportRuleSetMap" parent="importAbstractRule" abstract="true" />
+
+    <bean id="importAbstractRule" class="com.exigen.ipb.imp.validation.rules.impl.ImportAbstractRule" abstract="true">
+        <property name="lookupAccessFacade" ref="lookupAccessFacade" />
+    </bean>
+
+    <bean id="checkUSCountryCd" parent="checkUSCountryCdParent" />
+    <bean id="checkUSCountryCdParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportCheckCountryCdCondition" parent="importAbstractRule" abstract="true">
+        <property name="countryCd" value="US" />
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="checkCountryCds" parent="checkCountryCdsParent" />
+    <bean id="checkCountryCdsParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportCheckCountryCdsCondition" parent="importAbstractRule" abstract="true">
+        <property name="countryCds">
+            <set>
+                <value>US</value>
+            </set>
+        </property>
+
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="checkNonUSCountryCd" parent="checkNonUSCountryCdParent" />
+    <bean id="checkNonUSCountryCdParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportCheckCountryCdCondition" parent="importAbstractRule" abstract="true">
+        <property name="countryCd" value="!US" />
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="isBusiness" parent="isBusinessParent" />
+    <bean id="isBusinessParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportIsBusinessCondition" parent="importAbstractRule" abstract="true">
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="isRecurringPaymentsEnabled" parent="isRecurringPaymentsEnabledParent" />
+    <bean id="isRecurringPaymentsEnabledParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportIsRecurringPaymentsEnabledCondition" parent="importAbstractRule" abstract="true">
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="isIndividual" parent="isIndividualParent" />
+    <bean id="isIndividualParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportIsIndividualCondition" parent="importAbstractRule" abstract="true">
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="isBillingIndividual" parent="isBillingIndividualParent" />
+    <bean id="isBillingIndividualParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportIsBillingIndividualCondition" parent="importAbstractRule" abstract="true">
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="isBillingOther" parent="isBillingOtherParent" />
+    <bean id="isBillingOtherParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportIsBillingOtherCondition" parent="importAbstractRule" abstract="true">
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="isPayorDifferent" parent="isPayorDifferentParent" />
+    <bean id="isPayorDifferentParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportIsPayorDifferentCondition" parent="importAbstractRule" abstract="true">
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="isMonthlyDueDayConfig" parent="isMonthlyDueDayConfigParent" />
+    <bean id="isMonthlyDueDayConfigParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportIsMonthlyDueDayConfigCondition" parent="importAbstractRule" abstract="true">
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="isWeeklyDueDayConfig" parent="isWeeklyDueDayConfigParent" />
+    <bean id="isWeeklyDueDayConfigParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportIsWeeklyDueDayConfigCondition" parent="importAbstractRule" abstract="true">
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="isReasonEqualsOT" parent="isReasonEqualsOTParent" />
+    <bean id="isReasonEqualsOTParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportIsReasonEqualsOTCondition" parent="importAbstractRule" abstract="true">
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="isImportedTerm" parent="isImportedTermParent" />
+    <bean id="isImportedTermParent" class="com.exigen.ipb.imp.validation.rules.conditions.ImportIsImportedTermCondition" parent="importAbstractRule" abstract="true">
+        <property name="isCondition" value="true" />
+    </bean>
+
+    <bean id="importCommonValidator" parent="importCommonValidatorParent" />
+    <bean id="importCommonValidatorParent" class="com.exigen.ipb.imp.validation.ImportCommonValidator" abstract="true" />
+
+    <bean id="importBrokerAgencyDao" parent="importBrokerAgencyDaoParent" />
+    <bean id="importBrokerAgencyDaoParent" class="com.exigen.ipb.imp.validation.dao.BrokerAgencyJpaDao" abstract="true" />
+
+    <bean id="importStateProvCdLookupParams" parent="importLookupParamsParent">
+        <property name="includeCountryCdLookupParam" value="true" />
+    </bean>
+
+    <bean id="importLookupParamsParent" class="com.exigen.ipb.imp.validation.utils.impl.ImportLookupParamsImpl" abstract="true" />
+
+</beans>

@@ -1,0 +1,36 @@
+<MappingTool>
+    <user>AAA</user>
+    <password>VVV</password>
+    <applicationSettingsFile></applicationSettingsFile>
+
+    <actions>
+        <action>
+            <actionName>_DOWNLOAD_REPO</actionName>
+            <downloadRepo>
+                <project>Prj</project>
+                <product>PROD</product>
+                <version>loadV</version>
+                <sourceAlias>ALL</sourceAlias>>
+            </downloadRepo>
+        </action>
+
+        <action>
+            <actionName>LOAD_SOURCE</actionName>
+            <loadSource>
+                <project>Liberty</project>
+                <product>ac</product>
+                <version>5_3</version>
+                <resultDir>C://111//TTT</resultDir>
+            </loadSource>
+            <!--
+            <loadSource>
+                <project>Liberty</project>
+                <product>ac</product>
+                <version>5_3</version>
+                <resultDir>C://111//TTT</resultDir>
+            </loadSource>
+            -->
+        </action>
+    </actions>
+
+</MappingTool>

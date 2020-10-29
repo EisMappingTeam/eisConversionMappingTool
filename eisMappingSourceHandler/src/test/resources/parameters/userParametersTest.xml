@@ -1,0 +1,28 @@
+<MappingTool>
+    <user>someone</user>
+    <password>xxx001</password>
+    <applicationSettingsFile>some_file_path</applicationSettingsFile>
+
+    <actions>
+        <action>
+            <actionName>DOWNLOAD_REPO</actionName>
+            <downloadRepo>
+                <project>BASE</project>
+                <product>AC</product>
+                <version>S12.4</version>
+                <sourceAlias>conv</sourceAlias>
+            </downloadRepo>
+        </action>
+
+        <action>
+            <actionName>LOAD_SOURCE</actionName>
+            <loadSource>
+                <project>MAS</project>
+                <product>CR</product>
+                <version>S2.1.1</version>
+                <resultDir>some_result_path</resultDir>
+            </loadSource>
+        </action>
+    </actions>
+
+</MappingTool>

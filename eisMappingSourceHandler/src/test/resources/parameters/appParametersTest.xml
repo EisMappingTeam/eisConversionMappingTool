@@ -1,0 +1,15 @@
+<MappingToolApplication>
+    <repoRootDir>repo_root_folder</repoRootDir>
+
+    <repoCommand>
+        <commandName>REPO_DOWNLOAD</commandName>
+        <project>Prj</project>
+        <product>PROD</product>
+
+        <userPattern>@user@</userPattern>
+        <passwordPattern>@passw@</passwordPattern>
+        <resultDirPattern>@resultDir@</resultDirPattern>
+        <command>XXXX_YYYY</command>
+    </repoCommand>
+
+</MappingToolApplication>
