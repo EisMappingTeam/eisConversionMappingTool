@@ -84,8 +84,8 @@
                 </groups>
 
                 <!-- 12345 or 12345-1234 or 123456789 -->
-                <!--<element name="regexp">^(\d{5})$|^(\d{5}-\d{4})$|^(\d{9})$|^$</element>-->
-                <element name="regexp">^[a-zA-ZÀ-ʫ]+(('|´|`|-|\.|\s)[a-zA-ZÀ-ʫ]+)*$</element>
+                <element name="regexp">^(\d{5})$|^(\d{5}-\d{4})$|^(\d{9})$|^$</element>
+
             </constraint>
 
             <!-- Canada postalCode constraints -->
