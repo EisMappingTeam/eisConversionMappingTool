@@ -1,6 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.files.java;
 
 import com.eis.conv.mapping.srcHandler.source.files.SourceFile;
+import com.eis.conv.mapping.srcHandler.source.files.java.jObjects.JMethod;
 import com.eis.conv.mapping.srcHandler.source.files.types.ContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.files.java.jObjects.JAnnotation;
 import com.eis.conv.mapping.srcHandler.source.files.java.jObjects.JVariableDeclaration;
@@ -17,6 +18,7 @@ public class SourceJavaFile extends SourceFile {
     private String className = "";
     private List<JAnnotation> annotations = new ArrayList<>();
     private List<JVariableDeclaration> variables = new ArrayList<>();
+    private List<JMethod> methods = new ArrayList<>();
 
     public SourceJavaFile() {
     }
@@ -65,6 +67,13 @@ public class SourceJavaFile extends SourceFile {
         return variables.stream().filter(item -> item.getVariable().equalsIgnoreCase(varName)).findFirst().orElse(null);
     }
 
+    public List<JMethod> getMethods() {
+        return methods;
+    }
+
+    public void setMethods(List<JMethod> methods) {
+        this.methods = methods;
+    }
 
     public JAnnotation getAnnotationByName(String annotationName) {
         return annotations.stream().filter(item -> item.getAnnotation().equalsIgnoreCase(annotationName)).findFirst().orElse(null);

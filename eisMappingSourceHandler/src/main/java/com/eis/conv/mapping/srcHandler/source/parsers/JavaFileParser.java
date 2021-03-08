@@ -1,6 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.parsers;
 
 import com.eis.conv.mapping.srcHandler.source.files.java.SourceJavaFile;
+import com.eis.conv.mapping.srcHandler.source.files.java.jObjects.JMethod;
 import com.eis.conv.mapping.srcHandler.source.files.types.ContentTypeJava;
 import com.eis.conv.mapping.srcHandler.source.files.java.jObjects.JAnnotation;
 import com.eis.conv.mapping.srcHandler.source.files.java.jObjects.JVariableDeclaration;
@@ -75,6 +76,9 @@ public final class JavaFileParser {
         @Override
         public void visit(MethodDeclaration n, String arg) {
             //System.out.println("       MV: Method: " + n.getName());
+            //Add method
+            fileAnnotations.getMethods().add( new JMethod(n.getName().asString() , n.toString()));
+            //Parse annotation
             n.accept(new AnnotationPropertiesVisitor(fileAnnotations), n.getName().toString());
             super.visit(n, arg);
         }
