@@ -1,10 +1,25 @@
 package com.eis.conv.mapping.srcHandler.source.files.xml;
 
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
+import com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects.XmlBeanValidation;
 import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.tags.beans.XmlNodesBeans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SourceXmlBeanFile extends SourceXmlFile {
-    XmlNode root;
+    private List<XmlBeanValidation> beanValidations = new ArrayList();
+    private XmlNode root;
+
+
+    public List<XmlBeanValidation> getBeanValidations() {
+        return beanValidations;
+    }
+
+    public void setBeanValidations(List<XmlBeanValidation> beanValidations) {
+        this.beanValidations = beanValidations;
+    }
+
 
     public XmlNode getRoot() {
         return root;
@@ -22,15 +37,15 @@ public class SourceXmlBeanFile extends SourceXmlFile {
     private XmlNode getChildByNameAndAttribute(String nodeName, String attributeName, String attributeValue) {
         return root.getChildren().stream().filter(item ->
                 item.getName().equals(nodeName) &
-                nodeHasAttribute(item,attributeName) &
-                item.getAttributeByName(attributeName).getValue().equals(attributeValue) &
-                attributeValue.length()>0)
+                        nodeHasAttribute(item, attributeName) &
+                        item.getAttributeByName(attributeName).getValue().equals(attributeValue) &
+                        attributeValue.length() > 0)
                 .findFirst()
                 .orElse(new XmlNode());
 
     }
 
     private boolean nodeHasAttribute(XmlNode node, String attributeName) {
-        return node.getAttributeByName(attributeName).getName().equals(attributeName) & attributeName.length()>0;
+        return node.getAttributeByName(attributeName).getName().equals(attributeName) & attributeName.length() > 0;
     }
 }

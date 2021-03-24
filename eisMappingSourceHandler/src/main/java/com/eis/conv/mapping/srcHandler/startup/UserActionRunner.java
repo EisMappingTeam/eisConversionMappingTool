@@ -18,12 +18,13 @@ public final class UserActionRunner {
         UserStartupActions actions = userParameters.getActions() != null ? userParameters.getActions() : new UserStartupActions();
 
         for (UserStartupAction action : actions.getAction()) {
-            if (action.getActionName().equalsIgnoreCase(UserAllActions.DOWNLOAD_REPO.getAction())) { //Download repo
+            //Download repo from git | Mercurial | etc
+            if (action.getActionName().equalsIgnoreCase(UserAllActions.DOWNLOAD_REPO.getAction())) {
                 System.out.println("Startup action: " + action.getActionName());
                 UserActionRunnerDownloadRepo.run(appParameters, action, userParameters.getUser(), userParameters.getPassword());
 
-
-            } else if (action.getActionName().equalsIgnoreCase(UserAllActions.LOAD_SOURCE.getAction())) { //Read folders and sources
+                //Read folders and sources from java files | XML | properties | etc
+            } else if (action.getActionName().equalsIgnoreCase(UserAllActions.LOAD_SOURCE.getAction())) {
                 System.out.println("Startup action: " + action.getActionName());
                 UserActionRunnerLoadSource.run(appParameters, action);
             }

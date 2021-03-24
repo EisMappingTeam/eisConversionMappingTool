@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.parsers;
+package com.eis.conv.mapping.srcHandler.source.parsers.propertiesParsers;
 
 import com.eis.conv.mapping.srcHandler.source.files.properties.SourcePropertyFile;
 import com.eis.conv.mapping.srcHandler.source.files.properties.pObjects.PropertyKeyValue;

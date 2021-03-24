@@ -19,12 +19,14 @@ public final class UserActionRunnerLoadSource {
         UserLoadSource userLoadSource = action.getLoadSource() != null ? action.getLoadSource() : new UserLoadSource();
         SourceFilesReader sourceFilesReader = ReadSourceAction.readRepo(userLoadSource.getProject(), userLoadSource.getProduct(), userLoadSource.getVersion(), appParameters.getRepoRootDir());
 
+        //Create reports
         TableWithNamedCols errorReport = OutputRepoAnalyzerHandler.createErrorFilesReport(sourceFilesReader);
         TableWithNamedCols unknownReport = OutputRepoAnalyzerHandler.createUnknownFilesReport(sourceFilesReader);
         TableWithNamedCols summaryReport = OutputRepoAnalyzerHandler.createSummaryReport(sourceFilesReader);
         TableWithNamedCols rulesReport = OutputRepoAnalyzerHandler.createRulesReport(appParameters, sourceFilesReader);
         TableWithNamedCols successFilesReport = OutputRepoAnalyzerHandler.createSuccessFilesReport(sourceFilesReader) ;
 
+        //Print reports
         String resultDir = userLoadSource.getResultDir();
         OutputRepoAnalyzerWriter.saveToFileErrorReport(errorReport, resultDir);
         OutputRepoAnalyzerWriter.saveToFileRulesReport(rulesReport, resultDir);

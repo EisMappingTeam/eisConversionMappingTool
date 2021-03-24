@@ -2,7 +2,7 @@ package com.eis.conv.mapping.srcHandler.source.files.handlers;
 
 import com.eis.conv.mapping.core.filesSupport.FileHelper;
 import com.eis.conv.mapping.srcHandler.source.files.properties.SourcePropertyFile;
-import com.eis.conv.mapping.srcHandler.source.parsers.PropertiesFileParser;
+import com.eis.conv.mapping.srcHandler.source.parsers.propertiesParsers.PropertiesFileParser;
 
 import java.io.IOException;
 

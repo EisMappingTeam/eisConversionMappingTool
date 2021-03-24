@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.parsers;
+package com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers;
 
 import com.eis.conv.mapping.srcHandler.source.files.handlers.XmlFileHandler;
 import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlConstraintFile;

@@ -2,7 +2,7 @@ package com.eis.conv.mapping.srcHandler.source.files.handlers;
 
 import com.eis.conv.mapping.core.filesSupport.FileHelper;
 import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlFile;
-import com.eis.conv.mapping.srcHandler.source.parsers.XmlFileParser;
+import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.XmlFileParser;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;

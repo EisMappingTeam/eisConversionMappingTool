@@ -1,12 +1,11 @@
-package com.eis.conv.mapping.srcHandler.source.parsers;
+package com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers;
 
 import com.eis.conv.mapping.core.stringsSupport.StringHelper;
 import com.eis.conv.mapping.core.xml.XmlDOMParser;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
-import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlFile;
 import com.eis.conv.mapping.srcHandler.source.files.types.ContentTypeXML;
-import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.XmlFileParserBeanValidation;
-import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.XmlFileParserConstraintValidation;
+import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlBeanFile;
+import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlFile;
 import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.tags.beans.XmlNodesBeans;
 import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.tags.constraints.XmlNodesConstraints;
 import org.xml.sax.SAXException;

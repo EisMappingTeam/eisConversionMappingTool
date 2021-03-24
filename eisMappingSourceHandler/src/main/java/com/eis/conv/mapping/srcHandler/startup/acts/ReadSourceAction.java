@@ -19,6 +19,8 @@ public final class ReadSourceAction {
 
         List<RepoDir> src = RepoHandler.loadRepo(project, product, version, rootRepoDir);
         SourceFilesReader sourceReader = new SourceFilesReader();
+
+        //Parse files
         sourceReader.readRepo(project, product, version, src);
         return sourceReader;
     }

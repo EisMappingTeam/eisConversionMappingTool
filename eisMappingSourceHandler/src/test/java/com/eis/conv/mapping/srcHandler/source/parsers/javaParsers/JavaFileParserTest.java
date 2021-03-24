@@ -1,9 +1,10 @@
-package com.eis.conv.mapping.srcHandler.source.parsers;
+package com.eis.conv.mapping.srcHandler.source.parsers.javaParsers;
 
 import com.eis.conv.mapping.core.filesSupport.FileHelper;
 import com.eis.conv.mapping.srcHandler.source.files.java.SourceJavaFile;
 import com.eis.conv.mapping.srcHandler.source.files.java.jObjects.JAnnotation;
 import com.eis.conv.mapping.srcHandler.source.files.java.jObjects.JVariableDeclaration;
+import com.eis.conv.mapping.srcHandler.source.parsers.javaParsers.JavaFileParser;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
