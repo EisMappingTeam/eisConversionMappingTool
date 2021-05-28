@@ -15,22 +15,24 @@
         </action>
 
         <action>
-            <actionName>LOAD_SOURCE</actionName>
+            <actionName>_LOAD_SOURCE</actionName>
             <loadSource>
                 <project>Liberty</project>
                 <product>ac</product>
                 <version>5_3</version>
                 <resultDir>C://111//TTT</resultDir>
             </loadSource>
-            <!--
-            <loadSource>
-                <project>Liberty</project>
-                <product>ac</product>
-                <version>5_3</version>
-                <resultDir>C://111//TTT</resultDir>
-            </loadSource>
-            -->
         </action>
+
+        <action>
+            <actionName>XML_COMPARE_IMPORT_VS_EXPORT</actionName>
+            <compareImportExport>
+                <importFile>C://111//TTT//ImpExp//Imp.xml</importFile>
+                <exportFile>C://111//TTT//ImpExp//Exp.xml</exportFile>
+                <resultDir>C://111//TTT</resultDir>
+            </compareImportExport>
+        </action>
+
     </actions>
 
 </MappingTool>

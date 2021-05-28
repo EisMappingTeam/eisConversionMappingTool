@@ -3,7 +3,7 @@ package com.eis.conv.mapping.core.data.tree;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//https://stackoverflow.com/questions/19330731/tree-implementation-in-java-root-parents-and-children
 public class TreeNode<T> {
     private final List<TreeNode<T>> children;
     private TreeNode<T> parent;

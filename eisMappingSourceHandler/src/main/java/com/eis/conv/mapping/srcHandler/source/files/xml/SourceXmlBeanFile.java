@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.files.xml;
 
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
-import com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects.XmlBeanValidation;
+import com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects.beanValidations.XmlBeanValidation;
 import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.tags.beans.XmlNodesBeans;
 
 import java.util.ArrayList;

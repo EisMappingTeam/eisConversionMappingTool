@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.source.files.xml;
 
 
-import com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects.XmlConstraintValidation;
+import com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects.constraintValidations.XmlConstraintValidation;
 
 import java.util.ArrayList;
 import java.util.List;

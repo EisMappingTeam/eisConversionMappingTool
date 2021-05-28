@@ -23,6 +23,17 @@
                 <resultDir>some_result_path</resultDir>
             </loadSource>
         </action>
+
+        <action>
+            <actionName>XML_COMPARE_IMPORT_VS_EXPORT</actionName>
+            <compareImportExport>
+                <importFile>imp_file</importFile>
+                <exportFile>exp_file</exportFile>
+                <resultDir>result_dir</resultDir>
+            </compareImportExport>
+        </action>
+
+
     </actions>
 
 </MappingTool>

@@ -32,6 +32,11 @@ public class ParametersReaderTest {
     //App
     private final String APPCONTENT_MAIN_REPO_DIR = "repo_root_folder";
 
+    //XML Compare
+    private final String XML_COMPARE_IMPORTFILE = "imp_file";
+    private final String XML_COMPARE_EXPORTFILE = "exp_file";
+    private final String XML_COMPARE_RESULTDIR = "result_dir";
+
     @Test
     public void readUserParametersTest() throws IOException {
         Path workingDir = Path.of("", DIR);
@@ -48,9 +53,10 @@ public class ParametersReaderTest {
         assertThat(parameters.getActions()).isNotEqualTo(null);
         UserStartupActions userStartupActions = parameters.getActions();
 
-        assertThat(userStartupActions.getAction().size()).isEqualTo(2);
+        assertThat(userStartupActions.getAction().size()).isEqualTo(3);
         UserStartupAction actionDownloadRepo = userStartupActions.getActionByName(UserAllActions.DOWNLOAD_REPO.getAction());
         UserStartupAction actionLoadSourceFiles = userStartupActions.getActionByName(UserAllActions.LOAD_SOURCE.getAction());
+        UserStartupAction actionXmlCompare = userStartupActions.getActionByName(UserAllActions.XML_COMPARE_IMPORT_VS_EXPORT.getAction());
 
         assertThat(actionDownloadRepo.getActionName()).isEqualTo(UserAllActions.DOWNLOAD_REPO.getAction());
         assertThat(actionLoadSourceFiles.getActionName()).isEqualTo(UserAllActions.LOAD_SOURCE.getAction());
@@ -69,6 +75,11 @@ public class ParametersReaderTest {
         assertThat(userLoadSource.getVersion()).isEqualTo(USRCONTENT_LOADSRC_VER);
         assertThat(userLoadSource.getResultDir()).isEqualTo(USRCONTENT_LOADSRC_RESULTFILE);
 
+        //Compare XML Import vs Export
+        UserCompareImportExport compareImportExport = actionXmlCompare.getCompareImportExport();
+        assertThat(compareImportExport.getImportFile()).isEqualTo(XML_COMPARE_IMPORTFILE);
+        assertThat(compareImportExport.getExportFile()).isEqualTo(XML_COMPARE_EXPORTFILE);
+        assertThat(compareImportExport.getResultDir()).isEqualTo(XML_COMPARE_RESULTDIR);
     }
 
     @Test

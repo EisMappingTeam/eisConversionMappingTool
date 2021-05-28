@@ -1,20 +1,39 @@
 package com.eis.conv.mapping.core.xml.xmlNodes;
 
+import com.eis.conv.mapping.core.stringsSupport.StringHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class XmlNode {
-    private String name ="";
-    private String date ="";
+    private final String PATH_DELIMITER = "/";
+
+    private XmlNode parent = null;
+    private String name = "";
+    private String value = "";
     private List<XmlAttribute> attributes = new ArrayList<>();
     private List<XmlNode> children = new ArrayList<>();
 
     public XmlNode() {
     }
 
-    public XmlNode(String name, String date) {
+    public XmlNode(String name, String value) {
         this.name = name;
-        this.date = date;
+        this.value = value;
+    }
+
+    public XmlNode(String name, String value, XmlNode parent) {
+        this.parent = parent;
+        this.name = name;
+        this.value = value;
+    }
+
+    public XmlNode getParent() {
+        return parent;
+    }
+
+    public void setParent(XmlNode parent) {
+        this.parent = parent;
     }
 
     public String getName() {
@@ -25,28 +44,40 @@ public class XmlNode {
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
+    public String getValue() {
+        return value;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public List<XmlAttribute> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(List<XmlAttribute> attributes) {
-        this.attributes = attributes;
-    }
 
     public List<XmlNode> getChildren() {
         return children;
     }
 
-    public void setChildren(List<XmlNode> children) {
-        this.children = children;
+
+    public void addChild(XmlNode child) {
+        child.setParent(this);
+        children.add(child);
+    }
+
+
+    public String getPath() {
+        String path = this.name;
+        if (parent != null) {
+            path = StringHelper.joinWithDelimiter(PATH_DELIMITER, parent.getPath(), path);
+        }
+        return path;
+    }
+
+    public String getPathDelimiter() {
+        return PATH_DELIMITER;
     }
 
     public XmlNode getChildByName(String nodeName) {

@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects;
+package com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects.constraintValidations;
 
 public class XmlConstraintValidation {
 

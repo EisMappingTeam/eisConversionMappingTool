@@ -7,6 +7,8 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class StringHelper {
 
@@ -71,6 +73,13 @@ public final class StringHelper {
     public static String encodingToUTF8(String str) {
         ByteBuffer buffer = StandardCharsets.UTF_8.encode(str);
         return StandardCharsets.UTF_8.decode(buffer).toString();
+    }
+
+    public static String joinWithDelimiter(String delimiter, String s1, String s2) {
+        String joined =  Stream.of(s1, s2)
+                .filter(s -> s != null && !s.isEmpty())
+                .collect(Collectors.joining(delimiter));
+        return joined;
     }
 
 //    public static String detectCharset(String value, String charsets[]) throws UnsupportedEncodingException {

@@ -45,14 +45,14 @@ public class XmlDOMParser {
         readAttributes(node,currentXmlNode);
         if (node.getNodeType() == Node.ELEMENT_NODE) {
             currentXmlNode.setName(node.getNodeName());
-            parentXmlNode.getChildren().add(currentXmlNode);
+            parentXmlNode.addChild(currentXmlNode);
             //System.out.println(indent + node.getNodeName());
         }
 
         if (node.getNodeType() == Node.TEXT_NODE) {
             //have no children
             String content_trimmed = node.getTextContent().trim();
-            parentXmlNode.setDate(content_trimmed);
+            parentXmlNode.setValue(content_trimmed);
 
             //if (content_trimmed.length() > 0 ) {
             //System.out.print(indent);

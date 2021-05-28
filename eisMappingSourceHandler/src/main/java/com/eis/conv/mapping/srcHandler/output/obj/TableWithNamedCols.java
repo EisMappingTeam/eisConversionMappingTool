@@ -40,6 +40,10 @@ public class TableWithNamedCols {
 
     }
 
+    public String getColumnCaption(int idx) {
+        return cols.get(idx);
+    }
+
     public int getRowsCount() {
         return rows.size();
 

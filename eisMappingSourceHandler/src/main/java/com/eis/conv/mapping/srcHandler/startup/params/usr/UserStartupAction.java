@@ -13,6 +13,9 @@ public class UserStartupAction {
     @JacksonXmlElementWrapper(localName = "loadSource", useWrapping = false)
     private UserLoadSource loadSource;
 
+    @JacksonXmlElementWrapper(localName = "compareImportExport", useWrapping = false)
+    private UserCompareImportExport compareImportExport;
+
 
     public UserStartupAction() {
     }
@@ -45,12 +48,21 @@ public class UserStartupAction {
         this.loadSource = loadSource;
     }
 
+    public UserCompareImportExport getCompareImportExport() {
+        return compareImportExport;
+    }
+
+    public void setCompareImportExport(UserCompareImportExport compareImportExport) {
+        this.compareImportExport = compareImportExport;
+    }
+
     @Override
     public String toString() {
         return "UserStartupAction{" +
                 "actionName='" + actionName + '\'' +
                 ", downloadRepo=" + downloadRepo +
                 ", loadSource=" + loadSource +
+                ", compareImportExport=" + compareImportExport +
                 '}';
     }
 }

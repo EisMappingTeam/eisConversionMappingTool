@@ -1,8 +1,8 @@
-package com.eis.conv.mapping.srcHandler.output.reports;
+package com.eis.conv.mapping.srcHandler.output.reports.sourceAnalysis;
 
 import com.eis.conv.mapping.core.filesSupport.FileHelper;
 import com.eis.conv.mapping.core.stringsSupport.StringHelper;
-import com.eis.conv.mapping.srcHandler.output.obj.RulesReportColumns;
+import com.eis.conv.mapping.srcHandler.output.reports.sourceAnalysis.cols.RulesReportColumns;
 import com.eis.conv.mapping.srcHandler.output.obj.TableWithNamedCols;
 import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
 import com.eis.conv.mapping.srcHandler.source.files.java.SourceJavaFile;

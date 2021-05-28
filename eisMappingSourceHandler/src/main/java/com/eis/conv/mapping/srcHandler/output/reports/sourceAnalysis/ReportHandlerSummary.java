@@ -1,6 +1,6 @@
-package com.eis.conv.mapping.srcHandler.output.reports;
+package com.eis.conv.mapping.srcHandler.output.reports.sourceAnalysis;
 
-import com.eis.conv.mapping.srcHandler.output.obj.SummaryReportColumns;
+import com.eis.conv.mapping.srcHandler.output.reports.sourceAnalysis.cols.SummaryReportColumns;
 import com.eis.conv.mapping.srcHandler.output.obj.TableWithNamedCols;
 import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
 

@@ -1,5 +1,6 @@
 package com.eis.conv.mapping.srcHandler.startup;
 
+import com.eis.conv.mapping.srcHandler.startup.acts.UserActionRunnerCompareXmlImportExport;
 import com.eis.conv.mapping.srcHandler.startup.acts.UserActionRunnerDownloadRepo;
 import com.eis.conv.mapping.srcHandler.startup.acts.UserActionRunnerLoadSource;
 import com.eis.conv.mapping.srcHandler.startup.params.app.AppStartupParameters;
@@ -27,6 +28,10 @@ public final class UserActionRunner {
             } else if (action.getActionName().equalsIgnoreCase(UserAllActions.LOAD_SOURCE.getAction())) {
                 System.out.println("Startup action: " + action.getActionName());
                 UserActionRunnerLoadSource.run(appParameters, action);
+
+            } else if (action.getActionName().equalsIgnoreCase(UserAllActions.XML_COMPARE_IMPORT_VS_EXPORT.getAction())) {
+                System.out.println("Startup action: " + action.getActionName());
+                UserActionRunnerCompareXmlImportExport.run(appParameters, action);
             }
 
         }

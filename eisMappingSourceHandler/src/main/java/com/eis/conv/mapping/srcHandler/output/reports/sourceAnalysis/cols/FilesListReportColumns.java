@@ -1,4 +1,4 @@
-package com.eis.conv.mapping.srcHandler.output.obj;
+package com.eis.conv.mapping.srcHandler.output.reports.sourceAnalysis.cols;
 
 public enum FilesListReportColumns {
     COL_FILE("File");

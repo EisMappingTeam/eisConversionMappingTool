@@ -56,8 +56,8 @@ public class XmlDOMParserTest {
         assertThat(attContr0.getValue()).isEqualTo("com.exigen.ipb.crm.domain.validation.NotBlank");
         XmlNode msg0 = constraint0.getChildByName("message");
         XmlNode groups0 = constraint0.getChildByName("groups");
-        assertThat(msg0.getDate()).isEqualTo("{crm00079}");
-        assertThat(groups0.getDate()).isEqualTo("");
+        assertThat(msg0.getValue()).isEqualTo("{crm00079}");
+        assertThat(groups0.getValue()).isEqualTo("");
         assertThat(groups0.getChildren().size()).isEqualTo(2);
 
         //first bean -> field -> constraint -> groups

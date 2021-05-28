@@ -3,7 +3,9 @@ package com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.tags.beans;
 public enum XmlNodesBeans {
     BEANS("beans"),
     BEAN("bean"),
-    CLASS("class");
+    PROPERTY("property"),
+    SET("set"),
+    REF("ref");
 
     private final String name;
 

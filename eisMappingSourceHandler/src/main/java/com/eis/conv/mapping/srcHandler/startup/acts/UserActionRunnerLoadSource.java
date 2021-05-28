@@ -1,7 +1,7 @@
 package com.eis.conv.mapping.srcHandler.startup.acts;
 
-import com.eis.conv.mapping.srcHandler.output.reports.OutputRepoAnalyzerHandler;
-import com.eis.conv.mapping.srcHandler.output.OutputRepoAnalyzerWriter;
+import com.eis.conv.mapping.srcHandler.output.reports.sourceAnalysis.OutputRepoAnalyzerHandler;
+import com.eis.conv.mapping.srcHandler.output.reports.sourceAnalysis.OutputRepoAnalyzerWriter;
 import com.eis.conv.mapping.srcHandler.output.obj.TableWithNamedCols;
 import com.eis.conv.mapping.srcHandler.processing.readSource.SourceFilesReader;
 import com.eis.conv.mapping.srcHandler.startup.params.app.AppStartupParameters;

@@ -5,7 +5,7 @@ import com.eis.conv.mapping.core.xml.xmlNodes.XmlAttribute;
 import com.eis.conv.mapping.core.xml.xmlNodes.XmlNode;
 import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlConstraintFile;
 import com.eis.conv.mapping.srcHandler.source.files.types.ContentTypeXML;
-import com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects.XmlConstraintValidation;
+import com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects.constraintValidations.XmlConstraintValidation;
 import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.tags.constraints.XmlAttributesConstraints;
 import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.tags.constraints.XmlNodesConstraints;
 import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.tags.constraints.XmlValuesConstraints;
@@ -77,15 +77,15 @@ public final class XmlFileParserConstraintValidation {
                 //message
                 XmlNode message = constraint.getChildByName(XmlNodesConstraints.VALIDATION_MESSAGE.getName());
                 cv.setCode(constraint.getAttributeByName(XmlAttributesConstraints.ANNOTATION.getName()).getValue()); //need to split '.'
-                cv.setErrorMessage(message.getDate());
+                cv.setErrorMessage(message.getValue());
 
                 //element
                 XmlNode element = constraint.getChildByName(XmlNodesConstraints.VALIDATION_ELEMENT.getName());
                 XmlAttribute attrName = element.getAttributeByName(XmlAttributesConstraints.NAME.getName());
                 if (attrName.getValue().equalsIgnoreCase(XmlValuesConstraints.MAX.getName())) {
-                    cv.setMaximumLength(element.getDate());
+                    cv.setMaximumLength(element.getValue());
                 } else if (attrName.getValue().equalsIgnoreCase(XmlValuesConstraints.REGEXP.getName())) {
-                    cv.setRegExpExpression(element.getDate());
+                    cv.setRegExpExpression(element.getValue());
                 }
                 fieldResult.add(cv);
             }

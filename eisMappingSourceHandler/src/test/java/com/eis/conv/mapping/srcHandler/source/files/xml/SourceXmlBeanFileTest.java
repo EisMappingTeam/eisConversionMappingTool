@@ -26,7 +26,7 @@ public class SourceXmlBeanFileTest {
         String attrValue = String.valueOf(2);
         XmlNode r1 = sf.getBean(attrName, attrValue);
         assertThat(r1.getName()).isEqualTo(NODE_BEAN);
-        assertThat(r1.getDate()).isEqualTo(String.valueOf(2));
+        assertThat(r1.getValue()).isEqualTo(String.valueOf(2));
 
         XmlAttribute attr = r1.getAttributeByName(attrName);
         assertThat(attr.getName()).isEqualTo(attrName);
