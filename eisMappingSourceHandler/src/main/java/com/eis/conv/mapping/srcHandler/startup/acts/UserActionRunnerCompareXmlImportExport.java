@@ -23,7 +23,7 @@ public class UserActionRunnerCompareXmlImportExport {
 
         //Create reports
         TableWithNamedCols reportImportVsExport = ReportHandlerXmlComparison.createImportVsExportReport(importData, exportData);
-        TableWithNamedCols reportExportVsImport = ReportHandlerXmlComparison.createImportVsExportReport(importData, exportData);
+        TableWithNamedCols reportExportVsImport = ReportHandlerXmlComparison.createExportVsImportReport( importData, exportData);
 
         //Print reports
         OutputXmlComparisonWriter.saveToFileImportVsExportReport(reportImportVsExport, outputDir);

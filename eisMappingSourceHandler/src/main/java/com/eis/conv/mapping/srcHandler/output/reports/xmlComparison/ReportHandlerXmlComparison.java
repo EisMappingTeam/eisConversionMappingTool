@@ -21,8 +21,11 @@ public class ReportHandlerXmlComparison {
     private static TableWithNamedCols importVsExportReport(List<XmlNode> importNodes, List<XmlNode> exportNodes) {
         TableWithNamedCols rep = new TableWithNamedCols();
         rep.addColumn(XmlComparisonReportColumns.COL_IMPORT_PATH.getCaption());
+        rep.addColumn(XmlComparisonReportColumns.COL_IMPORT_ATTR.getCaption());
         rep.addColumn(XmlComparisonReportColumns.COL_IMPORT_VALUE.getCaption());
+
         rep.addColumn(XmlComparisonReportColumns.COL_EXPORT_PATH.getCaption());
+        rep.addColumn(XmlComparisonReportColumns.COL_EXPORT_ATTR.getCaption());
         rep.addColumn(XmlComparisonReportColumns.COL_EXPORT_VALUE.getCaption());
         populateReport(rep, importNodes, exportNodes);
         return rep;
@@ -31,8 +34,11 @@ public class ReportHandlerXmlComparison {
     private static TableWithNamedCols exportVsImportReport(List<XmlNode> importNodes, List<XmlNode> exportNodes) {
         TableWithNamedCols rep = new TableWithNamedCols();
         rep.addColumn(XmlComparisonReportColumns.COL_EXPORT_PATH.getCaption());
+        rep.addColumn(XmlComparisonReportColumns.COL_EXPORT_ATTR.getCaption());
         rep.addColumn(XmlComparisonReportColumns.COL_EXPORT_VALUE.getCaption());
+
         rep.addColumn(XmlComparisonReportColumns.COL_IMPORT_PATH.getCaption());
+        rep.addColumn(XmlComparisonReportColumns.COL_IMPORT_ATTR.getCaption());
         rep.addColumn(XmlComparisonReportColumns.COL_IMPORT_VALUE.getCaption());
         populateReport(rep, exportNodes, importNodes);
         return rep;
@@ -44,17 +50,36 @@ public class ReportHandlerXmlComparison {
         XmlNode correspondingNode;
 
         for (XmlNode item : leftNodes) {
+            //Left
             colCaption = rep.getColumnCaption(0);
-            row = rep.putInNewRow(colCaption, item.getPath());
+            row = rep.putInNewRow(colCaption, getParentPath(item));
+
             colCaption = rep.getColumnCaption(1);
+            rep.putValue(row, colCaption, item.getName());
+
+            colCaption = rep.getColumnCaption(2);
             rep.putValue(row, colCaption, item.getValue());
 
+            //Right
             correspondingNode = getNodeByPath(item.getPath(), rightNodes);
-            colCaption = rep.getColumnCaption(2);
-            rep.putValue(row, colCaption, correspondingNode.getPath());
             colCaption = rep.getColumnCaption(3);
+            rep.putValue(row, colCaption, getParentPath(correspondingNode));
+
+            colCaption = rep.getColumnCaption(4);
+            rep.putValue(row, colCaption, correspondingNode.getName());
+
+            colCaption = rep.getColumnCaption(5);
             rep.putValue(row, colCaption, correspondingNode.getValue());
         }
+    }
+
+    private static String getParentPath(XmlNode node) {
+        if (node != null) {
+            if (node.getParent() != null) {
+                return node.getParent().getPath();
+            }
+        }
+        return "";
     }
 
     private static XmlNode getNodeByPath(String path, List<XmlNode> nodes) {
