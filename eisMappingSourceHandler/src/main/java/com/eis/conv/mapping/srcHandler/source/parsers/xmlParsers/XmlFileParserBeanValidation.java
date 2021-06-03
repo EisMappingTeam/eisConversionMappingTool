@@ -5,22 +5,31 @@ import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlBeanFile;
 import com.eis.conv.mapping.srcHandler.source.parsers.xmlParsers.tags.beans.XmlNodesBeans;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class XmlFileParserBeanValidation {
 
     public static SourceXmlBeanFile parse(XmlNode root) {
+
         SourceXmlBeanFile result = new SourceXmlBeanFile();
-        XmlNode beans = root.getChildren().get(0); //XML structure must be checked before call 'parse'
-        result.setRoot(beans);
+        XmlNode beansNode = root.getChildren().get(0); //XML structure must be checked before call 'parse'
+        result.setRoot(beansNode);
+
+        //parse beans to beanValidations
+        List<XmlNode> allBeans = getBeanList(beansNode);
 
         return result;
     }
 
-    //TODO
-    public static XmlNode getBeanByAttribute(XmlNode rootBeans, String attributeName, String attributeValue) {
-        return getChildByNameAndAttribute(rootBeans, XmlNodesBeans.BEAN.getName(), attributeName, attributeValue);
-    }
+//    //TODO
+//    public static XmlNode getBeanByAttribute(XmlNode rootBeans, String attributeName, String attributeValue) {
+//        return getChildByNameAndAttribute(rootBeans, XmlNodesBeans.BEAN.getName(), attributeName, attributeValue);
+//    }
 
+
+    private static List<XmlNode> getBeanList(XmlNode root) {
+        return root.getChildren().stream().filter(item -> item.getName().equalsIgnoreCase(XmlNodesBeans.BEAN.getName())).collect(Collectors.toList());
+    }
 
     private static List<XmlNode> getAllChild(XmlNode rootBeans) {
         return rootBeans.getChildren();

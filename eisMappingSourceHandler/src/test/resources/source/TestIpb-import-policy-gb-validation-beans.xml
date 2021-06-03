@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <bean id="importPolicyGbRuleSet" parent="importPolicyGbRuleSetParent"/>
+    <bean id="importPolicyGbRuleSetParent" parent="importMiniPolicyRuleSetParent" abstract="true">
+        <property name="ruleSet">
+            <set merge="true">
+                <ref bean="importPolicyGbDetailRuleSet"/>
+                <ref bean="importPolicyGbPackageInfoRuleSet"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importPolicyGbDetailRuleSet" parent="importPolicyGbDetailRuleSetParent"/>
+    <bean id="importPolicyGbDetailRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="policyDetail"/>
+        <property name="ruleSet">
+            <set>
+                <ref bean="importPolicyGbBillingDetailsRuleSet"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importPolicyGbBillingDetailsRuleSet" parent="importPolicyGbBillingDetailsRuleSetParent"/>
+    <bean id="importPolicyGbBillingDetailsRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="billingDetails"/>
+        <property name="ruleSet">
+            <set>
+                <ref bean="importPolicyGbBillingGroupsRuleSet"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importPolicyGbBillingGroupsRuleSet" parent="importPolicyGbBillingGroupsRuleSetParent"/>
+    <bean id="importPolicyGbBillingGroupsRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="billingGroups"/>
+        <property name="ruleSet">
+            <set>
+                <ref bean="importBillingGroupNameRuleSet"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importBillingGroupNameRuleSet" parent="importBillingGroupNameRuleSetParent"/>
+    <bean id="importBillingGroupNameRuleSetParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="name"/>
+        <property name="maxSize" value="50"/>
+    </bean>
+
+    <bean id="importPolicyGbPackageInfoRuleSet" parent="importPolicyGbPackageInfoRuleSetParent"/>
+    <bean id="importPolicyGbPackageInfoRuleSetParent" parent="abstractImportRuleSet" abstract="true">
+        <property name="fieldName" value="packageInfos"/>
+        <property name="ruleSet">
+            <set merge="true">
+                <ref bean="importPolicyGbPackageCdRule"/>
+                <ref bean="importPolicyGbPackageNameRule"/>
+                <ref bean="importPolicyGbPackageDescriptionRule"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="importPolicyGbPackageCdRule" parent="importPolicyGbPackageCdRuleParent"/>
+    <bean id="importPolicyGbPackageCdRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="packageCd"/>
+        <property name="maxSize" value="50"/>
+        <property name="mandatory" value="true"/>
+    </bean>
+
+    <bean id="importPolicyGbPackageNameRule" parent="importPolicyGbPackageNameRuleParent"/>
+    <bean id="importPolicyGbPackageNameRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="packageName"/>
+        <property name="maxSize" value="255"/>
+        <property name="mandatory" value="true"/>
+    </bean>
+
+    <bean id="importPolicyGbPackageDescriptionRule" parent="importPolicyGbPackageDescriptionRuleParent"/>
+    <bean id="importPolicyGbPackageDescriptionRuleParent" parent="importAbstractRule" abstract="true">
+        <property name="fieldName" value="packageDescription"/>
+        <property name="maxSize" value="255"/>
+    </bean>
+</beans>

@@ -5,7 +5,7 @@ import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlConstraintFile;
 import com.eis.conv.mapping.srcHandler.source.files.xml.SourceXmlFile;
 import com.eis.conv.mapping.srcHandler.source.files.types.ContentTypeXML;
 import com.eis.conv.mapping.srcHandler.source.files.xml.xmlObjects.constraintValidations.XmlConstraintValidation;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
