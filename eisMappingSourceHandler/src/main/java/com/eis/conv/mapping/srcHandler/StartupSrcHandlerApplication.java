@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import static java.lang.System.*;
 
-
 @SpringBootApplication
 public class StartupSrcHandlerApplication implements CommandLineRunner {
 
@@ -34,5 +33,4 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         exit(0);
 
     }
-
 }
