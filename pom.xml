@@ -22,19 +22,24 @@
         <!--<jParser.version></jParser.version>-->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <spring.version>5.2.6.RELEASE</spring.version>
-        <assertj.version>3.9.2</assertj.version>
-        <jUnit.version>5.6.2</jUnit.version>
-        <guava.version>29.0-jre</guava.version>
+        <spring.version>6.1.12</spring.version>
+        <assertj.version>3.9.2</assertj.version> <!-- https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html -->
+        <jUnit.version>5.11.0</jUnit.version>
+        <guava.version>33.3.0-jre</guava.version>
+<!--        jackson-->
+        <jackson.dataformat.xml.version>2.17.2</jackson.dataformat.xml.version>
+        <jackson.core.version>2.17.2</jackson.core.version>
+        <jackson.databind.version>2.17.2</jackson.databind.version>
     </properties>
 
 
     <dependencies>
         <!--Spring-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.boot</groupId>-->
-        <!--<artifactId>spring-boot-starter</artifactId>-->
-        <!--</dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-json</artifactId>-->
+<!--            <version>${spring.boot.starter.json}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -67,17 +72,17 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.11.0</version>
+            <version>${jackson.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.11.0</version>
+            <version>${jackson.databind.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
-            <version>2.11.0</version>
+            <version>${jackson.dataformat.xml.version}</version>
         </dependency>
 
     </dependencies>

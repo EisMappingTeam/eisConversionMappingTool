@@ -9,7 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import static java.lang.System.exit;
+import static java.lang.System.*;
+
 
 @SpringBootApplication
 public class StartupSrcHandlerApplication implements CommandLineRunner {
@@ -33,6 +34,5 @@ public class StartupSrcHandlerApplication implements CommandLineRunner {
         exit(0);
 
     }
-
 
 }

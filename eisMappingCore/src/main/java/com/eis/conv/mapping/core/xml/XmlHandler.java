@@ -11,8 +11,8 @@ import java.util.List;
 public class XmlHandler {
 
     public static <T> T xmlToObject(String xmlData, TypeReference<T> tRef) throws IOException {
-        XmlMapper xmlMapper = new XmlMapper();
-        return xmlMapper.readValue(xmlData, tRef);
+        XmlMapper mapper = new XmlMapper();
+        return mapper.readValue(xmlData, tRef);
     }
 
     public static List<XmlNode> xmlTransformToList(XmlNode root) {

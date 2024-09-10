@@ -29,7 +29,7 @@ public final class ParametersFileHelper {
     public static AppStartupParameters getAppParameters(String filePath) throws IOException {
         ParametersFileNameHelper parameterFilesHelper = new ParametersFileNameHelper();
         String appSettingsFileName;
-        if (filePath.length() < 1) {
+        if (filePath.isEmpty()) {
             appSettingsFileName = parameterFilesHelper.getAppSettingsFileName("");
             System.out.println("Application settings load from resources: " + appSettingsFileName);
         } else {

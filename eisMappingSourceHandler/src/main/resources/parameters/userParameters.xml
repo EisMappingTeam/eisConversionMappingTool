@@ -15,17 +15,17 @@
         </action>
 
         <action>
-            <actionName>_LOAD_SOURCE</actionName>
+            <actionName>LOAD_SOURCE</actionName>
             <loadSource>
                 <project>Liberty</project>
                 <product>ac</product>
-                <version>5_3</version>
+                <version>Err</version>
                 <resultDir>C://111//TTT</resultDir>
             </loadSource>
         </action>
 
         <action>
-            <actionName>XML_COMPARE_IMPORT_VS_EXPORT</actionName>
+            <actionName>_XML_COMPARE_IMPORT_VS_EXPORT</actionName>
             <compareImportExport>
                 <importFile>C://111//TTT//ImpExp//Imp.xml</importFile>
                 <exportFile>C://111//TTT//ImpExp//Exp.xml</exportFile>
